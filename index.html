@@ -368,14 +368,32 @@ La ligne « note » est facultative : la retirer si l’avis n’a pas de note. 
 <dialog id="searchdlg" class="dlg search" aria-label="Rechercher sur le site"><form method="dialog" class="sbar"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="sq" type="search" placeholder="Rechercher : natation, tarifs, annulation…" autocomplete="off" aria-label="Rechercher sur le site" aria-controls="sres"><button class="tbtn" value="close" aria-label="Fermer la recherche"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></form><ul id="sres" class="sres" role="listbox" aria-label="Résultats"></ul><p class="shint" id="shint">Tapez au moins 2 lettres. <kbd>Échap</kbd> pour fermer.</p></dialog>
 <dialog id="confirmdlg" class="dlg confirm" aria-labelledby="ctitle" aria-describedby="ctext"><p id="ctitle" class="ctitle" role="heading" aria-level="2"></p><p id="ctext"></p><div class="cbtns"><button class="btn alt" type="button" id="cno">Annuler</button><button class="btn" type="button" id="cyes">Confirmer</button></div></dialog>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script>(function(){var o=document.title;function r(){var id=decodeURIComponent(location.hash.slice(1)),v=null;document.querySelectorAll("[data-view]").forEach(function(x){if(x.id===id)v=x});document.querySelectorAll("[data-view]").forEach(function(x){x.hidden=x!==v});document.querySelector("main").hidden=!!v;if(v){window.scrollTo(0,0);var h=v.querySelector(".ptitle");if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true})};document.title=v.dataset.title+" | Athlea Coaching"}else{document.title=o;var t=id&&document.getElementById(id);if(t)t.scrollIntoView()}}addEventListener("hashchange",r);r()})();</script><script>(function(){var d=document,hd=d.querySelector("header.top");function sc(){hd.classList.toggle("scrolled",scrollY>10)}addEventListener("scroll",sc,{passive:true});sc();if("IntersectionObserver" in window){var ls=[].slice.call(d.querySelectorAll("#menu a"));var nv=d.getElementById("menu"),nw=nv.querySelector(".nwave"),nwi=nw.firstChild,first=true,lock=false,lt;
-function wv(a){a=a||nv.querySelector("a.on");if(!a){nwi.style.setProperty("--o",0);return}
-var W=nv.clientWidth,x=a.offsetLeft,r=W-x-a.offsetWidth,ox=parseFloat(nwi.style.getPropertyValue("--x"))||0;
-nw.classList.toggle("fw",x>ox);nw.classList.toggle("bw",x<ox);nw.classList.toggle("still",first);first=false;
-nwi.style.setProperty("--x",x+"px");nwi.style.setProperty("--r",r+"px");nwi.style.setProperty("--o",1)}
-ls.forEach(function(a){a.addEventListener("click",function(){lock=true;wv(a);clearTimeout(lt);lt=setTimeout(function(){lock=false;wv()},1200)});a.addEventListener("mouseenter",function(){if(!lock)wv(a)});a.addEventListener("focus",function(){wv(a)})});
-nv.addEventListener("mouseleave",function(){if(!lock)wv()});addEventListener("resize",function(){first=true;wv()});if(d.fonts)d.fonts.ready.then(function(){first=true;wv()});
-var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){ls.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id)});if(!lock)wv()}})},{rootMargin:"-40% 0px -55% 0px"});ls.forEach(function(a){var t=d.getElementById(a.getAttribute("href").slice(1));if(t)so.observe(t)});var hh=d.querySelector(".hero");if(hh)so.observe(hh)}})();</script>
+<script>(function(){var o=document.title;function r(){var id=decodeURIComponent(location.hash.slice(1)),v=null;document.querySelectorAll("[data-view]").forEach(function(x){if(x.id===id)v=x});document.querySelectorAll("[data-view]").forEach(function(x){x.hidden=x!==v});document.querySelector("main").hidden=!!v;if(v){window.scrollTo(0,0);var h=v.querySelector(".ptitle");if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true})};document.title=v.dataset.title+" | Athlea Coaching"}else{document.title=o;var t=id&&document.getElementById(id);if(t)t.scrollIntoView()}}addEventListener("hashchange",r);r()})();</script><script>(function(){var d=document,hd=d.querySelector("header.top");function sc(){hd.classList.toggle("scrolled",scrollY>10)}addEventListener("scroll",sc,{passive:true});sc();if("IntersectionObserver" in window){var ls=[].slice.call(d.querySelectorAll("#menu a"));var nv=d.getElementById("menu"),nw=nv.querySelector(".nwave"),nwi=nw.firstChild,hov=false,ht,raf=0;
+var secs=ls.map(function(a){return d.getElementById(a.getAttribute("href").slice(1))});
+function geo(a){return[a.offsetLeft,nv.clientWidth-a.offsetLeft-a.offsetWidth]}
+function setw(x,r,o,cl,cr){nwi.style.setProperty("--x",x+"px");nwi.style.setProperty("--r",r+"px");nwi.style.setProperty("--o",o);if(cl){nwi.style.setProperty("--cl",cl);nwi.style.setProperty("--cr",cr||cl)}}
+/* couleur dominante de chaque section (--c), convertie en [r,g,b] */
+var probe=d.createElement("i"),cc={};probe.hidden=true;nw.appendChild(probe);
+function col(el){var c=el?getComputedStyle(el).getPropertyValue(el.style.getPropertyValue("--c")?"--c":"--wc").trim():"";
+if(!(c in cc)){probe.style.color=c;cc[c]=(getComputedStyle(probe).color.match(/[\d.]+/g)||[63,115,80]).slice(0,3).map(Number)}return cc[c]}
+function mix(a,b,t){return"rgb("+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(",")+")"}
+function sm(t){t=t<0?0:t>1?1:t;return t*t*(3-2*t)}
+function top(el){return el.getBoundingClientRect().top+scrollY}
+/* position = avancée dans la section : le segment glisse vers le lien suivant au fil de la lecture (l'avant part un peu avant l'arrière) */
+function track(){raf=0;if(hov||!nv.offsetWidth)return;var ref=scrollY+innerHeight*.4,k=-1,i;
+for(i=0;i<secs.length;i++)if(secs[i]&&top(secs[i])<=ref)k=i;
+if(k<0){var g0=geo(ls[0]),c0=mix(col(secs[0]),col(secs[0]),0);setw(g0[0],g0[1],0,c0,c0);return}
+var A=geo(ls[k]),CA=col(secs[k]);if(k===ls.length-1||!secs[k+1]){setw(A[0],A[1],1,mix(CA,CA,0));return}
+var B=geo(ls[k+1]),t0=top(secs[k]),t=(ref-t0)/(top(secs[k+1])-t0),tr=sm((t-.1)/.7),tl=sm((t-.3)/.7);
+var CB=col(secs[k+1]);setw(A[0]+(B[0]-A[0])*tl,A[1]+(B[1]-A[1])*tr,1,mix(CA,CB,tl),mix(CA,CB,tr))}
+function req(){if(!raf)raf=requestAnimationFrame(track)}
+addEventListener("scroll",req,{passive:true});addEventListener("resize",req);if(d.fonts)d.fonts.ready.then(req);req();
+/* survol : le segment glisse jusqu'au lien, puis revient à la position de lecture */
+function go(a){hov=true;clearTimeout(ht);nw.classList.add("anim");var g=geo(a),c=col(secs[ls.indexOf(a)]);c=mix(c,c,0);setw(g[0],g[1],1,c,c)}
+function back(){hov=false;nw.classList.add("anim");track();clearTimeout(ht);ht=setTimeout(function(){if(!hov)nw.classList.remove("anim")},600)}
+ls.forEach(function(a){a.addEventListener("mouseenter",function(){go(a)});a.addEventListener("focus",function(){go(a)});a.addEventListener("blur",back)});
+nv.addEventListener("mouseleave",back);
+var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){ls.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id)})}})},{rootMargin:"-40% 0px -55% 0px"});ls.forEach(function(a){var t=d.getElementById(a.getAttribute("href").slice(1));if(t)so.observe(t)});var hh=d.querySelector(".hero");if(hh)so.observe(hh)}})();</script>
 <script>(function(){var d=document,h=d.documentElement,rm=matchMedia("(prefers-reduced-motion:reduce)").matches,MAIL="athlea_coaching@icloud.com";
 function $(s,c){return (c||d).querySelector(s)}function $$(s,c){return [].slice.call((c||d).querySelectorAll(s))}
 function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
