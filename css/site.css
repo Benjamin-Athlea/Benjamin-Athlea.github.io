@@ -343,6 +343,21 @@ footer .pages a{display:block;padding:.15rem 0;white-space:nowrap}
 .contact-grid .formtitle{font-size:1.6rem!important;margin-bottom:.8rem}
 .contact-grid .fgrid{gap:.8rem 1rem}
 .contact-grid .factions{margin-top:1rem}
+.hp{display:none!important}
+.coach-card{display:flex;align-items:center;gap:1rem;margin-top:2.2rem}
+.coach-card img{flex:none;width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--sand)}
+.coach-card p{margin:0;display:flex;flex-direction:column;line-height:1.35}
+.coach-card b{color:var(--cream);font-size:1.05rem}
+.coach-card span{color:#e6dcc4;font-size:.93rem}
+.reassure{list-style:none;margin:1.3rem 0 0;padding:0;display:grid;gap:.55rem;color:#e6dcc4}
+.reassure li{display:flex;gap:.6rem;align-items:baseline}
+.reassure li::before{content:"";flex:none;width:.95rem;height:.55rem;border-left:2px solid var(--sand);border-bottom:2px solid var(--sand);transform:translateY(-.15rem) rotate(-45deg)}
+/* avis : version courte tant qu'aucun avis n'est publié */
+#avis:not(:has(.avis)){padding:clamp(2.4rem,5vw,3.4rem) 0}
+#avis:not(:has(.avis)) .avis-top{align-items:center}
+#avis:not(:has(.avis)) .avis-top .intro{display:none}
+#avis:not(:has(.avis)) .avis-top .actions{width:auto}
+#avis:not(:has(.avis)) .avis-vide{margin-top:1.2rem;max-width:none;padding:0;border:0;background:none}
 section.contact{padding:clamp(3rem,6vw,4.5rem) 0}
 .contact-grid .err:empty{min-height:0}
 .contact-grid .field textarea{min-height:96px}
