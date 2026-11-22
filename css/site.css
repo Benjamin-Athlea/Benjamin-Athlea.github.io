@@ -56,11 +56,21 @@ header.top.scrolled .wrap{padding-top:.42rem;padding-bottom:.42rem}
 header.top .mark{--markdot:#4a7c59}
 .lw{font-size:1.32rem;font-weight:400;letter-spacing:-.025em;line-height:1}
 .lw b{font-weight:700}
-nav{display:flex;gap:1.25rem;margin-left:auto;font-size:.97rem;font-weight:550}
+nav{position:relative;display:flex;gap:1.25rem;margin-left:auto;font-size:.97rem;font-weight:550}
 nav a{position:relative;text-decoration:none;padding:.55rem .05rem;color:var(--pencil)}
 nav a::after{content:"";position:absolute;left:-.1rem;right:-.1rem;bottom:.15rem;height:8px;background:var(--sage);-webkit-mask:var(--wave) center/100% 100% no-repeat;mask:var(--wave) center/100% 100% no-repeat;transform:scaleX(0);transform-origin:left;transition:transform .25s}
 nav a:hover,nav a.on{color:var(--ink)}
 nav a:hover::after,nav a.on::after{transform:scaleX(1)}
+/* longue vague sous le menu, le segment vert glisse jusqu'au lien actif */
+:root{--navwave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='10'%3E%3Cpath d='M0 5c4.566-1.537 8.934-3 14-3s9.434 1.463 14 3s8.934 3 14 3s9.434-1.463 14-3' fill='none' stroke='%23000' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E")}
+@property --x{syntax:"<length>";inherits:false;initial-value:0px}
+@property --r{syntax:"<length>";inherits:false;initial-value:0px}
+.nwave{position:absolute;left:0;right:0;bottom:.05rem;height:10px;pointer-events:none;background:var(--line);-webkit-mask:var(--navwave) 0 0/56px 10px repeat-x;mask:var(--navwave) 0 0/56px 10px repeat-x}
+.nwave i{position:absolute;inset:0;background:var(--sage);opacity:var(--o,0);clip-path:inset(-2px var(--r) -2px var(--x) round 6px);transition:--x .6s cubic-bezier(.45,.05,.25,1),--r .6s cubic-bezier(.45,.05,.25,1),opacity .35s}
+.nwave.fw i{transition-delay:.1s,0s,0s}
+.nwave.bw i{transition-delay:0s,.1s,0s}
+.nwave.still i{transition:opacity .35s}
+@media (min-width:1061px){nav a::after{display:none}}
 .tools{display:flex;gap:.2rem;align-items:center}
 .tbtn{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:inherit;cursor:pointer;transition:background .2s}
 .tbtn:hover{background:rgba(127,127,127,.14)}
@@ -73,6 +83,7 @@ nav a:hover::after,nav a.on::after{transform:scaleX(1)}
  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;padding:.3rem clamp(1.25rem,4vw,2.5rem) 1rem;background:var(--paper);border-bottom:1.5px solid var(--line);box-shadow:0 18px 30px -18px rgba(0,0,0,.4)}
  nav a{padding:.85rem 0;font-size:1.12rem;border-bottom:1px dashed var(--line);color:var(--ink)}
  nav a::after{bottom:.5rem;right:auto;width:2.4rem}
+ .nwave{display:none}
  header.top.open nav{display:flex;animation:drop .25s ease-out}
  header.top.open .i-menu{display:none}header.top.open .i-close{display:inline}
  .tools{margin-left:auto}
@@ -145,15 +156,11 @@ section{position:relative;padding:clamp(4rem,8.5vw,6.75rem) 0}
 .intro{max-width:36rem;margin-top:1.15rem;font-size:1.13rem;color:var(--pencil);text-wrap:pretty}
 .bt{font-size:clamp(1.45rem,2.4vw,1.75rem);font-weight:800;letter-spacing:-.025em}
 .bt+.intro{margin-top:.6rem}
-.more{margin-top:1.1rem;font-weight:700}
-.more a{color:var(--c);text-decoration-thickness:2px;text-underline-offset:3px}
-.more a::after{content:"";display:inline-block;width:.55em;height:.55em;margin-left:.45em;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg) translateY(-.1em)}
 .crumb{font-size:.92rem;color:var(--pencil);margin-bottom:1.4rem}.crumb a{color:var(--accent)}
 .prose{max-width:42rem}.prose p+p{margin-top:.9rem}.prose p{color:var(--text)}
 .towns{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0 0;padding:0;list-style:none}
 .towns li{padding:.35rem .8rem;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);font-weight:600;font-size:.95rem}
-footer .pages a{display:block;padding:.15rem 0;white-space:nowrap}
-.tnote{margin-top:1rem;font-size:.95rem;color:var(--pencil);max-width:44rem}.tnote a{color:var(--accent)}
+footer .tnote{margin-top:1rem;font-size:.95rem;color:var(--pencil);max-width:44rem}.tnote a{color:var(--accent)}
 .phead .snap{justify-self:center;width:min(100%,380px)}
 
 /* planche de photos (coaching) */
@@ -167,7 +174,6 @@ footer .pages a{display:block;padding:.15rem 0;white-space:nowrap}
 .planche li:nth-child(5n+4) .snap{--r:2.2deg;--tr:-2deg}
 .planche li:nth-child(5n+5) .snap{--r:-1.6deg;--tr:4deg}
 .planche p{color:var(--pencil);font-size:.98rem;text-wrap:pretty}
-.soon{position:absolute;z-index:3;right:-.6rem;top:.9rem;padding:.15rem .6rem;background:var(--sand);color:#3b2d10;font:700 1.25rem/1.1 var(--hand);transform:rotate(8deg);box-shadow:0 6px 12px -8px rgba(0,0,0,.5)}
 
 /* où et comment */
 .ou{display:grid;grid-template-columns:1fr 1fr;gap:2rem clamp(2rem,5vw,4rem);margin-top:1.6rem}
@@ -309,8 +315,6 @@ footer .pages a{display:block;padding:.15rem 0;white-space:nowrap}
 @media (max-width:760px){.avis-top .actions{width:100%}}
 
 /* FAQ */
-.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.5rem clamp(2.5rem,6vw,5.5rem);align-items:start}
-.split>.head{position:sticky;top:6.25rem}
 .faq{border-top:2px solid var(--ink)}
 .faq-head{display:flex;justify-content:space-between;align-items:end;gap:1rem 3rem;flex-wrap:wrap}
 .faq-head .intro{max-width:30rem}
@@ -471,8 +475,7 @@ kbd{font:600 .75rem var(--font);padding:.1rem .35rem;border:1px solid var(--line
 
 /* adaptations */
 @media (max-width:980px){
- .hero-grid,.phead,.about,.pro,.zone,.resgrid,.split,.twocol,.contact-grid,.faq-groups{grid-template-columns:1fr}
- .split>.head{position:static}
+ .hero-grid,.phead,.about,.pro,.zone,.resgrid,.twocol,.contact-grid,.faq-groups{grid-template-columns:1fr}
  .hero-photo{width:min(100%,340px);justify-self:end;margin-right:4%}
  .routes{grid-template-columns:1fr;gap:2.4rem}
  .route{margin-top:0}
@@ -514,7 +517,7 @@ kbd{font:600 .75rem var(--font);padding:.1rem .35rem;border:1px solid var(--line
  section{padding:1.2rem 0}
  .cover h2,.cover h3,.cover .intro,.fnote{color:#000!important}
  .snap{box-shadow:none;transform:none!important;border:1px solid #999}.snap::before{display:none}
- .hero-grid,.phead,.about,.pro,.zone,.split,.twocol,.formules,.routes{grid-template-columns:1fr}
+ .hero-grid,.phead,.about,.pro,.zone,.twocol,.formules,.routes{grid-template-columns:1fr}
  .ptable,.formule,.faq details,.steps li{break-inside:avoid}
  .faq details>.ans{display:block!important}
  img.fade{opacity:1!important}
