@@ -110,6 +110,11 @@ img.fade{opacity:0;transition:opacity .6s}img.fade.ok{opacity:1}
 .hnote a{color:var(--ink);font-weight:700;white-space:nowrap}
 .hero-photo{position:relative;justify-self:center;width:min(100%,430px);padding:1.4rem 0 3.4rem}
 .hero-photo .snap{--r:2.2deg;--ar:3/2.1}
+.trio{position:relative;aspect-ratio:1/.92}
+.trio .snap{position:absolute;--ar:1/1}
+.trio .t1{left:0;top:4%;width:50%;--r:-6deg;--tr:5deg}
+.trio .t2{right:0;top:0;width:54%;--r:5deg;--tr:-3deg}
+.trio .t3{left:22%;bottom:0;width:56%;--r:-1.5deg;--tr:2deg;z-index:3}
 .hero-photo .anno{position:absolute;left:-1.2rem;bottom:0;display:flex;align-items:flex-end;gap:.4rem;--c:var(--eau);font-size:1.5rem;transform:rotate(-3deg)}
 .hero-photo .anno svg{width:46px;height:40px;flex:none;color:var(--c);margin-bottom:.6rem}
 .hero .creds{margin-top:2.2rem;--c:var(--sage);font-size:1.45rem;max-width:30rem;transform:rotate(-1deg);transform-origin:left}
