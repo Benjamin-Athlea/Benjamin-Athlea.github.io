@@ -374,7 +374,7 @@ function geo(a){return[a.offsetLeft,nv.clientWidth-a.offsetLeft-a.offsetWidth]}
 function setw(x,r,o,cl,cr){nwi.style.setProperty("--x",x+"px");nwi.style.setProperty("--r",r+"px");nwi.style.setProperty("--o",o);if(cl){nwi.style.setProperty("--cl",cl);nwi.style.setProperty("--cr",cr||cl)}}
 /* couleur dominante de chaque section (--c), convertie en [r,g,b] */
 var probe=d.createElement("i"),cc={};probe.hidden=true;nw.appendChild(probe);
-function col(el){var c=el?getComputedStyle(el).getPropertyValue(el.style.getPropertyValue("--c")?"--c":"--wc").trim():"";
+function col(el){var c=el?getComputedStyle(el).getPropertyValue("--wv").trim():"";
 if(!(c in cc)){probe.style.color=c;cc[c]=(getComputedStyle(probe).color.match(/[\d.]+/g)||[63,115,80]).slice(0,3).map(Number)}return cc[c]}
 function mix(a,b,t){return"rgb("+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(",")+")"}
 function sm(t){t=t<0?0:t>1?1:t;return t*t*(3-2*t)}
