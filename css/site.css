@@ -121,6 +121,11 @@ img.fade{opacity:0;transition:opacity .6s}img.fade.ok{opacity:1}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(2.5rem,6vw,5rem);align-items:center}
 .hero h1{font-size:clamp(2.9rem,7.8vw,5.8rem);font-weight:800;letter-spacing:-.05em;line-height:.93;max-width:10ch}
 .lead{text-wrap:pretty;max-width:33rem;margin:1.6rem 0 2rem;font-size:clamp(1.12rem,1.65vw,1.3rem);line-height:1.5;color:var(--text)}
+.obj{margin-top:1.4rem;padding:.9rem 1.15rem;border:1.5px dashed var(--line);border-radius:12px;color:var(--ink);line-height:1.45}
+.obj .hand{display:block;font-size:1.4rem;--c:var(--sage);margin-bottom:.15rem}
+.hcta{display:flex;align-items:center;gap:1rem 1.4rem;flex-wrap:wrap;max-width:33rem;padding:1rem 1.2rem;border:1.5px dashed var(--line);border-radius:14px}
+.hcta p{flex:1 1 15rem;font-size:1.02rem;line-height:1.45;color:var(--ink);text-wrap:pretty}
+.hcta .btn{flex:none}
 .hprix{margin-top:1.1rem;max-width:33rem;font-size:1rem;line-height:1.5;color:var(--text);text-wrap:pretty}
 .hprix b{color:var(--ink)}
 .hnote{margin-top:.45rem;max-width:33rem;font-size:.95rem;line-height:1.5;color:var(--pencil);text-wrap:pretty}
@@ -132,8 +137,8 @@ img.fade{opacity:0;transition:opacity .6s}img.fade.ok{opacity:1}
 .trio .t1{left:0;top:4%;width:50%;--r:-6deg;--tr:5deg}
 .trio .t2{right:0;top:0;width:54%;--r:5deg;--tr:-3deg}
 .trio .t3{left:22%;bottom:0;width:56%;--r:-1.5deg;--tr:2deg;z-index:3}
-.hero-photo .anno{position:absolute;left:-1.2rem;bottom:0;display:flex;align-items:flex-end;gap:.4rem;--c:var(--eau);font-size:1.5rem;transform:rotate(-3deg)}
-.hero-photo .anno svg{width:46px;height:40px;flex:none;color:var(--c);margin-bottom:.6rem}
+.hero-photo .anno{position:absolute;left:0;right:0;bottom:.2rem;width:max-content;margin:auto;padding:.4rem 1.2rem .5rem;--c:var(--eau);font-size:1.6rem;background:var(--surface);border-radius:4px;box-shadow:0 8px 18px -10px rgba(0,0,0,.35);transform:rotate(-2deg);z-index:4}
+.hero-photo .anno::before{content:"";position:absolute;top:-.55rem;left:50%;width:3.6rem;height:1.1rem;margin-left:-1.8rem;transform:rotate(4deg);background:var(--tape)}
 .hero .creds{margin-top:2.2rem;--c:var(--sage);font-size:1.45rem;max-width:30rem;transform:rotate(-1deg);transform-origin:left}
 
 /* par où commencer */
@@ -469,13 +474,14 @@ kbd{font:600 .75rem var(--font);padding:.1rem .35rem;border:1px solid var(--line
 /* un seul moment animé : la photo se pose sur la page */
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes settle{from{opacity:0;transform:translateY(-26px) rotate(7deg)}to{opacity:1;transform:rotate(var(--r))}}
+@keyframes tag{from{opacity:0;transform:translateY(10px) rotate(-7deg)}to{opacity:1;transform:rotate(-2deg)}}
 @keyframes ink{from{opacity:0;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0 0 0 0)}}
 @media (prefers-reduced-motion:no-preference){
  .loading .hero-text>*,.loading .hero-photo .snap,.loading .hero-photo .anno{opacity:0}
  .loaded .hero-text>*{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
  .loaded .hero-text>:nth-child(2){animation-delay:.1s}.loaded .hero-text>:nth-child(3){animation-delay:.2s}.loaded .hero-text>:nth-child(4){animation-delay:.3s}.loaded .hero-text>:nth-child(5){animation-delay:.4s}
  .loaded .hero-photo .snap{animation:settle .9s cubic-bezier(.2,.75,.25,1.15) .25s both}
- .loaded .hero-photo .anno{animation:ink .8s ease-out 1s both}
+ .loaded .hero-photo .anno{animation:tag .6s cubic-bezier(.2,.75,.25,1.3) 1s both}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 
@@ -508,7 +514,7 @@ kbd{font:600 .75rem var(--font);padding:.1rem .35rem;border:1px solid var(--line
  .planche .snap figcaption{font-size:1.2rem}
  .fgrid{grid-template-columns:1fr}
  .faq .ans{padding-right:0}
- .hero-photo .anno{left:0}
+ .hero-photo .anno{font-size:1.4rem}
  .stickycta{left:.75rem;right:.75rem;bottom:calc(.75rem + env(safe-area-inset-bottom,0px));justify-content:center}
  #totop{right:.75rem;bottom:calc(4.9rem + env(safe-area-inset-bottom,0px))}
  footer .wrap{grid-template-columns:1fr}
