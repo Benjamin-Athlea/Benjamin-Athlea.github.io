@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Athlea Coaching, nouvelle version | Coach sportif et maître-nageur à Ottrott</title>
+<meta name="description" content="Version de test du site Athlea Coaching : coaching sportif à domicile, natation à Obernai, pilates et sport en entreprise autour d’Ottrott.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://athleacoaching.fr/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f5f0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preload" href="fonts/albert-sans.woff" as="font" type="font/woff" crossorigin>
+<style>
+@font-face{font-family:"Albert Sans";font-style:normal;font-display:swap;font-weight:100 900;src:url(fonts/albert-sans.woff) format("woff")}
+:root{
+ --bg:#f6f5f0;--bg2:#ecebe3;--card:#ffffff;--ink:#0f1f19;--text:#2c3a34;--mute:#5d6a64;--line:rgba(15,31,25,.13);
+ --forest:#1e3d2f;--deep:#11241b;--water:#16748f;--water2:#1d8fb3;--sand:#e8d5b0;--cream:#f5ecd7;--ocre:#a86f12;
+ --on-dark:#f5ecd7;--on-dark2:rgba(245,236,215,.72);--btn:#1e3d2f;--btn-ink:#f5ecd7;
+ --rope:repeating-linear-gradient(90deg,var(--water2) 0 14px,transparent 14px 18px,var(--sand) 18px 32px,transparent 32px 36px,#c4613f 36px 50px,transparent 50px 54px);
+ --r:18px;--wrap:1180px;--gut:clamp(1rem,4vw,2rem);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1512;--bg2:#121d18;--card:#16221d;--ink:#eee8da;--text:#cfd6d0;--mute:#93a29a;--line:rgba(238,232,218,.13);--forest:#173025;--deep:#0a120e;--water:#6cc8e6;--ocre:#f0b860;--btn:#e8d5b0;--btn-ink:#11241b}}
+:root[data-theme="dark"]{--bg:#0d1512;--bg2:#121d18;--card:#16221d;--ink:#eee8da;--text:#cfd6d0;--mute:#93a29a;--line:rgba(238,232,218,.13);--forest:#173025;--deep:#0a120e;--water:#6cc8e6;--ocre:#f0b860;--btn:#e8d5b0;--btn-ink:#11241b}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:5.5rem;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1.02rem/1.6 "Albert Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%;height:auto}
+h1,h2,h3,h4{color:var(--ink);margin:0;line-height:1.1;letter-spacing:-.02em;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
+a{color:inherit}
+ul,ol{margin:0;padding:0;list-style:none}
+.wrap{width:min(100% - 2*var(--gut),var(--wrap));margin-inline:auto}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:99;background:var(--btn);color:var(--btn-ink);padding:.7rem 1rem;border-radius:10px}
+.skip:focus{top:1rem}
+:focus-visible{outline:3px solid var(--water2);outline-offset:3px;border-radius:6px}
+.kicker{display:inline-flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--water)}
+.kicker::before{content:"";width:28px;height:4px;border-radius:2px;background:var(--rope)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.4rem;border-radius:999px;border:0;background:var(--btn);color:var(--btn-ink);font:700 1rem/1 inherit;font-family:inherit;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(0,0,0,.45)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn svg{width:18px;height:18px}
+.rope{height:5px;background:var(--rope);border-radius:3px;opacity:.9}
+
+/* en-tête */
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:1rem;min-height:68px}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--ink);font-size:1.18rem;letter-spacing:-.01em;margin-right:auto}
+.logo svg{width:32px;height:30px}
+.logo b{font-weight:800}
+.nav{display:flex;gap:.2rem}
+.nav a{padding:.5rem .7rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--text);transition:background .2s,color .2s}
+.nav a:hover,.nav a.on{background:var(--bg2);color:var(--ink)}
+.ibtn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.ibtn:hover{background:var(--bg2)}
+.ibtn svg{width:20px;height:20px}
+.top .btn{min-height:42px;padding:.6rem 1.1rem;font-size:.95rem}
+#menubtn{display:none}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--rope);transform-origin:left;transform:scaleX(0)}
+@media (max-width:1000px){
+ #menubtn{display:grid}
+ .top .btn{display:none}
+ .nav{position:fixed;inset:68px 0 auto 0;flex-direction:column;gap:0;padding:.6rem var(--gut) 1.2rem;background:var(--bg);border-bottom:1px solid var(--line);transform:translateY(-120%);visibility:hidden;transition:transform .3s,visibility .3s}
+ .nav a{padding:.9rem .4rem;border-radius:0;border-bottom:1px solid var(--line);font-size:1.05rem}
+ .open .nav{transform:none;visibility:visible}
+}
+
+/* hero */
+.hero{background:var(--forest);color:var(--on-dark);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:var(--rope)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center;padding:clamp(3rem,8vw,6rem) 0 clamp(3.5rem,8vw,6rem)}
+.hero .kicker{color:var(--sand)}
+.hero h1{color:var(--cream);font-size:clamp(3rem,8.4vw,6.4rem);font-weight:800;letter-spacing:-.055em;line-height:.9;margin:1.1rem 0 1.4rem}
+.hero h1 em{font-style:normal;color:var(--sand)}
+.hero .lead{font-size:clamp(1.1rem,1.7vw,1.28rem);line-height:1.55;color:var(--on-dark);max-width:34rem}
+.hero .acts{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem;margin-top:1.8rem}
+.hero .btn{background:var(--sand);color:#11241b}
+.hero .tel{color:var(--on-dark);font-weight:700;text-decoration:none;border-bottom:1.5px solid rgba(245,236,215,.4)}
+.hero .tel:hover{border-color:var(--sand)}
+.hero .note{margin-top:1.4rem;font-size:.95rem;color:var(--on-dark2);max-width:34rem}
+.hero .note b{color:var(--cream)}
+.mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:.8rem;aspect-ratio:1/1.05}
+.mosaic figure{margin:0;border-radius:var(--r);overflow:hidden;position:relative}
+.mosaic figure:first-child{grid-row:1/3}
+.mosaic img{width:100%;height:100%;object-fit:cover}
+.mosaic figcaption{position:absolute;left:.7rem;bottom:.7rem;padding:.3rem .7rem;border-radius:999px;background:rgba(17,36,27,.72);color:var(--cream);font-size:.78rem;font-weight:600;backdrop-filter:blur(6px)}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.mosaic{aspect-ratio:1/.8;max-width:520px}}
+.badge{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.9rem;color:var(--on-dark2)}
+.badge::before{content:"";width:9px;height:9px;border-radius:50%;background:#7fd19a;box-shadow:0 0 0 4px rgba(127,209,154,.2)}
+
+/* couloirs */
+.lanes{padding:clamp(3rem,7vw,5rem) 0 1rem}
+.lanes h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:.8rem 0 1.6rem}
+.lane{display:grid;grid-template-columns:4.5rem 1fr auto;gap:1.2rem;align-items:center;padding:1.4rem 1.2rem;border-top:1px solid var(--line);text-decoration:none;color:inherit;position:relative;transition:background .25s}
+.lane:last-child{border-bottom:1px solid var(--line)}
+.lane::before{content:"";position:absolute;left:0;right:0;top:-1px;height:4px;background:var(--rope);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.lane:hover{background:var(--bg2)}
+.lane:hover::before{transform:scaleX(1)}
+.lane .n{font-size:2.8rem;font-weight:800;letter-spacing:-.05em;color:var(--lc);line-height:1}
+.lane h3{font-size:clamp(1.25rem,2.2vw,1.6rem)}
+.lane p{color:var(--mute);margin-top:.35rem;max-width:44rem}
+.lane .px{text-align:right;white-space:nowrap}
+.lane .px b{display:block;color:var(--ink);font-size:1.1rem}
+.lane .px span{font-size:.88rem;color:var(--mute)}
+.lane .arr{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--bg2);margin-left:.8rem;vertical-align:middle;transition:transform .25s,background .25s}
+.lane:hover .arr{transform:translateY(3px);background:var(--lc);color:#fff}
+.lane .arr svg{width:18px;height:18px}
+.zone-line{margin-top:1.2rem;color:var(--mute);font-size:.95rem}
+.zone-line b{color:var(--ink)}
+@media (max-width:700px){.lane{grid-template-columns:3rem 1fr;padding:1.2rem .2rem}.lane .n{font-size:2rem}.lane .px{grid-column:2;text-align:left}.lane .arr{display:none}}
+
+/* sections */
+.sec{padding:clamp(4rem,9vw,7rem) 0;border-top:1px solid var(--line)}
+.sec.alt{background:var(--bg2)}
+.sgrid{display:grid;grid-template-columns:minmax(0,.34fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem)}
+.side{position:sticky;top:6rem;align-self:start}
+.side .num{display:block;font-size:clamp(4rem,9vw,7.5rem);font-weight:800;letter-spacing:-.07em;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--sc,var(--water));margin-bottom:.8rem}
+.side h2{font-size:clamp(1.9rem,3.4vw,2.8rem);letter-spacing:-.035em}
+.side p{margin-top:1rem;color:var(--mute)}
+.side .btn{margin-top:1.4rem}
+.body>*+*{margin-top:clamp(2.8rem,5vw,4rem)}
+.body h3{font-size:clamp(1.3rem,2.2vw,1.65rem);margin-bottom:1.1rem}
+.intro{font-size:1.12rem;color:var(--text);max-width:42rem}
+@media (max-width:900px){.sgrid{grid-template-columns:1fr}.side{position:static}}
+
+/* spécialités */
+.specs{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem}
+.spec{grid-column:span 2;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.spec:nth-child(4),.spec:nth-child(5){grid-column:span 3}
+.spec figure{margin:0;aspect-ratio:4/3;overflow:hidden}
+.spec:nth-child(4) figure,.spec:nth-child(5) figure{aspect-ratio:16/9}
+.spec img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.spec:hover img{transform:scale(1.04)}
+.spec div{padding:1.1rem 1.2rem 1.3rem}
+.spec h4{font-size:1.15rem;margin-bottom:.4rem}
+.spec p{font-size:.96rem;color:var(--mute)}
+@media (max-width:900px){.specs{grid-template-columns:1fr 1fr}.spec,.spec:nth-child(4),.spec:nth-child(5){grid-column:span 1}.spec:nth-child(5){grid-column:1/-1}}
+@media (max-width:560px){.specs{grid-template-columns:1fr}.spec:nth-child(5){grid-column:auto}}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.how{display:flex;gap:1rem;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1rem}
+.how img{width:110px;height:110px;object-fit:cover;border-radius:12px;flex:none}
+.how h4{font-size:1.1rem;margin-bottom:.3rem}
+.how p{font-size:.95rem;color:var(--mute)}
+@media (max-width:700px){.duo{grid-template-columns:1fr}.how img{width:84px;height:84px}}
+
+/* étapes */
+.steps{counter-reset:s;position:relative;display:grid;gap:0}
+.steps li{position:relative;display:grid;grid-template-columns:3rem 1fr;gap:1rem;padding-bottom:1.5rem}
+.steps li::before{content:"";position:absolute;left:1.5rem;top:2.8rem;bottom:.2rem;width:2px;background:repeating-linear-gradient(180deg,var(--water2) 0 8px,transparent 8px 12px,var(--sand) 12px 20px,transparent 20px 24px)}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child::before{display:none}
+.steps .k{display:grid;place-items:center;width:3rem;height:3rem;border-radius:50%;background:var(--card);border:1.5px solid var(--line);font-weight:800;color:var(--ink);font-size:1.1rem}
+.steps li:last-child .k{background:var(--forest);border-color:var(--forest);color:var(--cream)}
+.steps .k svg{width:20px;height:20px}
+.steps h4{font-size:1.12rem;margin:.6rem 0 .25rem}
+.steps p{color:var(--mute);font-size:.98rem}
+.demo{display:grid;grid-template-columns:1.35fr 1fr;gap:1.2rem;align-items:center;margin-top:2rem}
+.demo figure{margin:0}
+.demo video{width:100%;border-radius:var(--r);background:#000;aspect-ratio:16/9}
+.demo figcaption{font-size:.85rem;color:var(--mute);margin-top:.5rem}
+.cta-card{background:var(--forest);color:var(--on-dark);border-radius:var(--r);padding:1.6rem}
+.cta-card strong{display:block;font-size:1.25rem;color:var(--cream);margin-bottom:1rem;line-height:1.25}
+.cta-card .btn{background:var(--sand);color:#11241b}
+.cta-card p{margin-top:1rem;font-size:.9rem;color:var(--on-dark2)}
+@media (max-width:800px){.demo{grid-template-columns:1fr}}
+
+/* prix */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.price{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:1.5rem;display:flex;flex-direction:column}
+.price h4{font-size:1rem;color:var(--mute);font-weight:600;letter-spacing:0}
+.price .amt{font-size:2.6rem;font-weight:800;letter-spacing:-.05em;color:var(--ink);margin:.4rem 0 .6rem;line-height:1}
+.price .amt small{font-size:1rem;font-weight:600;letter-spacing:0;color:var(--mute)}
+.price p{font-size:.96rem}
+.price .foot{margin-top:auto;padding-top:1rem;font-size:.9rem;font-weight:600;color:var(--water)}
+.price.hl{background:var(--forest);border-color:var(--forest);color:var(--on-dark)}
+.price.hl h4,.price.hl p{color:var(--on-dark2)}
+.price.hl .amt{color:var(--sand)}
+.price.hl .foot{color:var(--sand)}
+@media (max-width:860px){.prices{grid-template-columns:1fr}}
+.tbl{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:.98rem}
+.tbl caption{text-align:left;font-weight:700;color:var(--ink);padding-bottom:.6rem}
+.tbl th,.tbl td{padding:.9rem .6rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.tbl thead th{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:700}
+.tbl tbody th{font-weight:700;color:var(--ink)}
+.tbl tbody th span{display:block;font-weight:400;color:var(--mute);font-size:.9rem}
+.tbl td{white-space:nowrap}
+.tbl td b{color:var(--ink);font-size:1.05rem}
+.tbl td small{display:block;color:var(--mute);font-size:.84rem}
+.tbl .r{text-align:right}
+.small{font-size:.92rem;color:var(--mute);margin-top:1rem}
+.small a{color:var(--ink);font-weight:600}
+@media (max-width:620px){
+ .tbl.stack thead{display:none}
+ .tbl.stack tr{display:block;padding:.8rem 0;border-bottom:1px solid var(--line)}
+ .tbl.stack th,.tbl.stack td{display:block;border:0;padding:.2rem 0}
+ .tbl.stack td{display:flex;justify-content:space-between;gap:1rem;white-space:normal}
+ .tbl.stack td::before{content:attr(data-l);color:var(--mute);font-size:.9rem}
+ .tbl.stack .r{text-align:right}
+}
+
+/* natation */
+.swim-head{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:stretch}
+.swim-head figure{margin:0;border-radius:var(--r);overflow:hidden;min-height:260px}
+.swim-head img{width:100%;height:100%;object-fit:cover}
+.pubs{display:grid;gap:.8rem}
+.pub{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--pc);border-radius:14px;padding:1.1rem 1.2rem}
+.pub h4{font-size:1.1rem;margin-bottom:.3rem}
+.pub p{font-size:.96rem;color:var(--mute)}
+@media (max-width:800px){.swim-head{grid-template-columns:1fr}}
+
+/* entreprise */
+.offers{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.offer{padding:1.3rem;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.offer .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--ocre) 16%,transparent);color:var(--ocre);margin-bottom:.9rem}
+.offer .ic svg{width:22px;height:22px}
+.offer h4{font-size:1.1rem;margin-bottom:.35rem}
+.offer p{font-size:.96rem;color:var(--mute)}
+.pro-photo{margin:0;border-radius:var(--r);overflow:hidden;aspect-ratio:16/8}
+.pro-photo img{width:100%;height:100%;object-fit:cover}
+@media (max-width:640px){.offers{grid-template-columns:1fr}}
+
+/* infos */
+.travel{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start}
+.travel figure{margin:0}
+.travel img{border-radius:var(--r);width:100%}
+.travel figcaption{font-size:.85rem;color:var(--mute);margin-top:.5rem}
+.tbl th .dot,.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.55rem;background:var(--dc)}
+.good{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.good div{padding:1.3rem;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.good h4{font-size:1.08rem;margin-bottom:.35rem}
+.good p{font-size:.95rem;color:var(--mute)}
+@media (max-width:860px){.travel,.good{grid-template-columns:1fr}}
+
+/* à propos */
+.about{display:grid;grid-template-columns:1fr .8fr;gap:1.5rem;align-items:start}
+.about figure{margin:0}
+.about img{border-radius:var(--r);width:100%;aspect-ratio:4/5;object-fit:cover}
+.about figcaption{font-size:.85rem;color:var(--mute);margin-top:.5rem}
+.about p+p{margin-top:1rem}
+.ways{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.ways li{padding:.45rem .9rem;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:.92rem;color:var(--ink)}
+.goal{margin-top:1.4rem;display:flex;gap:1rem;align-items:center;padding:1.2rem 1.3rem;border-radius:var(--r);background:var(--forest);color:var(--on-dark)}
+.goal .k{flex:none;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);writing-mode:vertical-rl;transform:rotate(180deg)}
+.goal b{display:block;color:var(--cream);font-size:1.2rem}
+.goal span{color:var(--on-dark2)}
+@media (max-width:800px){.about{grid-template-columns:1fr}.about figure{max-width:420px}}
+
+/* avis */
+.reviews{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;padding:1.8rem;border-radius:var(--r);background:var(--card);border:1px dashed var(--line)}
+.reviews .stars{font-size:1.4rem;letter-spacing:.15em;color:#d19d33}
+.reviews .acts{display:flex;flex-wrap:wrap;gap:.6rem}
+@media (max-width:760px){.reviews{grid-template-columns:1fr}}
+
+/* faq */
+.faqs{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2rem}
+.faqs h3{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--water);margin-bottom:.4rem}
+.faqs details{border-bottom:1px solid var(--line)}
+.faqs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;font-weight:700;color:var(--ink)}
+.faqs summary::-webkit-details-marker{display:none}
+.faqs summary::after{content:"";flex:none;width:22px;height:22px;margin-top:.05rem;border-radius:50%;background:var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316748f' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .3s}
+.faqs details[open] summary::after{transform:rotate(45deg)}
+.faqs details p{padding:0 0 1.1rem;color:var(--mute)}
+@media (max-width:800px){.faqs{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:var(--deep);color:var(--on-dark);padding:clamp(4rem,9vw,7rem) 0;position:relative}
+.contact::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--rope)}
+.contact .sgrid{grid-template-columns:minmax(0,.9fr) minmax(0,1fr)}
+.contact h2{color:var(--cream);font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-.045em;line-height:.95}
+.contact .kicker{color:var(--sand)}
+.contact .lead{margin-top:1.2rem;color:var(--on-dark2);font-size:1.08rem;max-width:32rem}
+.contact .direct{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.6rem}
+.contact .direct .btn{background:var(--sand);color:#11241b}
+.contact .direct .btn.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1.5px rgba(245,236,215,.3)}
+.coach{display:flex;align-items:center;gap:.9rem;margin-top:2rem}
+.coach img{width:58px;height:58px;border-radius:50%;object-fit:cover}
+.coach b{display:block;color:var(--cream)}
+.coach span{font-size:.92rem;color:var(--on-dark2)}
+.ticks{margin-top:1.6rem;display:grid;gap:.55rem}
+.ticks li{display:flex;gap:.6rem;align-items:flex-start;color:var(--on-dark)}
+.ticks li::before{content:"";flex:none;width:18px;height:18px;margin-top:.2rem;border-radius:50%;background:var(--sand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2311241b' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5 10 17 19 7'/%3E%3C/svg%3E") center/12px no-repeat}
+.form{background:var(--card);color:var(--text);border-radius:22px;padding:clamp(1.3rem,3vw,2rem)}
+.form h3{font-size:1.3rem;margin-bottom:1.1rem}
+.f{display:grid;gap:.35rem;margin-bottom:.95rem}
+.f label{font-weight:600;font-size:.92rem;color:var(--ink)}
+.f input,.f select,.f textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:.75rem .9rem;min-height:48px}
+.f textarea{min-height:110px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--water2);box-shadow:0 0 0 3px color-mix(in srgb,var(--water2) 25%,transparent)}
+.chk{display:flex;gap:.6rem;align-items:flex-start;font-size:.9rem;margin:.3rem 0 1.1rem}
+.chk input{width:20px;height:20px;margin-top:.15rem;flex:none;accent-color:var(--forest)}
+.form .btn{width:100%}
+.form .fine{font-size:.85rem;color:var(--mute);margin-top:.8rem}
+.hp{position:absolute;left:-9999px}
+.ok{display:none;text-align:center;padding:1rem 0}
+.ok.show{display:block}
+.ok h3{margin:.6rem 0}
+@media (max-width:900px){.contact .sgrid{grid-template-columns:1fr}}
+
+/* pied de page */
+footer{background:var(--deep);color:var(--on-dark2);font-size:.9rem;padding:2.5rem 0 1.5rem;border-top:1px solid rgba(245,236,215,.1)}
+footer .wrap{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:1.5rem}
+footer b{color:var(--cream)}
+footer a{color:var(--on-dark);text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer p+p{margin-top:.5rem}
+footer .links a{display:block;margin-bottom:.35rem}
+.copy{font:inherit;font-size:.8rem;border:1px solid rgba(245,236,215,.3);background:transparent;color:var(--on-dark);border-radius:999px;padding:.15rem .6rem;margin-left:.4rem;cursor:pointer}
+.bydesign{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:.45rem;margin-top:.6rem;padding-top:1.1rem;border-top:1px solid rgba(245,236,215,.12);font-size:.74rem;letter-spacing:.04em;color:rgba(217,208,185,.7)}
+.bydesign a{display:inline-flex;padding:.3rem;border-radius:50%;transition:transform .3s}
+.bydesign a:hover{transform:rotate(-12deg) scale(1.15)}
+.bydesign svg{display:block}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+
+/* apparition */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.no-js .rv{opacity:1;transform:none}
+@media print{.top,.progress,.contact .form,video,.demo{display:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body class="no-js">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="7.83 21.44 248.37 221.97"><path fill="currentColor" d="M252.2 132C252.93 153.68 243.95 175.11 230.42 191.13C216.89 207.16 199.75 218.31 182.38 226.19C165.01 234.06 146.75 238.97 128 239.4C109.25 239.84 90.2 235.16 74.02 225.5C57.84 215.84 44.78 201.74 34.78 185.82C24.78 169.9 17.18 151.96 13.63 132C10.09 112.04 11.39 89.59 20.93 70.18C30.47 50.77 48.44 35.6 68.71 29.3C88.97 23 110.19 25.25 128 29.97C145.81 34.68 160.97 40.65 177.07 47.01C193.17 53.38 210.95 61.33 225.87 75.49C240.8 89.65 251.46 110.32 252.2 132ZM212.88 82.99C199.27 71.1 183.4 65.06 169.57 60C155.73 54.95 143.19 49.68 128 44.97C112.81 40.25 94.2 37.3 76.21 42.29C58.21 47.28 42.15 60.54 33.92 77.68C25.69 94.82 25.09 114.66 28.63 132C32.18 149.34 39.08 164.67 47.77 178.32C56.46 191.98 67.6 204.16 81.52 212.51C95.43 220.86 111.87 224.84 128 224.4C144.13 223.97 159.77 219.76 174.88 213.2C189.98 206.63 205.21 197.39 217.43 183.63C229.65 169.88 237.93 151.06 237.2 132C236.46 112.94 226.5 94.89 212.88 82.99ZM218.02 126C218.38 140.84 212.84 155.55 204.1 167.05C195.35 178.54 183.86 187.07 171.7 193.03C159.54 198.99 146.39 202.52 133 202.73C119.61 202.94 106.07 199.53 94.5 192.69C82.93 185.85 73.45 175.87 66.45 164.42C59.44 152.98 54.58 139.99 52.83 126C51.08 112.01 52.83 96.79 59.61 83.63C66.39 70.46 78.29 59.95 91.87 54.77C105.46 49.59 120.07 49.59 133 51.92C145.93 54.25 157.54 58.3 169.08 63.51C180.61 68.73 192.41 75.68 201.85 86.25C211.29 96.82 217.66 111.16 218.02 126ZM188.86 93.75C180.73 85.44 170.84 80.41 161.58 76.5C152.31 72.6 143.31 69.25 133 66.92C122.69 64.59 110.69 63.89 99.37 67.76C88.05 71.63 78.07 80.23 72.6 91.13C67.13 102.03 66.08 114.63 67.83 126C69.58 137.37 73.74 147.75 79.44 156.92C85.13 166.1 92.69 174.17 102 179.7C111.3 185.23 122.23 187.94 133 187.73C143.77 187.52 154.31 184.69 164.2 180.04C174.09 175.39 183.67 168.77 191.11 159.55C198.54 150.32 203.38 138.22 203.02 126C202.66 113.78 196.99 102.06 188.86 93.75ZM186 120C186.12 128.38 183.36 136.71 178.73 143.51C174.1 150.32 167.76 155.67 160.73 159.38C153.71 163.08 145.9 165.17 138 165.24C130.1 165.32 122.16 163.26 115.33 159.26C108.5 155.27 102.83 149.43 98.78 142.64C94.73 135.85 92.19 128.1 91.61 120C91.03 111.9 92.53 103.4 96.51 96.04C100.48 88.68 106.96 82.67 114.46 79.23C121.96 75.78 130.26 74.86 138 75.64C145.74 76.41 153.04 78.68 159.86 82.14C166.68 85.59 173.12 90.42 177.98 96.92C182.84 103.41 185.88 111.62 186 120ZM164.99 104.42C161.44 100.19 156.91 97.27 152.36 95.13C147.81 92.98 143.12 91.41 138 90.64C132.88 89.86 127.19 90.08 121.96 92.22C116.73 94.35 112.16 98.45 109.5 103.54C106.83 108.64 106.03 114.52 106.61 120C107.19 125.48 109.03 130.62 111.77 135.14C114.52 139.66 118.27 143.59 122.83 146.27C127.39 148.96 132.72 150.32 138 150.24C143.28 150.17 148.48 148.78 153.23 146.39C157.99 143.99 162.42 140.55 165.74 136.01C169.06 131.48 171.12 125.76 171 120C170.88 114.24 168.54 108.65 164.99 104.42Z"/><circle style="fill:var(--markdot,#e8d5b0)" cx="143.0" cy="114.0" r="11.0"/></symbol></svg>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<header class="top" id="top">
+<div class="wrap">
+<a class="logo" href="#accueil" aria-label="Athlea Coaching, retour en haut de page"><svg aria-hidden="true"><use href="#mark"/></svg><span><b>athlea</b> coaching</span></a>
+<nav class="nav" id="menu" aria-label="Navigation principale"><a href="#coaching">Coaching</a><a href="#natation">Natation</a><a href="#entreprise">Entreprise</a><a href="#infos">Infos pratiques</a><a href="#apropos">À propos</a><a href="#faq">FAQ</a></nav>
+<button class="ibtn" id="themebtn" type="button" aria-label="Changer de thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+<a class="btn" href="#contact">Écrivez-moi</a>
+<button class="ibtn" id="menubtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+<div class="progress" aria-hidden="true"></div>
+</header>
+
+<main id="contenu">
+<section class="hero" id="accueil">
+<div class="wrap">
+<div>
+<span class="kicker">Coach sportif et maître-nageur · Ottrott</span>
+<h1>Bouger mieux, <em>durablement.</em></h1>
+<p class="lead">Perdre du poids, vous renforcer, découvrir le pilates ou apprendre à nager, même si l’eau vous fait peur&nbsp;: je vous accompagne chez vous autour d’Ottrott, en entreprise ou à distance, à votre rythme.</p>
+<div class="acts"><a class="btn" href="#contact">Écrivez-moi<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><span>ou <a class="tel" href="tel:+33765686708">07&nbsp;65&nbsp;68&nbsp;67&nbsp;08</a></span></div>
+<p class="note">Un petit message suffit, je vous réponds sous 48&nbsp;heures. Pour le coaching sportif, <b>le premier échange est offert</b>&nbsp;: 30&nbsp;minutes au téléphone ou en visio pour faire connaissance, sans engagement.</p>
+<p class="badge">Je viens jusqu’à vous, à Ottrott et jusqu’à 30&nbsp;km alentour (Obernai, Barr, Rosheim, Molsheim…).</p>
+</div>
+<div class="mosaic">
+<figure><img src="img/coaching-a-domicile.webp" alt="Coach sportif et cliente assis sur des médecine-balls pendant une séance de coaching" width="300" height="300" fetchpriority="high"><figcaption>Coaching à domicile</figcaption></figure>
+<figure><img src="img/cours-de-natation-obernai.webp" alt="Nageuse qui ajuste ses lunettes avant un cours de natation à Obernai" width="640" height="640"><figcaption>Natation</figcaption></figure>
+<figure><img src="img/remise-en-forme.webp" alt="Femme qui s’étire sur un tapis dans son salon, remise en forme à domicile" width="300" height="300"><figcaption>Remise en forme</figcaption></figure>
+</div>
+</div>
+</section>
+
+<section class="lanes" aria-labelledby="lanes-t">
+<div class="wrap">
+<span class="kicker">Chaque petit pas compte</span>
+<h2 id="lanes-t">Par où commencer&nbsp;?</h2>
+<a class="lane rv" href="#coaching" style="--lc:#2f8a4e"><span class="n">01</span><div><h3>Je veux me remettre en forme</h3><p>Perdre du poids, vous renforcer, retrouver la forme ou pratiquer le pilates, seul ou entre amis, chez vous ou à distance, même si vous débutez.</p></div><div class="px"><b>70&nbsp;€ la séance d’une heure</b><span>le premier échange est offert</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#natation" style="--lc:#1d8fb3"><span class="n">02</span><div><h3>Je veux apprendre ou progresser en natation</h3><p>Enfants, ados ou adultes, même si l’eau vous fait peur&nbsp;: de la première immersion au test d’aisance aquatique, jusqu’au crawl du triathlon.</p></div><div class="px"><b>À partir de 25&nbsp;€ la demi-heure</b><span>enfant ou adulte, à L’O ou chez vous</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#entreprise" style="--lc:#c98a1e"><span class="n">03</span><div><h3>Je cherche une activité pour mon équipe</h3><p>Coaching collectif, ateliers posture, sorties en plein air et événements sur mesure.</p></div><div class="px"><b>Sur devis</b><span>sur site, dehors ou en visio</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+</div>
+</section>
+
+<!-- COACHING -->
+<section class="sec" id="coaching" style="--sc:#2f8a4e">
+<div class="wrap sgrid">
+<div class="side"><span class="num" aria-hidden="true">01</span><h2>Coaching sportif à domicile et à distance</h2><p>Seul ou en petit groupe, je vous accompagne pas à pas.</p><a class="btn" href="#contact">Écrivez-moi</a></div>
+<div class="body">
+<p class="intro rv">Débutant, plus de 60&nbsp;ans ou gêné par un petit mal de dos&nbsp;: chaque séance est adaptée à vous. Tout commence par un premier échange offert de 30 minutes, au téléphone ou en visio, pour parler de votre niveau, de vos contraintes et de ce que vous aimeriez changer.</p>
+<ul class="specs">
+<li class="spec rv"><figure><img src="img/coaching-perte-de-poids.webp" alt="Homme en fente latérale avec un kettlebell pendant une séance de coaching perte de poids" loading="lazy"></figure><div><h4>Perte de poids</h4><p>Un plan d’entraînement progressif et des repères simples pour perdre du poids sans régime extrême, et garder les résultats dans la durée.</p></div></li>
+<li class="spec rv"><figure><img src="img/renforcement-musculaire.webp" alt="Sportive en exercice abdominal avec un ballon lesté, séance de renforcement musculaire" loading="lazy"></figure><div><h4>Renforcement musculaire</h4><p>Gagner en force et en tonus, améliorer votre posture, avec ou sans matériel.</p></div></li>
+<li class="spec rv"><figure><img src="img/remise-en-forme.webp" alt="Femme en étirement sur un tapis pendant une séance de remise en forme" loading="lazy"></figure><div><h4>Remise en forme</h4><p>Reprendre en douceur après une pause, une blessure ou une période plus sédentaire, à votre allure.</p></div></li>
+<li class="spec rv"><figure><img src="img/pilates-matwork.webp" alt="Femme en posture de pilates au sol (matwork)" loading="lazy"></figure><div><h4>Pilates</h4><p>Du pilates au sol (matwork) pour renforcer les muscles profonds, améliorer votre posture et gagner en souplesse.</p></div></li>
+<li class="spec rv"><figure><img src="img/initiation-trail.webp" alt="Coureur en pleine foulée sur un sentier, initiation au trail" loading="lazy"></figure><div><h4>Initiation au trail</h4><p>Découvrir la course en nature, progresser sans vous blesser et profiter des beaux sentiers autour d’Ottrott.</p></div></li>
+</ul>
+
+<div class="rv">
+<h3>Où et comment</h3>
+<div class="duo">
+<div class="how"><img src="img/coaching-a-domicile.webp" alt="Échange entre un coach sportif et son client lors d’un coaching à domicile" loading="lazy"><div><h4>Coaching à domicile</h4><p>Je viens chez vous, à Ottrott et dans les communes alentour, avec tout le matériel nécessaire. En séance individuelle ou en petit groupe.</p></div></div>
+<div class="how"><img src="img/programme-a-distance.webp" alt="Coach corrigeant la posture d’un sportif" loading="lazy"><div><h4>Programmes à distance</h4><p>Un programme personnalisé, un suivi régulier et des échanges par message ou visio, où que vous soyez.</p></div></div>
+</div>
+</div>
+
+<div>
+<h3 class="rv">Comment ça se passe</h3>
+<p class="intro rv" style="margin-bottom:1.6rem">Tout commence par un simple message. Ensuite, pour le coaching sportif, tout se retrouve sur l’appli Ekklo&nbsp;: vos séances, vos progrès et nos échanges, sur votre téléphone comme sur votre ordinateur.</p>
+<ol class="steps rv" id="suivi-steps">
+<li><span class="k" aria-hidden="true">1</span><div><h4>Vous me contactez</h4><p>Nous parlons de votre objectif, que ce soit pour la natation ou le coaching sportif.</p></div></li>
+<li><span class="k" aria-hidden="true">2</span><div><h4>Un premier échange offert</h4><p>Pour le coaching sportif, nous prenons 30&nbsp;minutes au téléphone ou en visio, gratuitement, au moment qui vous arrange.</p></div></li>
+<li><span class="k" aria-hidden="true">3</span><div><h4>Votre compte Ekklo</h4><p>Je vous envoie le lien pour créer votre compte, sur l’appli ou sur ordinateur. Vos séances, vos habitudes, votre évolution physique et nos messages y sont réunis.</p></div></li>
+<li><span class="k" aria-hidden="true">4</span><div><h4>Vous avancez à votre rythme</h4><p>Vous validez vos séances, me faites vos retours et suivez vos progrès.</p></div></li>
+<li><span class="k" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><h4>On reste en contact</h4><p>Une question, un doute&nbsp;? Nous restons en lien grâce à la messagerie de l’appli.</p></div></li>
+</ol>
+<div class="demo rv">
+<figure><video controls playsinline preload="none" src="video/suivi-ekklo-athlea-coaching.mp4" poster="video/suivi-ekklo-athlea-coaching.webp" title="Réserver et suivre son coaching sur l’appli Ekklo" width="1280" height="720" aria-describedby="suivi-steps">Votre navigateur ne peut pas lire cette vidéo.</video><figcaption>Démonstration du suivi sur l’appli Ekklo (28 secondes). Les étapes sont décrites ci-dessus.</figcaption></figure>
+<div class="cta-card"><strong>Tout commence par un simple message.</strong><a class="btn" href="#contact">Me contacter</a><p>Un empêchement&nbsp;? Vous pouvez annuler ou décaler jusqu’à 12 heures avant.</p></div>
+</div>
+</div>
+
+<div>
+<h3 class="rv">Tarifs du coaching</h3>
+<div class="prices">
+<div class="price rv"><h4>Premier échange</h4><p class="amt">Offert</p><p>30 minutes au téléphone ou en visio pour faire connaissance, quel que soit le coaching.</p><p class="foot">Le point de départ de chaque programme</p></div>
+<div class="price hl rv"><h4>Coaching individuel à domicile</h4><p class="amt">70&nbsp;€ <small>la séance</small></p><p>Une heure chez vous, matériel compris.</p><p class="foot">+ déplacement au-delà de 15&nbsp;km</p></div>
+<div class="price rv"><h4>Carnet de 10 séances individuelles</h4><p class="amt">630&nbsp;€</p><p>10 séances d’une heure, valables 6 mois, réglées en une fois.</p><p class="foot">Soit 63&nbsp;€ la séance au lieu de 70&nbsp;€</p></div>
+</div>
+<table class="tbl stack rv">
+<caption>Autres formules de coaching sportif</caption>
+<thead><tr><th scope="col">Formule</th><th scope="col" class="r">Prix</th></tr></thead>
+<tbody>
+<tr><th scope="row">Programme personnalisé en autonomie<span>Avec suivi adapté</span></th><td class="r" data-l="Prix">Sur devis</td></tr>
+<tr><th scope="row">Cours collectifs à domicile<span>De 3 à 8 personnes (pilates, stretching…), 45 minutes</span></th><td class="r" data-l="Prix">Sur devis</td></tr>
+</tbody></table>
+<p class="small">Le prix des formules sur devis dépend du nombre de participants et du lieu&nbsp;: écrivez-moi, je vous réponds sous 48 heures. Déplacement, paiement et annulation&nbsp;: tout est dans les <a href="#infos">infos pratiques</a>.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- NATATION -->
+<section class="sec alt" id="natation" style="--sc:#1d8fb3">
+<div class="wrap sgrid">
+<div class="side"><span class="num" aria-hidden="true">02</span><h2>Natation&nbsp;: apprendre, progresser, se sentir à l’aise</h2><p>De la toute première immersion au perfectionnement de la technique, chacun avance à son rythme.</p><a class="btn" href="#contact">Me contacter</a></div>
+<div class="body">
+<div class="swim-head">
+<div class="pubs">
+<p class="intro rv">Les cours ont lieu à L’O – Espace Aquatique d’Obernai ou chez vous.</p>
+<div class="pub rv" style="--pc:#16748f"><h4>Adultes</h4><p>En cours particulier, rien que vous et moi&nbsp;: apprendre à nager à tout âge, dépasser l’appréhension de l’eau, corriger votre technique ou préparer un objectif (triathlon, traversée, forme).</p></div>
+<div class="pub rv" style="--pc:#1d8fb3"><h4>Adolescents</h4><p>Perfectionner ses nages, gagner en endurance et en confiance, préparer un test ou une épreuve sportive.</p></div>
+<div class="pub rv" style="--pc:#6cc8e6"><h4>Enfants</h4><p>Apprivoiser l’eau, même quand elle fait peur, apprendre les nages et gagner en aisance, dans une ambiance rassurante et ludique. Seul ou avec un frère ou une sœur.</p></div>
+</div>
+<figure class="rv"><img src="img/cours-de-natation-obernai.webp" alt="Nageuse ajustant ses lunettes au bord du bassin avant un cours de natation" loading="lazy"></figure>
+</div>
+
+<div id="reserver">
+<h3 class="rv">Réserver un cours de natation</h3>
+<p class="intro rv" style="margin-bottom:1.6rem">Tout commence par un petit échange, pour que chaque cours soit pensé pour la personne qui nage. Ensuite, la réservation se fait en quelques clics, depuis votre téléphone ou votre ordinateur.</p>
+<ol class="steps rv" id="res-steps">
+<li><span class="k" aria-hidden="true">1</span><div><h4>Vous me contactez</h4><p>Nous parlons de la personne qui va nager, votre enfant, petit-enfant ou vous-même&nbsp;: son âge, son niveau, ses éventuelles craintes.</p></div></li>
+<li><span class="k" aria-hidden="true">2</span><div><h4>Je vous envoie mon agenda</h4><p>Vous recevez le lien vers mon calendrier en ligne, sur Calendly.</p></div></li>
+<li><span class="k" aria-hidden="true">3</span><div><h4>Vous choisissez vos créneaux</h4><p>Un ou plusieurs, selon ce qui vous convient. Un imprévu&nbsp;? Vous pouvez annuler ou reporter la séance.</p></div></li>
+<li><span class="k" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><h4>Le jour J</h4><p>Présentez-vous à l’accueil de la piscine et donnez mon nom&nbsp;: je vous attends au bord du bassin.</p></div></li>
+</ol>
+<div class="demo rv">
+<figure><video controls playsinline preload="none" src="video/reserver-athlea-coaching.mp4" poster="video/reserver-athlea-coaching.webp" title="Réserver un cours de natation sur Calendly" width="1280" height="720" aria-describedby="res-steps">Votre navigateur ne peut pas lire cette vidéo.</video><figcaption>Démonstration de réservation sur Calendly (22 secondes). Les étapes sont décrites ci-dessus.</figcaption></figure>
+<div class="cta-card"><strong>Après notre échange, je vous envoie le lien.</strong><a class="btn" href="#contact">Me contacter</a><p>Un empêchement&nbsp;? Vous pouvez annuler ou décaler jusqu’à 12 heures avant. Le règlement se fait après la séance.</p></div>
+</div>
+</div>
+
+<div>
+<h3 class="rv">Tarifs de la natation</h3>
+<table class="tbl stack rv">
+<caption class="sr">Tarifs des cours de natation selon le lieu</caption>
+<thead><tr><th scope="col">Cours</th><th scope="col" class="r">À L’O (Obernai)</th><th scope="col" class="r">À domicile</th></tr></thead>
+<tbody>
+<tr><th scope="row">30 minutes<span>1 personne, enfant ou adulte</span></th><td class="r" data-l="À L’O"><span><b>25&nbsp;€</b><small>+ entrée piscine</small></span></td><td class="r" data-l="À domicile"><b>30&nbsp;€</b></td></tr>
+<tr><th scope="row">1 heure<span>1 personne, enfant ou adulte</span></th><td class="r" data-l="À L’O"><span><b>50&nbsp;€</b><small>+ entrée piscine</small></span></td><td class="r" data-l="À domicile"><b>60&nbsp;€</b></td></tr>
+<tr><th scope="row">30 minutes<span>2 enfants de la même famille</span></th><td class="r" data-l="À L’O"><span><b>50&nbsp;€</b><small>+ entrées piscine</small></span></td><td class="r" data-l="À domicile"><span>Sur devis<small>2 personnes et plus</small></span></td></tr>
+<tr><th scope="row">Cours collectifs<span>Aquagym, renforcement aquatique…, 45 minutes</span></th><td class="r" data-l="À L’O">–</td><td class="r" data-l="À domicile">Sur devis</td></tr>
+</tbody></table>
+<p class="small">À L’O, l’entrée de la piscine s’ajoute au prix du cours. Chez vous, un petit forfait de déplacement s’ajoute au-delà de 15&nbsp;km (voir les <a href="#infos">infos pratiques</a>).</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ENTREPRISE -->
+<section class="sec" id="entreprise" style="--sc:#c98a1e">
+<div class="wrap sgrid">
+<div class="side"><span class="num" aria-hidden="true">03</span><h2>Sport en entreprise</h2><p>Entreprises, associations, collectivités.</p><a class="btn" href="#contact">Demander un devis</a></div>
+<div class="body">
+<div class="rv">
+<p class="intro">Je propose des activités qui prennent soin de la santé de vos équipes et renforcent leur cohésion, dans vos locaux, en plein air ou en visio. Chaque prestation est préparée sur devis.</p>
+<p class="intro" style="margin-top:1rem">Par exemple&nbsp;: une séance collective de renforcement ou de pilates dans vos locaux, ou des pauses actives au bureau. Dites-moi combien vous êtes et où, je vous envoie un devis sous 48&nbsp;heures.</p>
+</div>
+<figure class="pro-photo rv"><img src="img/sport-en-entreprise-posture.webp" alt="Salarié assis sur un ballon de gym à son bureau, atelier posture en entreprise" loading="lazy"></figure>
+<ul class="offers">
+<li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c.6-3.2 3-5 6-5s5.4 1.8 6 5M15 14.3c2.6-.4 5 1 5.6 4.2"/></svg></span><h4>Coaching en entreprise</h4><p>Séances collectives de renforcement, mobilité ou pilates, sur site ou en visio.</p></li>
+<li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><h4>Ateliers posture et pauses actives</h4><p>Prévenir les douleurs liées au travail assis, grâce à des exercices simples à faire au bureau.</p></li>
+<li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 6-11 4 6 3-4 5 9z"/><circle cx="17" cy="5" r="2"/></svg></span><h4>Sorties plein air</h4><p>Marche ou course en groupe autour d’Ottrott, tous niveaux, pour se retrouver autrement.</p></li>
+<li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><h4>Événements sur mesure</h4><p>Journées bien-être, challenges d’équipe, découverte de la natation&nbsp;: parlez-moi de votre idée.</p></li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- INFOS -->
+<section class="sec alt" id="infos" style="--sc:#c4613f">
+<div class="wrap sgrid">
+<div class="side"><span class="num" aria-hidden="true">04</span><h2>Infos pratiques</h2><p>Déplacements, réservation, paiement, annulation&nbsp;: l’essentiel à savoir, pour le coaching comme pour la natation.</p></div>
+<div class="body">
+<div class="travel">
+<div class="rv">
+<h3>Frais de déplacement</h3>
+<p>Pour les séances chez vous, un petit forfait s’ajoute selon la distance depuis Ottrott. Je me déplace jusqu’à 30&nbsp;km.</p>
+<table class="tbl">
+<caption class="sr">Frais de déplacement selon la distance depuis Ottrott</caption>
+<thead><tr><th scope="col">Distance depuis Ottrott</th><th scope="col" class="r">Par séance</th></tr></thead>
+<tbody>
+<tr><th scope="row"><span class="dot" style="--dc:#2f8a4e" aria-hidden="true"></span>Jusqu’à 15 km</th><td class="r"><b>Inclus</b></td></tr>
+<tr><th scope="row"><span class="dot" style="--dc:#9bbf4a" aria-hidden="true"></span>De 15 à 20 km</th><td class="r"><b>+ 5&nbsp;€</b></td></tr>
+<tr><th scope="row"><span class="dot" style="--dc:#e0a53a" aria-hidden="true"></span>De 20 à 25 km</th><td class="r"><b>+ 10&nbsp;€</b></td></tr>
+<tr><th scope="row"><span class="dot" style="--dc:#c4613f" aria-hidden="true"></span>De 25 à 30 km</th><td class="r"><b>+ 15&nbsp;€</b></td></tr>
+</tbody></table>
+</div>
+<figure class="rv"><img src="img/zones-deplacement-ottrott.webp" alt="Carte en relief des zones de déplacement autour d’Ottrott, calculées selon la distance par la route : la zone de 15 km couvre Obernai et le Mont Sainte-Odile, la zone de 30 km s’étend de Mutzig et Molsheim au nord jusqu’à Benfeld et Scherwiller au sud" loading="lazy"><figcaption>Zones calculées selon la distance par la route depuis Ottrott, à titre indicatif. Carte © Mapbox © OpenStreetMap.</figcaption></figure>
+</div>
+<div>
+<h3 class="rv">Bon à savoir</h3>
+<div class="good">
+<div class="rv"><h4>Réservation</h4><p>Coaching sportif&nbsp;: sur l’appli Ekklo, après notre premier échange. Natation&nbsp;: par le lien Calendly que je vous envoie.</p></div>
+<div class="rv"><h4>Paiement</h4><p>Juste après la séance, par virement, par paiement sans contact ou par lien de paiement. Le carnet de 10 séances se règle en une fois.</p></div>
+<div class="rv"><h4>Annulation</h4><p>Vous pouvez annuler ou décaler une séance jusqu’à 12 heures avant. Passé ce délai, on en parle ensemble.</p></div>
+</div>
+<p class="small rv">Prix en euros, TVA non applicable, article 293 B du CGI. Réservation, annulation et droit de rétractation&nbsp;: voir les <a href="index.html#cgv">conditions générales de vente</a>.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- À PROPOS -->
+<section class="sec" id="apropos" style="--sc:#5462b8">
+<div class="wrap sgrid">
+<div class="side"><span class="num" aria-hidden="true">05</span><h2>À propos</h2><p>Benjamin Olivier, coach sportif et maître-nageur diplômé.</p></div>
+<div class="body">
+<div class="about">
+<div class="rv">
+<p class="intro">Je m’appelle Benjamin. Sportif depuis l’enfance, j’ai joué au football pendant 10 ans et participé à des compétitions UNSS en athlétisme, volley, badminton, futsal et bien d’autres sports.</p>
+<p>Aujourd’hui maître-nageur sauveteur et coach sportif diplômé, j’aide adultes, ados et enfants à bouger plus souvent, en toute sécurité et avec plaisir, à Ottrott et dans les communes alentour.</p>
+<h3 style="margin:1.6rem 0 0">Ma façon de travailler</h3>
+<ul class="ways"><li>Des objectifs qui vous ressemblent</li><li>Des progrès mesurables</li><li>Un suivi humain</li></ul>
+</div>
+<figure class="rv"><img src="img/benjamin-olivier-coach-sportif.webp" alt="Benjamin Olivier, coach sportif et maître-nageur, en balade matinale à Chamonix face au Mont-Blanc" loading="lazy"><figcaption>Balade matinale à Chamonix, face au Mont-Blanc</figcaption></figure>
+</div>
+<div class="rv">
+<h3>Diplômes et formations</h3>
+<table class="tbl stack">
+<caption class="sr">Diplômes et formations de Benjamin Olivier</caption>
+<thead><tr><th scope="col">Diplôme ou formation</th><th scope="col" class="r">Intitulé</th></tr></thead>
+<tbody>
+<tr><th scope="row">Maître-nageur sauveteur<span>Activités aquatiques et de la natation&nbsp;: enseignement et surveillance.</span></th><td class="r" data-l="Intitulé"><b>BPJEPS AAN</b></td></tr>
+<tr><th scope="row">Coach sportif<span>Activités de la forme, mention musculation et haltérophilie, option cours collectifs.</span></th><td class="r" data-l="Intitulé"><b>BPJEPS AF</b></td></tr>
+<tr><th scope="row">Matwork niveau 1<span>Pilates au sol&nbsp;: gainage profond, posture et souplesse.</span></th><td class="r" data-l="Intitulé"><b>Pilates</b></td></tr>
+<tr><th scope="row">Saunameister<span>Formation à l’animation des séances de sauna.</span></th><td class="r" data-l="Intitulé"><b>Sauna</b></td></tr>
+</tbody></table>
+</div>
+<div class="rv">
+<h3>Ma pratique aujourd’hui</h3>
+<p>Je ne fais pas que coacher&nbsp;: je m’entraîne aussi. Aujourd’hui, je cours surtout en trail, sur des distances moyennes pour l’instant, et je joue au tennis et au padel. Quelques courses récentes&nbsp;:</p>
+<table class="tbl stack">
+<caption class="sr">Courses récentes de Benjamin Olivier</caption>
+<thead><tr><th scope="col">Course</th><th scope="col" class="r">Temps</th></tr></thead>
+<tbody>
+<tr><th scope="row">Trail des Celtes 2026<span>Trail Alsace by UTMB, 47 km, 1&nbsp;650 m D+</span></th><td class="r" data-l="Temps"><b>5 h 58</b></td></tr>
+<tr><th scope="row">Trail du Haut-Koenigsbourg<span>26 km, 900 m D+</span></th><td class="r" data-l="Temps"><b>2 h 57</b></td></tr>
+<tr><th scope="row">Course des Châteaux d’Ottrott<span>10 km, 250 m D+</span></th><td class="r" data-l="Temps"><b>47 min</b></td></tr>
+</tbody></table>
+<div class="goal"><span class="k">Prochain défi</span><p><b>Le Marathon du Grand Ballon</b><span>80&nbsp;km et 3&nbsp;900&nbsp;m de dénivelé positif.</span></p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- AVIS + FAQ -->
+<section class="sec alt" id="faq" style="--sc:#237a7a">
+<div class="wrap sgrid">
+<div class="side"><span class="num" aria-hidden="true">06</span><h2>Avis et questions fréquentes</h2><p>Les réponses aux questions qu’on me pose le plus souvent. Une autre question&nbsp;? <a href="#contact">Écrivez-moi</a>.</p></div>
+<div class="body">
+<div class="reviews rv" id="avis">
+<div><p class="stars" aria-hidden="true">★★★★★</p><h3 style="margin:.3rem 0 .5rem">Avis</h3><p>Les premiers avis arrivent bientôt. Vous avez déjà fait une séance avec moi&nbsp;? Quelques mots de votre part m’aident à progresser, et aident aussi ceux qui hésitent encore.</p></div>
+<div class="acts"><a class="btn" href="https://g.page/r/CeAjLiGyOuoLECE/review" target="_blank" rel="noopener">Laisser un avis sur Google</a><a class="btn ghost" href="https://www.google.com/maps?cid=858563215702762464" target="_blank" rel="noopener">Voir les avis</a></div>
+</div>
+<div class="faqs">
+<div class="rv"><h3>Pour commencer</h3>
+<details><summary>Comment se passe le premier échange&nbsp;?</summary><p>Pour le coaching sportif, c’est un échange offert de 30 minutes, au téléphone ou en visio. Nous faisons le point ensemble sur votre niveau, vos contraintes et vos objectifs, puis nous choisissons la formule qui vous convient.</p></details>
+<details><summary>Faut-il déjà avoir un bon niveau&nbsp;?</summary><p>Pas du tout. Chaque programme part de votre niveau, que nous définissons lors de notre premier échange, et avance à votre rythme. Les cours de natation accueillent aussi bien les débutants que les nageurs qui veulent progresser.</p></details>
+<details><summary>Dois-je avoir du matériel&nbsp;?</summary><p>Pour le coaching à domicile, j’apporte tout le matériel nécessaire. Le renforcement peut aussi se faire sans matériel.</p></details>
+</div>
+<div class="rv"><h3>Lieux et déplacement</h3>
+<details><summary>Où ont lieu les séances&nbsp;?</summary><p>Chez vous, à Ottrott et jusqu’à 30 km autour&nbsp;; à L’O – Espace Aquatique d’Obernai pour la natation&nbsp;; ou à distance, avec un programme suivi par message ou en visio.</p></details>
+<details><summary>Combien coûte le déplacement&nbsp;?</summary><p>Il est inclus jusqu’à 15 km autour d’Ottrott. Au-delà, comptez 5&nbsp;€ de 15 à 20 km, 10&nbsp;€ de 20 à 25 km et 15&nbsp;€ de 25 à 30 km par séance. Je ne me déplace pas au-delà de 30 km.</p></details>
+</div>
+<div class="rv"><h3>Réserver et payer</h3>
+<details><summary>Comment réserver une séance&nbsp;?</summary><p>Pour le coaching sportif, tout commence par un premier échange offert&nbsp;: je vous invite ensuite sur l’appli Ekklo, où vous réservez vos séances et suivez votre programme. Pour la natation, je vous envoie le lien de mon agenda Calendly&nbsp;: vous choisissez votre cours, un jour et une heure, puis vous recevez une confirmation et un rappel par e-mail.</p></details>
+<details><summary>Comment payer&nbsp;?</summary><p>Juste après la séance, par virement, par paiement sans contact ou par lien de paiement. Le carnet de 10 séances se règle en une fois.</p></details>
+<details><summary>Puis-je annuler ou décaler une séance&nbsp;?</summary><p>Oui, jusqu’à 12 heures avant la séance. Passé ce délai, on en parle ensemble.</p></details>
+</div>
+<div class="rv"><h3>Enfants et entreprises</h3>
+<details><summary>Les enfants peuvent-ils prendre des cours de natation&nbsp;?</summary><p>Bien sûr&nbsp;: apprivoiser l’eau, apprendre les nages et gagner en aisance, dans une ambiance rassurante. Un cours de 30 minutes peut aussi réunir deux enfants de la même famille.</p></details>
+<details><summary>Travaillez-vous avec les entreprises&nbsp;?</summary><p>Oui&nbsp;: coaching collectif, ateliers posture, sorties en plein air et événements sur mesure, dans vos locaux, dehors ou en visio. Chaque prestation fait l’objet d’un devis.</p></details>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div class="wrap sgrid">
+<div>
+<span class="kicker">07 · Contact</span>
+<h2 style="margin-top:1rem">Parlons de votre projet</h2>
+<p class="lead">Une question, une envie, un objectif&nbsp;? Écrivez-moi ou appelez-moi, je vous réponds sous 48 heures. Ensuite, je vous invite sur l’appli Ekklo pour le coaching, ou je vous envoie le lien de mon agenda pour la natation.</p>
+<div class="direct"><a class="btn" href="tel:+33765686708">07&nbsp;65&nbsp;68&nbsp;67&nbsp;08</a><a class="btn ghost" href="mailto:athlea_coaching@icloud.com?subject=Prise%20de%20contact">M’écrire un e-mail</a></div>
+<div class="coach"><img src="img/benjamin-olivier-coach-sportif.webp" alt="" loading="lazy"><p><b>Benjamin Olivier</b><span>Coach sportif et maître-nageur diplômé</span></p></div>
+<ul class="ticks"><li>Premier échange de 30 minutes offert pour le coaching</li><li>Réponse sous 48 heures</li><li>Déplacement inclus jusqu’à 15 km autour d’Ottrott</li></ul>
+</div>
+<div class="form">
+<form id="cform" novalidate>
+<h3>Ou écrivez-moi ici</h3>
+<input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+<div class="f"><label for="f-name">Nom et prénom</label><input id="f-name" name="name" autocomplete="name" required></div>
+<div class="f"><label for="f-mail">E-mail</label><input id="f-mail" name="email" type="email" autocomplete="email" inputmode="email" required></div>
+<div class="f"><label for="f-topic">Votre demande</label><select id="f-topic" name="topic" required><option value="">Choisir…</option><option>Premier échange offert (coaching)</option><option>Coaching sportif</option><option>Natation</option><option>Pilates</option><option>Entreprise ou association</option><option>Autre question</option></select></div>
+<div class="f"><label for="f-msg">Message</label><textarea id="f-msg" name="message" rows="3" required minlength="10"></textarea></div>
+<label class="chk"><input type="checkbox" id="f-ok" required><span>J’accepte que mes informations servent uniquement à répondre à ma demande, comme expliqué dans la <a href="index.html#confidentialite">politique de confidentialité</a>.</span></label>
+<button class="btn" type="submit">Envoyer ma demande</button>
+<p class="fine">Tous les champs sont obligatoires. Votre messagerie s’ouvre avec la demande pré-remplie, il ne reste qu’à l’envoyer. Rien n’est enregistré sur ce site.</p>
+</form>
+<div class="ok" id="fok" role="status" tabindex="-1"><p style="font-size:2rem">✓</p><h3>Votre demande est prête</h3><p>Elle s’est ouverte dans votre messagerie&nbsp;: vérifiez-la puis appuyez sur «&nbsp;Envoyer&nbsp;». Je vous réponds sous 48 heures.</p><p class="fine">La messagerie ne s’est pas ouverte&nbsp;? Écrivez directement à <b>athlea_coaching@icloud.com</b>.</p></div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="wrap">
+<div><p><b>athlea</b> coaching</p><p>© 2026 Athlea Coaching, Benjamin OLIVIER EI<br>43 route du Mont Sainte-Odile, 67530 Ottrott</p><p>SIRET 918 610 296 00025. TVA non applicable, article 293 B du CGI.</p></div>
+<div><p><a href="tel:+33765686708">07 65 68 67 08</a></p><p>athlea_coaching@icloud.com<button class="copy" type="button" data-copy="athlea_coaching@icloud.com">Copier</button></p></div>
+<div class="links"><a href="index.html#mentions-legales">Mentions légales</a><a href="index.html#confidentialite">Confidentialité</a><a href="index.html#cgv">Conditions générales de vente</a></div>
+<p class="bydesign"><span>designed by</span><a href="index.html" title="Revenir à la version actuelle du site" aria-label="Revenir à la version actuelle du site"><svg class="dmark" viewBox="0 0 256 256" width="16" height="16" aria-hidden="true"><path fill="#D19D33" fill-rule="evenodd" d="M52.5 213.8 C57.7 213.6 62.5 212.7 67.2 211.1 C69.2 210.5 70 210.2 73.1 208.8 C75.4 207.9 79.5 205.7 82 204.2 C82.5 203.8 83.2 203.4 83.6 203.1 C86.7 201.3 92.3 196.8 96.7 192.4 C100.9 188.2 103.7 184.8 107.8 178.9 C109.3 176.8 109.7 176.1 110.1 175.5 C113.2 170 114.4 167.9 115.5 165.4 C115.7 165.1 115.9 164.5 116.1 164.1 C116.3 163.7 116.4 163.4 116.4 163.3 C116.4 163.3 116.6 162.8 116.9 162.3 C117.4 161.2 117.9 160.1 118.6 158.2 C119.1 156.9 121.2 150.4 121.4 149.4 C121.5 149 121.7 148.3 121.9 147.6 C122.3 146.2 122.6 144.7 122.8 143.6 C122.9 143.1 123.1 142.5 123.1 142.3 C123.2 142.1 123.3 141.6 123.3 141.2 C123.4 140.9 123.5 140.2 123.6 139.7 C123.9 138.3 124.2 136.7 124.3 135.6 C124.3 135 124.4 134.1 124.5 133.5 C124.6 132.9 124.7 131.5 124.8 130.2 C124.9 129 125 127.7 125 127.4 C125.1 126.4 125 120.6 125 119.8 C124.8 118.1 124 118.1 123.4 119.8 C123.3 120.1 122.9 121 122.7 121.7 C122.4 122.4 122 123.2 122 123.5 C121.9 123.8 121.7 124.2 121.6 124.4 C121.3 125.1 120.9 126.1 120.9 126.2 C120.9 126.3 120.8 126.6 120.7 126.9 C120.5 127.2 120 128.6 119.4 130 C118.9 131.4 118.3 132.8 118.2 133.1 C118 133.4 117.7 134.2 117.4 134.9 C116.2 137.7 113.5 143.1 112.2 145.5 C111.8 146.2 111.5 146.8 111.5 146.8 C111.5 146.8 111.2 147.2 111 147.6 C110.7 148.1 110.3 148.7 110.1 149.1 C104.8 158.8 96.3 169 87.7 175.8 C83.6 179.1 74 184.9 72.7 184.9 C72.7 184.9 72.5 185 72.3 185.1 C72.1 185.2 71.7 185.3 71.5 185.4 C71.2 185.5 70.9 185.6 70.9 185.6 C70.8 185.7 70.3 185.9 69.8 186.1 C69.2 186.2 68.5 186.5 68.1 186.6 C66.3 187.3 62.4 188.3 61 188.4 C60.6 188.5 59.9 188.6 59.5 188.7 C58.5 188.9 51.7 188.9 50.4 188.7 C48.1 188.4 46.5 188.1 45.3 187.6 C44.9 187.5 44.3 187.3 43.9 187.2 C43 186.9 42.6 186.6 42.5 186 C42.5 185.8 42.3 185.2 42.1 184.7 C41.5 182.5 41.4 181.8 41.1 178.9 C40.9 176.7 41.2 170.7 41.6 169.1 C41.7 168.8 41.8 168.2 41.9 167.7 C42.2 165.9 43.7 160.9 44.1 160.4 C44.1 160.4 44.2 160.1 44.3 159.8 C44.4 159.6 44.5 159.3 44.6 159.2 C44.6 159.1 44.8 158.8 44.9 158.6 C45.2 157.6 46.4 155.2 47.4 153.5 C53.4 143 61.9 134.5 74.5 126.4 C78 124.1 84 120.8 87.4 119.4 C88.2 119 89.7 118.3 90.7 117.9 C91.7 117.5 92.8 117 93.1 116.9 C93.5 116.7 94.1 116.5 94.6 116.3 C95.1 116.1 95.7 115.9 96 115.8 C96.3 115.7 97.7 115.2 99.2 114.7 C102.1 113.7 103.5 113.3 104.9 112.9 C105.4 112.8 106.7 112.4 107.8 112.2 C108.9 111.9 111.1 111.3 112.6 111 C114.2 110.6 115.6 110.2 115.7 110.1 C116 109.8 116 109.2 115.8 109 C115.1 108.5 95.2 108.5 92.2 109.1 C92 109.1 91 109.2 90 109.3 C88.2 109.5 87.3 109.7 84.2 110.2 C81.7 110.6 78.3 111.2 76.4 111.7 C75.8 111.8 74.8 112 74.1 112.2 C72.8 112.5 70.4 113.1 69.2 113.4 C68.8 113.5 67.6 113.8 66.6 114.1 C65.7 114.3 64.7 114.6 64.3 114.7 C63.5 115 61.5 115.5 58.9 116.1 C57.6 116.5 55 116.2 54.3 115.6 C54.2 115.6 54 115.4 53.7 115.3 C51.1 114.4 46.7 111.4 43.3 108.2 C40.8 105.8 39.4 104.1 37.1 100.6 C35.7 98.5 35.8 98.7 35 97.2 C34.7 96.6 34.2 95.7 34 95.2 C33.7 94.7 33.3 93.9 33.1 93.4 C32.9 93 32.7 92.4 32.6 92.2 C32.3 91.5 30.9 87.1 30.9 86.8 C30.9 86.7 30.8 86.2 30.7 85.8 C30.5 85.2 30.4 84.3 30 82.4 C29.5 79.4 29.6 73.6 30.1 71 C30.7 68.2 30.8 67.7 31.2 67.4 C31.9 67.1 32.5 66.7 33.7 66 C38.5 63 44.6 61.3 52.2 60.7 C57.5 60.3 67.6 61.6 73.4 63.6 C73.8 63.8 74.4 63.9 74.7 64 C75.9 64.4 79.7 65.8 81.1 66.5 C81.5 66.7 82 66.9 82.2 67 C84.2 67.7 92.1 71.8 94.2 73.2 C94.3 73.3 94.7 73.6 95 73.8 C96.6 74.8 97.1 75.1 98.6 76.2 C100.7 77.6 101.2 78 102.5 79 C104.7 80.7 105 81 106 81.9 C106.6 82.3 107.4 83 107.8 83.4 C109.6 84.8 112 87 113.2 88.3 C113.9 89 115.3 90.4 116.2 91.4 C117.2 92.4 118.8 94.1 119.8 95.2 C123.8 99.6 123.5 99.4 123.9 99.3 C124.9 99.2 124.9 98.7 123.5 94.7 C123.3 94.4 123.2 94 123.1 93.8 C123 93.6 122.9 93.3 122.8 93.1 C122.8 93 122.7 92.8 122.7 92.7 C122.6 92.6 122.4 92.2 122.2 91.7 C121.8 90.6 121.7 90.4 120.3 87.5 C119.3 85.4 118.5 83.9 116.8 80.9 C116.2 80 115.5 78.9 114.3 77 C111.2 72.4 108.4 68.9 104.6 64.8 C103.8 63.9 102.9 62.9 102.7 62.6 C100.6 60.3 93.7 54.5 89.3 51.4 C72.7 39.7 53.8 35.4 36.4 39.4 C36 39.4 35.1 39.6 34.5 39.8 C30.9 40.6 27.9 41.5 24.4 42.9 C23.9 43.1 23.2 43.4 22.9 43.5 C21.1 44.2 18.3 45.6 15.8 47.1 C10 50.5 7.6 52.9 6.4 56.5 C5.6 58.7 4.7 62 4.4 64.1 C4.3 64.6 4.2 65 4.2 65 C4.2 65.1 4.1 66.1 4 67.2 C3.9 68.4 3.7 69.9 3.6 70.6 C3.4 73.5 3.8 82.2 4.3 84 C4.3 84.3 4.4 84.8 4.5 85.2 C4.5 85.5 4.7 86.3 4.8 86.8 C4.9 87.3 5 87.8 5 88 C5 88.1 5.2 88.6 5.3 89.1 C5.4 89.6 5.7 90.3 5.8 90.8 C6 91.6 6.4 92.6 6.9 94.2 C7 94.5 7.3 95.2 7.5 95.7 C7.7 96.2 8.1 97.1 8.3 97.6 C8.8 98.8 10.8 102.7 11.5 103.8 C11.7 104.1 12.2 104.9 12.7 105.7 C13.2 106.5 13.7 107.4 14 107.7 C16.2 110.6 16.4 110.9 18.3 113.1 C21.6 117 27.4 121.7 31.7 124.2 C34.7 125.9 40 128.4 41.5 128.8 C42.1 128.9 42.1 129.3 41.6 129.7 C39.5 130.8 32.6 137.3 29.7 140.8 C27.4 143.5 25.5 146.1 23.8 148.8 C23.6 149.2 23.2 149.8 22.9 150.3 C22.1 151.6 19.9 155.8 19.2 157.6 C19.2 157.7 19 158.2 18.8 158.5 C18.6 158.9 18.4 159.4 18.4 159.6 C18.3 159.8 18.1 160.3 17.9 160.8 C17.7 161.3 17.4 162.1 17.3 162.7 C17.1 163.2 16.9 164 16.7 164.4 C14.7 170.8 14.1 179.6 15.1 186.5 C15.7 190.6 16.1 192.3 17.3 195.8 C18.1 198.1 18.2 198.5 18.7 199.6 C21.1 205 22.2 206.3 25.6 208.3 C26.3 208.7 29.2 210.2 29.7 210.4 C32.8 211.5 36.2 212.5 37.9 212.8 C38.2 212.8 38.6 212.9 38.8 213 C40.9 213.6 48.3 214.1 52.5 213.8 Z M211.6 213.7 C213.6 213.5 216.8 213.1 217.2 213 C217.4 212.9 217.8 212.8 218.1 212.8 C219.8 212.5 223.2 211.5 226.3 210.4 C226.8 210.2 229.7 208.7 230.4 208.3 C233.8 206.3 234.9 205 237.3 199.6 C237.8 198.5 237.9 198.1 238.7 195.8 C239.9 192.3 240.3 190.6 240.9 186.5 C241.9 179.6 241.3 170.8 239.3 164.4 C239.1 164 238.9 163.2 238.7 162.7 C238.6 162.1 238.3 161.3 238.1 160.8 C237.9 160.3 237.7 159.8 237.6 159.6 C237.6 159.4 237.4 158.9 237.2 158.5 C237 158.2 236.8 157.7 236.8 157.6 C236.1 155.8 233.9 151.6 233.1 150.3 C232.8 149.8 232.4 149.2 232.2 148.8 C230.5 146.1 228.6 143.5 226.3 140.8 C223.4 137.3 216.5 130.8 214.4 129.7 C213.9 129.3 213.9 128.9 214.5 128.8 C216 128.4 221.3 125.9 224.3 124.2 C230.1 120.9 236.3 115.3 240.7 109.4 C241.2 108.8 241.8 108 242 107.7 C242.3 107.4 242.8 106.5 243.3 105.7 C243.8 104.9 244.3 104.1 244.5 103.8 C245.2 102.7 247.2 98.8 247.7 97.6 C247.9 97.1 248.3 96.2 248.5 95.7 C248.7 95.2 249 94.5 249.1 94.2 C249.6 92.6 250 91.6 250.2 90.8 C250.3 90.3 250.6 89.6 250.7 89.1 C250.8 88.6 251 88.1 251 88 C251 87.8 251.1 87.3 251.2 86.8 C251.3 86.3 251.5 85.5 251.5 85.2 C251.6 84.8 251.7 84.3 251.7 84 C252.2 82.2 252.6 73.5 252.3 70.6 C252.3 69.9 252.1 68.4 252 67.2 C251.9 66.1 251.8 65.1 251.8 65 C251.8 65 251.7 64.6 251.6 64.1 C251.4 62.6 250.8 60.4 250.3 58.4 C249 54.1 247.8 52.3 244.3 49.8 C241.1 47.5 236.3 44.8 233.1 43.5 C232.8 43.4 232.1 43.1 231.6 42.9 C228.1 41.5 225.1 40.6 221.5 39.8 C220.8 39.6 220 39.4 219.6 39.4 C204.8 36 188.4 38.7 173.9 46.8 C168.9 49.6 164.5 52.7 159.7 56.8 C157.2 58.9 154 61.8 153.3 62.6 C153.1 62.9 152.2 63.9 151.4 64.8 C148.2 68.2 145.3 71.8 143 75.1 C141.8 76.8 139.9 79.8 139.2 80.9 C137.5 83.9 136.7 85.4 135.7 87.5 C134.3 90.4 134.2 90.6 133.8 91.7 C133.6 92.2 133.4 92.6 133.3 92.7 C133.3 92.8 133.2 93 133.2 93.1 C133.1 93.3 133 93.6 132.9 93.8 C132.8 94 132.7 94.4 132.5 94.7 C131.1 98.7 131.1 99.2 132.1 99.3 C132.5 99.4 132.2 99.6 136.2 95.2 C137.2 94.1 138.8 92.4 139.8 91.4 C140.7 90.4 142.1 89 142.8 88.3 C144 87 146.4 84.8 148.2 83.4 C148.6 83 149.4 82.3 150 81.9 C151 81 151.3 80.7 153.5 79 C154.8 78 155.3 77.6 157.4 76.2 C158.9 75.1 159.4 74.8 161 73.8 C161.3 73.6 161.7 73.3 161.8 73.2 C163.9 71.8 171.8 67.7 173.8 67 C174 66.9 174.5 66.7 174.9 66.5 C176.3 65.8 180.1 64.4 181.3 64 C181.6 63.9 182.2 63.8 182.6 63.6 C188.4 61.6 198.5 60.3 203.8 60.7 C211.4 61.3 217.5 63 222.3 66 C223.5 66.7 224.1 67.1 224.8 67.4 C225.2 67.7 225.3 68.2 225.9 71 C226.4 73.6 226.5 79.4 226 82.4 C225.7 84.3 225.5 85.2 225.3 85.8 C225.2 86.2 225.1 86.7 225.1 86.8 C225.1 87.1 223.7 91.5 223.4 92.2 C223.3 92.4 223.1 93 222.9 93.4 C222.7 93.9 222.3 94.7 222.1 95.2 C221.8 95.7 221.3 96.6 221 97.2 C220.2 98.7 220.3 98.5 218.9 100.6 C217.1 103.4 216.2 104.6 214.5 106.4 C213.2 107.8 210.4 110.3 208.7 111.6 C207.2 112.8 203.5 114.9 202.3 115.3 C202 115.4 201.8 115.6 201.7 115.6 C201 116.2 198.4 116.5 197.1 116.1 C194.5 115.5 192.5 115 191.7 114.7 C191.3 114.6 190.3 114.3 189.4 114.1 C188.4 113.8 187.2 113.5 186.8 113.4 C185.6 113.1 183.2 112.5 181.9 112.2 C181.2 112 180.2 111.8 179.6 111.7 C177.7 111.2 174.3 110.6 171.8 110.2 C168.7 109.7 167.8 109.5 166 109.3 C165 109.2 164 109.1 163.8 109.1 C160.8 108.5 140.9 108.5 140.2 109 C140 109.2 140 109.8 140.3 110.1 C140.4 110.2 141.8 110.6 143.4 111 C144.9 111.3 147.1 111.9 148.2 112.2 C149.3 112.4 150.6 112.8 151.1 112.9 C152.6 113.3 153.9 113.7 156.8 114.7 C158.3 115.2 159.7 115.7 160 115.8 C160.3 115.9 160.9 116.1 161.4 116.3 C161.9 116.5 162.5 116.7 162.9 116.9 C163.2 117 164.3 117.5 165.3 117.9 C166.3 118.3 167.8 119 168.6 119.4 C183.3 125.8 197.8 137.3 205.7 148.8 C208.1 152.3 210.4 156.5 211.1 158.6 C211.2 158.8 211.3 159.1 211.4 159.2 C211.5 159.3 211.6 159.6 211.7 159.8 C211.8 160.1 211.9 160.4 211.9 160.4 C212.3 160.9 213.8 165.9 214.1 167.7 C214.2 168.2 214.3 168.8 214.4 169.1 C214.8 170.7 215.2 176.7 214.9 178.9 C214.6 181.8 214.5 182.5 213.8 184.7 C213.7 185.2 213.5 185.8 213.5 186 C213.4 186.6 212.9 186.9 212.1 187.2 C211.7 187.3 211.1 187.5 210.7 187.6 C209.5 188.1 207.9 188.4 205.6 188.7 C204.3 188.9 197.5 188.9 196.6 188.7 C196.1 188.6 195.4 188.5 194.9 188.4 C193.6 188.3 189.7 187.3 187.9 186.6 C187.5 186.5 186.8 186.2 186.2 186.1 C185.7 185.9 185.2 185.7 185.1 185.6 C185.1 185.6 184.8 185.5 184.5 185.4 C184.3 185.3 183.9 185.2 183.7 185.1 C183.5 185 183.3 184.9 183.3 184.9 C182.4 184.9 174.5 180.4 170.8 177.7 C161.9 171.5 151.7 159.7 145.9 149.1 C145.7 148.7 145.3 148.1 145 147.6 C144.8 147.2 144.5 146.8 144.5 146.8 C144.5 146.8 144.2 146.2 143.8 145.5 C142.4 143.1 139.8 137.7 138.6 134.9 C138.3 134.2 137.9 133.4 137.8 133.1 C137.7 132.8 137.1 131.4 136.6 130 C136 128.6 135.4 127.2 135.3 126.9 C135.2 126.6 135.1 126.3 135.1 126.2 C135.1 126.1 134.7 125.1 134.4 124.4 C134.3 124.2 134.1 123.8 134.1 123.5 C133.9 123.2 133.6 122.4 133.3 121.7 C133.1 121 132.7 120.1 132.6 119.8 C132 118.1 131.2 118.1 131.1 119.8 C131 120.6 130.9 126.4 131 127.4 C131 127.7 131.1 129 131.2 130.2 C131.3 131.5 131.4 132.9 131.5 133.5 C131.6 134.1 131.7 135 131.7 135.6 C131.8 136.7 132.1 138.3 132.4 139.7 C132.5 140.2 132.6 140.9 132.7 141.2 C132.7 141.6 132.8 142.1 132.9 142.3 C132.9 142.5 133.1 143.1 133.2 143.6 C133.4 144.7 133.7 146.2 134.1 147.6 C134.3 148.3 134.5 149 134.6 149.4 C134.8 150.4 136.9 156.9 137.4 158.2 C138.1 160.1 138.6 161.2 139.1 162.3 C139.4 162.8 139.6 163.3 139.6 163.3 C139.6 163.4 139.7 163.7 139.8 163.9 C139.9 164.2 140.2 164.8 140.4 165.2 C141.6 167.9 142.7 169.9 145.9 175.5 C146.7 176.8 149.8 181.3 151.5 183.5 C155.4 188.6 159.7 193.1 165.2 197.8 C167.1 199.4 171.1 202.4 172.4 203.1 C172.8 203.4 173.5 203.8 174 204.2 C176.5 205.7 180.6 207.9 182.9 208.8 C186 210.2 186.8 210.5 188.8 211.1 C195.9 213.5 204.3 214.4 211.6 213.7 Z M129.1 255.8 C130.4 254.9 135.7 249.9 137.7 247.7 C141.1 243.9 144.9 238.8 146.8 235.5 C147.1 235 147.5 234.4 147.7 234.1 C148.1 233.4 149.9 229.7 150.3 228.9 C150.4 228.7 150.5 228.3 150.6 228.1 C152.8 222.8 153.7 219.5 154.2 215.2 C154.3 213.4 153.7 213.7 147.8 218 C139.7 223.8 130.2 229.3 128 229.3 C125.8 229.3 116.3 223.8 108.2 218 C102.3 213.7 101.7 213.4 101.8 215.2 C102.3 219.5 103.2 222.8 105.4 228.1 C105.5 228.3 105.6 228.7 105.7 228.9 C106 229.7 107.9 233.4 108.3 234.1 C108.5 234.4 108.9 235 109.2 235.5 C113.6 243.2 125.4 256.1 128 256.1 C128.4 256.1 128.7 256 129.1 255.8 Z M129.2 215.2 C130.2 214.8 131.9 213.9 134 212.6 C135.1 212 136.5 211.1 137.1 210.8 C138.3 210.1 140.2 208.8 142 207.6 C142.5 207.2 143.3 206.6 143.8 206.3 C145 205.5 145.4 205.2 146.5 204.4 C147 204 148.4 203 149.6 202.1 C152.5 200.1 152.4 200.2 150.9 198.4 C150.2 197.6 147.5 194.1 145.2 191.2 C144.7 190.5 143.8 189.4 143.4 188.7 C142.9 188.1 142.3 187.2 142 186.8 C141.2 185.6 139.2 182.6 138.6 181.7 C138.1 180.8 138.1 180.8 137.4 179.6 C137.2 179.2 136.8 178.7 136.7 178.4 C135 175.7 130.1 166.2 130.1 165.7 C130.1 165 128.5 162.5 128 162.5 C127.5 162.5 125.9 165 125.9 165.7 C125.9 166.2 121 175.7 119.3 178.4 C119.2 178.7 118.8 179.2 118.6 179.6 C117.9 180.8 117.9 180.8 117.4 181.7 C116.8 182.6 114.8 185.6 114 186.8 C113.7 187.2 113 188.1 112.6 188.7 C112.2 189.4 111.3 190.5 110.8 191.2 C108.5 194.1 105.8 197.6 105.1 198.4 C103.5 200.2 103.5 200.1 106.4 202.1 C107.6 203 109 204 109.5 204.4 C110.6 205.2 111 205.5 112.2 206.3 C112.7 206.6 113.5 207.2 114 207.6 C115.8 208.8 117.7 210.1 118.9 210.8 C119.5 211.1 120.9 212 122 212.6 C126.2 215.2 127.7 215.7 129.2 215.2 Z M128.9 60.7 C129.3 60.4 130.4 59.3 132 57.4 C132.5 56.8 133.3 55.8 133.8 55.1 C134.4 54.5 135.1 53.7 135.4 53.3 C135.7 52.9 136.7 51.8 137.4 50.9 C138.2 50 139.1 48.9 139.4 48.5 C140.1 47.8 143.8 43.6 145.2 42 C151.9 34.6 152.6 33.5 152.8 29.9 C153 27.1 151.8 24.4 148.7 20.6 C146.1 17.5 133.7 4.7 130 1.2 C127.7 -0.8 128.4 -1.2 119.8 7.4 C105.4 22 102.9 25.3 103.2 29.9 C103.4 33.5 104 34.6 110.8 42 C112.2 43.6 115.9 47.8 116.6 48.5 C116.9 48.9 117.8 50 118.6 50.9 C119.3 51.8 120.3 52.9 120.6 53.3 C121 53.7 121.6 54.5 122.2 55.1 C122.7 55.8 123.5 56.8 124 57.4 C127 61 127.7 61.4 128.9 60.7 Z"/></svg></a></p>
+</div>
+</footer>
+
+<script>
+(function(){
+var d=document,h=d.documentElement,b=d.body;b.classList.remove("no-js");
+var $=function(s){return d.querySelector(s)};
+// thème
+var K="athlea-theme";try{var t=localStorage.getItem(K);if(t)h.dataset.theme=t}catch(e){}
+$("#themebtn").addEventListener("click",function(){var dk=h.dataset.theme?h.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;h.dataset.theme=dk?"light":"dark";try{localStorage.setItem(K,h.dataset.theme)}catch(e){}});
+// menu mobile
+var top=$(".top"),mb=$("#menubtn");function menu(o){top.classList.toggle("open",o);mb.setAttribute("aria-expanded",o);mb.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu")}
+mb.addEventListener("click",function(){menu(!top.classList.contains("open"))});
+d.querySelectorAll(".nav a").forEach(function(a){a.addEventListener("click",function(){menu(false)})});
+d.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false)});
+// progression + rubrique active
+var bar=$(".progress"),links=[].slice.call(d.querySelectorAll(".nav a")),secs=links.map(function(a){return d.querySelector(a.getAttribute("href"))});
+var raf=0;function upd(){raf=0;var m=h.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?scrollY/m:0)+")";var y=scrollY+innerHeight*.35,k=-1;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)k=i});links.forEach(function(a,i){a.classList.toggle("on",i===k)})}
+addEventListener("scroll",function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});upd();
+// apparition
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});d.querySelectorAll(".rv").forEach(function(el){io.observe(el)})}else d.querySelectorAll(".rv").forEach(function(el){el.classList.add("in")});
+// copier
+d.querySelectorAll("[data-copy]").forEach(function(bt){bt.addEventListener("click",function(){navigator.clipboard&&navigator.clipboard.writeText(bt.dataset.copy).then(function(){bt.textContent="Copié";setTimeout(function(){bt.textContent="Copier"},1800)})})});
+// formulaire : ouvre la messagerie avec la demande pré-remplie
+var f=$("#cform");f.addEventListener("submit",function(e){e.preventDefault();if(f.elements["botcheck"].checked)return;if(!f.checkValidity()){f.reportValidity();return}
+var body="Nom : "+f.elements["name"].value+"\nE-mail : "+f.elements["email"].value+"\nDemande : "+f.elements["topic"].value+"\n\n"+f.elements["message"].value;
+location.href="mailto:athlea_coaching@icloud.com?subject="+encodeURIComponent(f.elements["topic"].value+" – "+f.elements["name"].value)+"&body="+encodeURIComponent(body);
+f.hidden=true;var ok=$("#fok");ok.classList.add("show");ok.focus()});
+})();
+</script>
+</body>
+</html>
