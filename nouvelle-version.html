@@ -126,8 +126,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (max-width:700px){.lane{grid-template-columns:3rem 1fr;padding:1.2rem .2rem}.lane .n{font-size:2rem}.lane .px{grid-column:2;text-align:left}.lane .arr{display:none}}
 
 /* sections */
-.sec{padding:clamp(4rem,9vw,7rem) 0;border-top:1px solid var(--line)}
-.sec.alt{background:var(--bg2)}
+.sec{padding:clamp(4rem,9vw,7rem) 0;border-top:1px solid var(--line);background:var(--bg) var(--topo) 0 0/600px 300px}
+.sec.alt{background-color:var(--bg2)}
 .sgrid{display:grid;grid-template-columns:minmax(0,.34fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem)}
 .side{position:sticky;top:6rem;align-self:start}
 .side .num{display:block;font-size:clamp(4rem,9vw,7.5rem);font-weight:800;letter-spacing:-.07em;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--sc,var(--water));margin-bottom:.8rem}
@@ -290,6 +290,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 
 /* faq (cartes reprises de la V35) */
 .faqs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;align-items:start}
+.fcol{display:grid;gap:1.2rem;align-content:start}
 .fcard{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:var(--r);padding:1.3rem 1.4rem .4rem;box-shadow:0 16px 28px -24px rgba(20,40,30,.55)}
 .fcard h3{display:flex;align-items:center;gap:.75rem;margin:0 0 .4rem;font-size:1.15rem}
 .fico{flex:none;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:52% 46% 50% 48%/48% 54% 46% 52%;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
@@ -602,23 +603,27 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="acts"><a class="btn" href="https://g.page/r/CeAjLiGyOuoLECE/review" target="_blank" rel="noopener">Laisser un avis sur Google</a><a class="btn ghost" href="https://www.google.com/maps?cid=858563215702762464" target="_blank" rel="noopener">Voir les avis</a></div>
 </div>
 <div class="faqs">
+<div class="fcol">
 <div class="fcard rv" style="--c:var(--c1)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></span>Pour commencer</h3>
 <details><summary>Comment se passe le premier échange&nbsp;?</summary><p>Pour le coaching sportif, c’est un échange offert de 30 minutes, au téléphone ou en visio. Nous faisons le point ensemble sur votre niveau, vos contraintes et vos objectifs, puis nous choisissons la formule qui vous convient.</p></details>
 <details><summary>Faut-il déjà avoir un bon niveau&nbsp;?</summary><p>Pas du tout. Chaque programme part de votre niveau, que nous définissons lors de notre premier échange, et avance à votre rythme. Les cours de natation accueillent aussi bien les débutants que les nageurs qui veulent progresser.</p></details>
 <details><summary>Dois-je avoir du matériel&nbsp;?</summary><p>Pour le coaching à domicile, j’apporte tout le matériel nécessaire. Le renforcement peut aussi se faire sans matériel.</p></details>
-</div>
-<div class="fcard rv" style="--c:var(--c2)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>Lieux et déplacement</h3>
-<details><summary>Où ont lieu les séances&nbsp;?</summary><p>Chez vous, à Ottrott et jusqu’à 30 km autour&nbsp;; à L’O – Espace Aquatique d’Obernai pour la natation&nbsp;; ou à distance, avec un programme suivi par message ou en visio.</p></details>
-<details><summary>Combien coûte le déplacement&nbsp;?</summary><p>Il est inclus jusqu’à 15 km autour d’Ottrott. Au-delà, comptez 5&nbsp;€ de 15 à 20 km, 10&nbsp;€ de 20 à 25 km et 15&nbsp;€ de 25 à 30 km par séance. Je ne me déplace pas au-delà de 30 km.</p></details>
 </div>
 <div class="fcard rv" style="--c:var(--c3)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>Réserver et payer</h3>
 <details><summary>Comment réserver une séance&nbsp;?</summary><p>Pour le coaching sportif, tout commence par un premier échange offert&nbsp;: je vous invite ensuite sur l’appli Ekklo, où vous réservez vos séances et suivez votre programme. Pour la natation, je vous envoie le lien de mon agenda Calendly&nbsp;: vous choisissez votre cours, un jour et une heure, puis vous recevez une confirmation et un rappel par e-mail.</p></details>
 <details><summary>Comment payer&nbsp;?</summary><p>Juste après la séance, par virement, par paiement sans contact ou par lien de paiement. Le carnet de 10 séances se règle en une fois.</p></details>
 <details><summary>Puis-je annuler ou décaler une séance&nbsp;?</summary><p>Oui, jusqu’à 12 heures avant la séance.</p></details>
 </div>
+</div>
+<div class="fcol">
+<div class="fcard rv" style="--c:var(--c2)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>Lieux et déplacement</h3>
+<details><summary>Où ont lieu les séances&nbsp;?</summary><p>Chez vous, à Ottrott et jusqu’à 30 km autour&nbsp;; à L’O – Espace Aquatique d’Obernai pour la natation&nbsp;; ou à distance, avec un programme suivi par message ou en visio.</p></details>
+<details><summary>Combien coûte le déplacement&nbsp;?</summary><p>Il est inclus jusqu’à 15 km autour d’Ottrott. Au-delà, comptez 5&nbsp;€ de 15 à 20 km, 10&nbsp;€ de 20 à 25 km et 15&nbsp;€ de 25 à 30 km par séance. Je ne me déplace pas au-delà de 30 km.</p></details>
+</div>
 <div class="fcard rv" style="--c:var(--c6)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg></span>Enfants et entreprises</h3>
 <details><summary>Les enfants peuvent-ils prendre des cours de natation&nbsp;?</summary><p>Bien sûr&nbsp;: apprivoiser l’eau, apprendre les nages et gagner en aisance, dans une ambiance rassurante. Un cours de 30 minutes peut aussi réunir deux enfants de la même famille.</p></details>
 <details><summary>Travaillez-vous avec les entreprises&nbsp;?</summary><p>Oui&nbsp;: coaching collectif, pilates, ateliers de posture, sorties en plein air et événements sur mesure, dans vos locaux, dehors ou en visio. Chaque prestation fait l’objet d’un devis.</p></details>
+</div>
 </div>
 </div>
 </div>
