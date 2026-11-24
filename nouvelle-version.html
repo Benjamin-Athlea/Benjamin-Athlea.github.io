@@ -49,7 +49,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .rope{height:5px;background:var(--rope);border-radius:3px;opacity:.9}
 
 /* en-tête */
-.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px)}
 .top .wrap{display:flex;align-items:center;gap:1rem;min-height:68px}
 .logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--ink);font-size:1.18rem;letter-spacing:-.01em;margin-right:auto}
 .logo svg{width:32px;height:30px}
@@ -63,16 +63,17 @@ ul,ol{margin:0;padding:0;list-style:none}
 @property --rr{syntax:"<length>";inherits:false;initial-value:0px}
 @property --cl{syntax:"<color>";inherits:false;initial-value:#2f8a4e}
 @property --cr{syntax:"<color>";inherits:false;initial-value:#2f8a4e}
+/* posée par le script exactement sur la ligne d'eau en vague de l'en-tête (même hauteur, même phase) */
 .nwave{position:absolute;left:0;right:0;bottom:-.1rem;height:10px;pointer-events:none}
-.nwave::before{content:"";position:absolute;inset:0;background:var(--line);-webkit-mask:var(--navwave) 0 0/56px 10px repeat-x;mask:var(--navwave) 0 0/56px 10px repeat-x}
-.nwave i{position:absolute;inset:0;background:linear-gradient(90deg,var(--cl),var(--cr)) var(--x) 0/max(1px,calc(100% - var(--x) - var(--rr))) 100% no-repeat;opacity:var(--o,0);-webkit-mask:var(--navwave2) 0 0/56px 10px repeat-x;mask:var(--navwave2) 0 0/56px 10px repeat-x;clip-path:inset(-2px var(--rr) -2px var(--x) round 6px);transition:opacity .35s}
+.nwave i{position:absolute;inset:0;background:linear-gradient(90deg,var(--cl),var(--cr)) var(--x) 0/max(1px,calc(100% - var(--x) - var(--rr))) 100% no-repeat;opacity:var(--o,0);-webkit-mask:var(--navwave2) var(--ph,0px) 0/56px 10px repeat-x;mask:var(--navwave2) var(--ph,0px) 0/56px 10px repeat-x;clip-path:inset(-2px var(--rr) -2px var(--x) round 6px);transition:opacity .35s}
 .nwave.anim i{transition:--x .5s cubic-bezier(.45,.05,.25,1),--rr .5s cubic-bezier(.45,.05,.25,1),--cl .5s,--cr .5s,opacity .35s}
 .ibtn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--ink);cursor:pointer}
 .ibtn:hover{background:var(--bg2)}
 .ibtn svg{width:20px;height:20px}
 .top .btn{min-height:42px;padding:.6rem 1.1rem;font-size:.95rem}
 #menubtn{display:none}
-.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--rope)}
+/* ligne d'eau en forme de vague, sous tout l'en-tête */
+.progress{position:absolute;left:0;right:0;bottom:0;height:10px;background:var(--rope);opacity:.9;pointer-events:none;-webkit-mask:var(--navwave) 0 0/56px 10px repeat-x;mask:var(--navwave) 0 0/56px 10px repeat-x}
 @media (max-width:1000px){
  #menubtn{display:grid}
  .nwave{display:none}
@@ -696,7 +697,8 @@ if(k<0){var g0=geo(links[0]),c0=mix(col(secs[0]),col(secs[0]),0);setw(g0[0],g0[1
 var A=geo(links[k]),CA=col(secs[k]);if(k===links.length-1||!secs[k+1]){setw(A[0],A[1],1,mix(CA,CA,0));return}
 var B=geo(links[k+1]),t0=tp(secs[k]),t=(ref-t0)/(tp(secs[k+1])-t0),tr=sm((t-.1)/.7),tl=sm((t-.3)/.7),CB=col(secs[k+1]);
 setw(A[0]+(B[0]-A[0])*tl,A[1]+(B[1]-A[1])*tr,1,mix(CA,CB,tl),mix(CA,CB,tr))}
-function req(){if(!raf)raf=requestAnimationFrame(track)}
+var hdr=$(".top");function place(){var r=nv.getBoundingClientRect(),q=hdr.getBoundingClientRect();nw.style.top=(q.bottom-r.top-10)+"px";nw.style.bottom="auto";nw.style.setProperty("--ph",(q.left-r.left)+"px")}
+function req(){if(!raf)raf=requestAnimationFrame(function(){place();track()})}
 addEventListener("scroll",req,{passive:true});addEventListener("resize",req);if(d.fonts)d.fonts.ready.then(req);req();
 function go(a){hov=true;clearTimeout(ht);nw.classList.add("anim");var g=geo(a),c=col(secs[links.indexOf(a)]);c=mix(c,c,0);setw(g[0],g[1],1,c,c)}
 function back(){hov=false;nw.classList.add("anim");track();clearTimeout(ht);ht=setTimeout(function(){if(!hov)nw.classList.remove("anim")},600)}
