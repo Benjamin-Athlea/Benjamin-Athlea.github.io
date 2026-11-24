@@ -19,9 +19,13 @@
  --on-dark:#f5ecd7;--on-dark2:rgba(245,236,215,.72);--btn:#1e3d2f;--btn-ink:#f5ecd7;
  --rope:repeating-linear-gradient(90deg,var(--water2) 0 14px,transparent 14px 18px,var(--sand) 18px 32px,transparent 32px 36px,#c4613f 36px 50px,transparent 50px 54px);
  --r:18px;--wrap:1180px;--gut:clamp(1rem,4vw,2rem);
+ /* une couleur par rubrique (numéros, vague du menu) */
+ --c1:#2f8a4e;--c2:#1d8fb3;--c3:#c98a1e;--c4:#c4613f;--c5:#5462b8;--c6:#237a7a;
+ --topo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cpath d='M0 26c100 -16 200 -16 300 0s200 16 300 0M0 74c100 9 200 9 300 0s200 -9 300 0M0 112c100 -24 200 -24 300 0s200 24 300 0M0 168c100 15 200 15 300 0s200 -15 300 0M0 210c100 -8 200 -8 300 0s200 8 300 0M0 262c100 20 200 20 300 0s200 -20 300 0' fill='none' stroke='%234a7c59' stroke-opacity='.16' stroke-width='1.3'/%3E%3C/svg%3E");
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1512;--bg2:#121d18;--card:#16221d;--ink:#eee8da;--text:#cfd6d0;--mute:#93a29a;--line:rgba(238,232,218,.13);--forest:#173025;--deep:#0a120e;--water:#6cc8e6;--ocre:#f0b860;--btn:#e8d5b0;--btn-ink:#11241b}}
-:root[data-theme="dark"]{--bg:#0d1512;--bg2:#121d18;--card:#16221d;--ink:#eee8da;--text:#cfd6d0;--mute:#93a29a;--line:rgba(238,232,218,.13);--forest:#173025;--deep:#0a120e;--water:#6cc8e6;--ocre:#f0b860;--btn:#e8d5b0;--btn-ink:#11241b}
+/* sombre : vert-de-gris chaud plutôt que noir, crème pour le texte, couleurs de rubrique éclaircies */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151c18;--bg2:#1a231e;--card:#202b25;--ink:#f5ecd7;--text:#e3ddcc;--mute:#b3ad9b;--line:rgba(245,236,215,.12);--forest:#1f3a2d;--deep:#101713;--water:#8cc6cf;--water2:#5fb3cf;--ocre:#e2b46a;--btn:#e8d5b0;--btn-ink:#11241b;--c1:#7fd19a;--c2:#6cc8e6;--c3:#f0b860;--c4:#ee9473;--c5:#a9b4f0;--c6:#6fd0c6;--topo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cpath d='M0 26c100 -16 200 -16 300 0s200 16 300 0M0 74c100 9 200 9 300 0s200 -9 300 0M0 112c100 -24 200 -24 300 0s200 24 300 0M0 168c100 15 200 15 300 0s200 -15 300 0M0 210c100 -8 200 -8 300 0s200 8 300 0M0 262c100 20 200 20 300 0s200 -20 300 0' fill='none' stroke='%239cc5a6' stroke-opacity='.1' stroke-width='1.3'/%3E%3C/svg%3E")}}
+:root[data-theme="dark"]{--bg:#151c18;--bg2:#1a231e;--card:#202b25;--ink:#f5ecd7;--text:#e3ddcc;--mute:#b3ad9b;--line:rgba(245,236,215,.12);--forest:#1f3a2d;--deep:#101713;--water:#8cc6cf;--water2:#5fb3cf;--ocre:#e2b46a;--btn:#e8d5b0;--btn-ink:#11241b;--c1:#7fd19a;--c2:#6cc8e6;--c3:#f0b860;--c4:#ee9473;--c5:#a9b4f0;--c6:#6fd0c6;--topo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cpath d='M0 26c100 -16 200 -16 300 0s200 16 300 0M0 74c100 9 200 9 300 0s200 -9 300 0M0 112c100 -24 200 -24 300 0s200 24 300 0M0 168c100 15 200 15 300 0s200 -15 300 0M0 210c100 -8 200 -8 300 0s200 8 300 0M0 262c100 20 200 20 300 0s200 -20 300 0' fill='none' stroke='%239cc5a6' stroke-opacity='.1' stroke-width='1.3'/%3E%3C/svg%3E")}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:5.5rem;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
@@ -50,17 +54,28 @@ ul,ol{margin:0;padding:0;list-style:none}
 .logo{display:flex;align-items:center;gap:.55rem;text-decoration:none;color:var(--ink);font-size:1.18rem;letter-spacing:-.01em;margin-right:auto}
 .logo svg{width:32px;height:30px}
 .logo b{font-weight:800}
-.nav{display:flex;gap:.2rem}
-.nav a{padding:.5rem .7rem;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--text);transition:background .2s,color .2s}
-.nav a:hover,.nav a.on{background:var(--bg2);color:var(--ink)}
+.nav{position:relative;display:flex;gap:.2rem}
+.nav a{padding:.5rem .7rem .75rem;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--text);transition:color .2s}
+.nav a:hover,.nav a.on{color:var(--ink)}
+/* vague sous le menu (reprise de la V35) : le segment coloré suit la lecture */
+:root{--navwave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='10'%3E%3Cpath d='M0 5c4.566-1.537 8.934-3 14-3s9.434 1.463 14 3s8.934 3 14 3s9.434-1.463 14-3' fill='none' stroke='%23000' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E");--navwave2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='10'%3E%3Cpath d='M0 5c4.566-1.537 8.934-3 14-3s9.434 1.463 14 3s8.934 3 14 3s9.434-1.463 14-3' fill='none' stroke='%23000' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E")}
+@property --x{syntax:"<length>";inherits:false;initial-value:0px}
+@property --rr{syntax:"<length>";inherits:false;initial-value:0px}
+@property --cl{syntax:"<color>";inherits:false;initial-value:#2f8a4e}
+@property --cr{syntax:"<color>";inherits:false;initial-value:#2f8a4e}
+.nwave{position:absolute;left:0;right:0;bottom:-.1rem;height:10px;pointer-events:none}
+.nwave::before{content:"";position:absolute;inset:0;background:var(--line);-webkit-mask:var(--navwave) 0 0/56px 10px repeat-x;mask:var(--navwave) 0 0/56px 10px repeat-x}
+.nwave i{position:absolute;inset:0;background:linear-gradient(90deg,var(--cl),var(--cr)) var(--x) 0/max(1px,calc(100% - var(--x) - var(--rr))) 100% no-repeat;opacity:var(--o,0);-webkit-mask:var(--navwave2) 0 0/56px 10px repeat-x;mask:var(--navwave2) 0 0/56px 10px repeat-x;clip-path:inset(-2px var(--rr) -2px var(--x) round 6px);transition:opacity .35s}
+.nwave.anim i{transition:--x .5s cubic-bezier(.45,.05,.25,1),--rr .5s cubic-bezier(.45,.05,.25,1),--cl .5s,--cr .5s,opacity .35s}
 .ibtn{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:0;background:transparent;color:var(--ink);cursor:pointer}
 .ibtn:hover{background:var(--bg2)}
 .ibtn svg{width:20px;height:20px}
 .top .btn{min-height:42px;padding:.6rem 1.1rem;font-size:.95rem}
 #menubtn{display:none}
-.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--rope);transform-origin:left;transform:scaleX(0)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--rope)}
 @media (max-width:1000px){
  #menubtn{display:grid}
+ .nwave{display:none}
  .top .btn{display:none}
  .nav{position:fixed;inset:68px 0 auto 0;flex-direction:column;gap:0;padding:.6rem var(--gut) 1.2rem;background:var(--bg);border-bottom:1px solid var(--line);transform:translateY(-120%);visibility:hidden;transition:transform .3s,visibility .3s}
  .nav a{padding:.9rem .4rem;border-radius:0;border-bottom:1px solid var(--line);font-size:1.05rem}
@@ -69,7 +84,6 @@ ul,ol{margin:0;padding:0;list-style:none}
 
 /* hero */
 .hero{background:var(--forest);color:var(--on-dark);position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:6px;background:var(--rope)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center;padding:clamp(3rem,8vw,6rem) 0 clamp(3.5rem,8vw,6rem)}
 .hero .kicker{color:var(--sand)}
 .hero h1{color:var(--cream);font-size:clamp(3rem,8.4vw,6.4rem);font-weight:800;letter-spacing:-.055em;line-height:.9;margin:1.1rem 0 1.4rem}
@@ -87,11 +101,11 @@ ul,ol{margin:0;padding:0;list-style:none}
 .mosaic img{width:100%;height:100%;object-fit:cover}
 .mosaic figcaption{position:absolute;left:.7rem;bottom:.7rem;padding:.3rem .7rem;border-radius:999px;background:rgba(17,36,27,.72);color:var(--cream);font-size:.78rem;font-weight:600;backdrop-filter:blur(6px)}
 @media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.mosaic{aspect-ratio:1/.8;max-width:520px}}
-.badge{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.9rem;color:var(--on-dark2)}
-.badge::before{content:"";width:9px;height:9px;border-radius:50%;background:#7fd19a;box-shadow:0 0 0 4px rgba(127,209,154,.2)}
+.badge{margin-top:1.1rem;max-width:34rem;padding:.75rem 1rem;border:1.5px solid rgba(232,213,176,.5);border-radius:12px;background:rgba(232,213,176,.09);font-size:.92rem;color:var(--on-dark)}
 
 /* couloirs */
-.lanes{padding:clamp(3rem,7vw,5rem) 0 1rem}
+.lanes{padding:clamp(3rem,7vw,5rem) 0 clamp(3rem,6vw,4.5rem);background:var(--bg) var(--topo) 0 0/600px 300px}
+.lanes .wrap{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(1.4rem,3.5vw,2.4rem) clamp(1rem,3vw,2rem);box-shadow:0 22px 40px -32px rgba(20,40,30,.55)}
 .lanes h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:.8rem 0 1.6rem}
 .lane{display:grid;grid-template-columns:4.5rem 1fr auto;gap:1.2rem;align-items:center;padding:1.4rem 1.2rem;border-top:1px solid var(--line);text-decoration:none;color:inherit;position:relative;transition:background .25s}
 .lane:last-child{border-bottom:1px solid var(--line)}
@@ -105,7 +119,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .lane .px b{display:block;color:var(--ink);font-size:1.1rem}
 .lane .px span{font-size:.88rem;color:var(--mute)}
 .lane .arr{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--bg2);margin-left:.8rem;vertical-align:middle;transition:transform .25s,background .25s}
-.lane:hover .arr{transform:translateY(3px);background:var(--lc);color:#fff}
+.lane:hover .arr{transform:translateY(3px);background:var(--lc);color:var(--bg)}
 .lane .arr svg{width:18px;height:18px}
 .zone-line{margin-top:1.2rem;color:var(--mute);font-size:.95rem}
 .zone-line b{color:var(--ink)}
@@ -179,6 +193,15 @@ ul,ol{margin:0;padding:0;list-style:none}
 .price.hl h4,.price.hl p{color:var(--on-dark2)}
 .price.hl .amt{color:var(--sand)}
 .price.hl .foot{color:var(--sand)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.7rem 0 .2rem}
+.two div{padding:.7rem .8rem;border-radius:12px;background:var(--bg2)}
+.two span{display:block;font-size:.82rem;font-weight:600;color:var(--mute)}
+.two b{display:block;font-size:1.9rem;font-weight:800;letter-spacing:-.04em;color:var(--ink);line-height:1.1}
+.two b small{font-size:.95rem;letter-spacing:0}
+.price.hl .two div{background:rgba(245,236,215,.1)}
+.price.hl .two span{color:var(--on-dark2)}
+.price.hl .two b{color:var(--sand)}
+.price.hl,.fact.goal,.pro-cta,.cta-card{box-shadow:inset 0 0 0 1px rgba(232,213,176,.2)}
 @media (max-width:860px){.prices{grid-template-columns:1fr}}
 .tbl{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:.98rem}
 .tbl caption{text-align:left;font-weight:700;color:var(--ink);padding-bottom:.6rem}
@@ -218,8 +241,15 @@ ul,ol{margin:0;padding:0;list-style:none}
 .offer .ic svg{width:22px;height:22px}
 .offer h4{font-size:1.1rem;margin-bottom:.35rem}
 .offer p{font-size:.96rem;color:var(--mute)}
-.pro-photo{margin:0;border-radius:var(--r);overflow:hidden;aspect-ratio:16/8}
+.pro-head{display:grid;grid-template-columns:1.1fr .9fr;gap:1.4rem;align-items:center}
+.pro-head .intro+.intro{margin-top:1rem}
+.pro-photo{margin:0;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3}
 .pro-photo img{width:100%;height:100%;object-fit:cover}
+.pro-cta{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;padding:1.4rem 1.5rem;border-radius:var(--r);background:var(--forest);color:var(--on-dark)}
+.pro-cta p{flex:1 1 18rem;color:var(--on-dark2)}
+.pro-cta b{color:var(--cream)}
+.pro-cta .btn{background:var(--sand);color:#11241b}
+@media (max-width:800px){.pro-head{grid-template-columns:1fr}}
 @media (max-width:640px){.offers{grid-template-columns:1fr}}
 
 /* infos */
@@ -235,18 +265,22 @@ ul,ol{margin:0;padding:0;list-style:none}
 @media (max-width:860px){.travel,.good{grid-template-columns:1fr}}
 
 /* à propos */
-.about{display:grid;grid-template-columns:1fr .8fr;gap:1.5rem;align-items:start}
+.about{display:grid;grid-template-columns:minmax(0,1fr) 15rem;gap:1.6rem;align-items:start}
 .about figure{margin:0}
 .about img{border-radius:var(--r);width:100%;aspect-ratio:4/5;object-fit:cover}
-.about figcaption{font-size:.85rem;color:var(--mute);margin-top:.5rem}
-.about p+p{margin-top:1rem}
-.ways{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
-.ways li{padding:.45rem .9rem;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:.92rem;color:var(--ink)}
-.goal{margin-top:1.4rem;display:flex;gap:1rem;align-items:center;padding:1.2rem 1.3rem;border-radius:var(--r);background:var(--forest);color:var(--on-dark)}
-.goal .k{flex:none;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);writing-mode:vertical-rl;transform:rotate(180deg)}
-.goal b{display:block;color:var(--cream);font-size:1.2rem}
-.goal span{color:var(--on-dark2)}
-@media (max-width:800px){.about{grid-template-columns:1fr}.about figure{max-width:420px}}
+.about figcaption{font-size:.82rem;color:var(--mute);margin-top:.45rem}
+.about p+p{margin-top:.9rem}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.fact{padding:1.2rem 1.3rem;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.fact h3{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sc);margin-bottom:.7rem}
+.fact li{display:flex;justify-content:space-between;gap:.8rem;padding:.45rem 0;border-top:1px solid var(--line);font-size:.94rem}
+.fact li:first-child{border-top:0;padding-top:0}
+.fact li b{color:var(--ink);white-space:nowrap}
+.fact.goal{background:var(--forest);border-color:var(--forest);color:var(--on-dark2)}
+.fact.goal h3{color:var(--sand)}
+.fact.goal b{display:block;color:var(--cream);font-size:1.2rem;line-height:1.25;margin-bottom:.4rem}
+@media (max-width:860px){.facts{grid-template-columns:1fr}}
+@media (max-width:640px){.about{grid-template-columns:1fr}.about figure{max-width:15rem}}
 
 /* avis */
 .reviews{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;padding:1.8rem;border-radius:var(--r);background:var(--card);border:1px dashed var(--line)}
@@ -254,20 +288,23 @@ ul,ol{margin:0;padding:0;list-style:none}
 .reviews .acts{display:flex;flex-wrap:wrap;gap:.6rem}
 @media (max-width:760px){.reviews{grid-template-columns:1fr}}
 
-/* faq */
-.faqs{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2rem}
-.faqs h3{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--water);margin-bottom:.4rem}
-.faqs details{border-bottom:1px solid var(--line)}
-.faqs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;font-weight:700;color:var(--ink)}
-.faqs summary::-webkit-details-marker{display:none}
-.faqs summary::after{content:"";flex:none;width:22px;height:22px;margin-top:.05rem;border-radius:50%;background:var(--bg2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316748f' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .3s}
-.faqs details[open] summary::after{transform:rotate(45deg)}
-.faqs details p{padding:0 0 1.1rem;color:var(--mute)}
+/* faq (cartes reprises de la V35) */
+.faqs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;align-items:start}
+.fcard{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:var(--r);padding:1.3rem 1.4rem .4rem;box-shadow:0 16px 28px -24px rgba(20,40,30,.55)}
+.fcard h3{display:flex;align-items:center;gap:.75rem;margin:0 0 .4rem;font-size:1.15rem}
+.fico{flex:none;display:grid;place-items:center;width:2.6rem;height:2.6rem;border-radius:52% 46% 50% 48%/48% 54% 46% 52%;background:color-mix(in srgb,var(--c) 18%,transparent);color:var(--c)}
+.fico svg{width:22px;height:22px}
+.fcard details{border-bottom:1px solid var(--line)}
+.fcard details:last-child{border-bottom:0}
+.fcard summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1.2rem;padding:.95rem 0;font-weight:700;font-size:1.02rem;line-height:1.3;color:var(--ink)}
+.fcard summary::-webkit-details-marker{display:none}
+.fcard summary::after{content:"";flex:none;width:24px;height:24px;border-radius:52% 46% 50% 48%/48% 54% 46% 52%;border:2px solid var(--c);background:linear-gradient(var(--c),var(--c)) center/9px 2px no-repeat,linear-gradient(var(--c),var(--c)) center/2px 9px no-repeat;transition:transform .25s}
+.fcard details[open] summary::after{background:linear-gradient(var(--c),var(--c)) center/9px 2px no-repeat;transform:rotate(180deg)}
+.fcard details p{padding:0 0 1.1rem;color:var(--mute)}
 @media (max-width:800px){.faqs{grid-template-columns:1fr}}
 
 /* contact */
 .contact{background:var(--deep);color:var(--on-dark);padding:clamp(4rem,9vw,7rem) 0;position:relative}
-.contact::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:var(--rope)}
 .contact .sgrid{grid-template-columns:minmax(0,.9fr) minmax(0,1fr)}
 .contact h2{color:var(--cream);font-size:clamp(2.2rem,5vw,3.8rem);letter-spacing:-.045em;line-height:.95}
 .contact .kicker{color:var(--sand)}
@@ -297,6 +334,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .ok{display:none;text-align:center;padding:1rem 0}
 .ok.show{display:block}
 .ok h3{margin:.6rem 0}
+.webmail{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:1rem}
+.webmail .btn{width:auto;min-height:42px;padding:.55rem 1rem;font-size:.92rem}
 @media (max-width:900px){.contact .sgrid{grid-template-columns:1fr}}
 
 /* pied de page */
@@ -328,7 +367,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <header class="top" id="top">
 <div class="wrap">
 <a class="logo" href="#accueil" aria-label="Athlea Coaching, retour en haut de page"><svg aria-hidden="true"><use href="#mark"/></svg><span><b>athlea</b> coaching</span></a>
-<nav class="nav" id="menu" aria-label="Navigation principale"><a href="#coaching">Coaching</a><a href="#natation">Natation</a><a href="#entreprise">Entreprise</a><a href="#infos">Infos pratiques</a><a href="#apropos">À propos</a><a href="#faq">FAQ</a></nav>
+<nav class="nav" id="menu" aria-label="Navigation principale"><a href="#coaching">Coaching</a><a href="#natation">Natation</a><a href="#entreprise">Entreprise</a><a href="#infos">Infos pratiques</a><a href="#apropos">À propos</a><a href="#faq">FAQ</a><span class="nwave" aria-hidden="true"><i></i></span></nav>
 <button class="ibtn" id="themebtn" type="button" aria-label="Changer de thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 <a class="btn" href="#contact">Écrivez-moi</a>
 <button class="ibtn" id="menubtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -343,14 +382,14 @@ footer .links a{display:block;margin-bottom:.35rem}
 <span class="kicker">Coach sportif et maître-nageur · Ottrott</span>
 <h1>Bouger mieux, <em>durablement.</em></h1>
 <p class="lead">Perdre du poids, vous renforcer, découvrir le pilates ou apprendre à nager, même si l’eau vous fait peur&nbsp;: je vous accompagne chez vous autour d’Ottrott, en entreprise ou à distance, à votre rythme.</p>
-<div class="acts"><a class="btn" href="#contact">Écrivez-moi<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><span>ou <a class="tel" href="tel:+33765686708">07&nbsp;65&nbsp;68&nbsp;67&nbsp;08</a></span></div>
+<div class="acts"><a class="btn" href="#contact">Écrivez-moi<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><span>ou appelez-moi au <a class="tel" href="tel:+33765686708">07&nbsp;65&nbsp;68&nbsp;67&nbsp;08</a></span></div>
 <p class="note">Un petit message suffit, je vous réponds sous 48&nbsp;heures. Pour le coaching sportif, <b>le premier échange est offert</b>&nbsp;: 30&nbsp;minutes au téléphone ou en visio pour faire connaissance, sans engagement.</p>
 <p class="badge">Je viens jusqu’à vous, à Ottrott et jusqu’à 30&nbsp;km alentour (Obernai, Barr, Rosheim, Molsheim…).</p>
 </div>
 <div class="mosaic">
-<figure><img src="img/coaching-a-domicile.webp" alt="Coach sportif et cliente assis sur des médecine-balls pendant une séance de coaching" width="300" height="300" fetchpriority="high"><figcaption>Coaching à domicile</figcaption></figure>
+<figure><img src="img/coaching-musculation.webp" alt="Sportif concentré pendant une séance de renforcement musculaire" width="900" height="900" fetchpriority="high"><figcaption>Renforcement</figcaption></figure>
 <figure><img src="img/cours-de-natation-obernai.webp" alt="Nageuse qui ajuste ses lunettes avant un cours de natation à Obernai" width="640" height="640"><figcaption>Natation</figcaption></figure>
-<figure><img src="img/remise-en-forme.webp" alt="Femme qui s’étire sur un tapis dans son salon, remise en forme à domicile" width="300" height="300"><figcaption>Remise en forme</figcaption></figure>
+<figure><img src="img/coaching-kettlebell.webp" alt="Coach qui corrige la posture d’un sportif pendant un exercice au kettlebell" width="1200" height="800" style="object-position:87% 50%"><figcaption>Coaching personnalisé</figcaption></figure>
 </div>
 </div>
 </section>
@@ -359,24 +398,26 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="wrap">
 <span class="kicker">Chaque petit pas compte</span>
 <h2 id="lanes-t">Par où commencer&nbsp;?</h2>
-<a class="lane rv" href="#coaching" style="--lc:#2f8a4e"><span class="n">01</span><div><h3>Je veux me remettre en forme</h3><p>Perdre du poids, vous renforcer, retrouver la forme ou pratiquer le pilates, seul ou entre amis, chez vous ou à distance, même si vous débutez.</p></div><div class="px"><b>70&nbsp;€ la séance d’une heure</b><span>le premier échange est offert</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
-<a class="lane rv" href="#natation" style="--lc:#1d8fb3"><span class="n">02</span><div><h3>Je veux apprendre ou progresser en natation</h3><p>Enfants, ados ou adultes, même si l’eau vous fait peur&nbsp;: de la première immersion au test d’aisance aquatique, jusqu’au crawl du triathlon.</p></div><div class="px"><b>À partir de 25&nbsp;€ la demi-heure</b><span>enfant ou adulte, à L’O ou chez vous</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
-<a class="lane rv" href="#entreprise" style="--lc:#c98a1e"><span class="n">03</span><div><h3>Je cherche une activité pour mon équipe</h3><p>Coaching collectif, ateliers posture, sorties en plein air et événements sur mesure.</p></div><div class="px"><b>Sur devis</b><span>sur site, dehors ou en visio</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#coaching" style="--lc:var(--c1)"><span class="n">01</span><div><h3>Je veux me remettre en forme ou préparer des objectifs</h3><p>Perdre du poids, vous renforcer, retrouver la forme ou pratiquer le pilates, seul ou entre amis, chez vous ou à distance, même si vous débutez.</p></div><div class="px"><b>70&nbsp;€ la séance d’une heure</b><span>le premier échange est offert</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#natation" style="--lc:var(--c2)"><span class="n">02</span><div><h3>Je veux apprendre ou progresser en natation</h3><p>Enfants, ados et adultes, même si l’eau vous fait peur&nbsp;: de la première immersion au test d’aisance aquatique, jusqu’aux nages codifiées ou à un objectif de triathlon.</p></div><div class="px"><b>À partir de 25&nbsp;€ la demi-heure</b><span>à L’O ou chez vous</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#entreprise" style="--lc:var(--c3)"><span class="n">03</span><div><h3>Je cherche à développer le bien-être de mes employés</h3><p>Coaching collectif, pilates, ateliers de posture, sorties en plein air et événements sur mesure.</p></div><div class="px"><b>Sur devis</b><span>sur site, dehors ou en visio</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#infos" style="--lc:var(--c4)"><span class="n">04</span><div><h3>Je veux savoir comment ça se passe</h3><p>Déplacements, réservation, paiement et annulation&nbsp;: l’essentiel avant de commencer.</p></div><div class="px"><b>Déplacement inclus</b><span>jusqu’à 15&nbsp;km d’Ottrott</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#apropos" style="--lc:var(--c5)"><span class="n">05</span><div><h3>Je veux connaître mon coach</h3><p>Benjamin, maître-nageur sauveteur et coach sportif diplômé, formé au pilates.</p></div><div class="px"><b>Diplômé d’État</b><span>BPJEPS AAN et AF</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
 </div>
 </section>
 
 <!-- COACHING -->
-<section class="sec" id="coaching" style="--sc:#2f8a4e">
+<section class="sec" id="coaching" style="--sc:var(--c1)">
 <div class="wrap sgrid">
-<div class="side"><span class="num" aria-hidden="true">01</span><h2>Coaching sportif à domicile et à distance</h2><p>Seul ou en petit groupe, je vous accompagne pas à pas.</p><a class="btn" href="#contact">Écrivez-moi</a></div>
+<div class="side"><span class="num" aria-hidden="true">01</span><h2>Coaching sportif à domicile et à distance</h2><p>Seul ou en petit groupe, je vous accompagne pas à pas.</p></div>
 <div class="body">
-<p class="intro rv">Débutant, plus de 60&nbsp;ans ou gêné par un petit mal de dos&nbsp;: chaque séance est adaptée à vous. Tout commence par un premier échange offert de 30 minutes, au téléphone ou en visio, pour parler de votre niveau, de vos contraintes et de ce que vous aimeriez changer.</p>
+<p class="intro rv">Que vous souhaitiez débuter une activité physique pour votre santé ou vous lancer dans la compétition, je peux vous accompagner dans différents domaines&nbsp;: perte de poids, remise en forme, renforcement, pilates, trail…</p>
 <ul class="specs">
 <li class="spec rv"><figure><img src="img/coaching-perte-de-poids.webp" alt="Homme en fente latérale avec un kettlebell pendant une séance de coaching perte de poids" loading="lazy"></figure><div><h4>Perte de poids</h4><p>Un plan d’entraînement progressif et des repères simples pour perdre du poids sans régime extrême, et garder les résultats dans la durée.</p></div></li>
 <li class="spec rv"><figure><img src="img/renforcement-musculaire.webp" alt="Sportive en exercice abdominal avec un ballon lesté, séance de renforcement musculaire" loading="lazy"></figure><div><h4>Renforcement musculaire</h4><p>Gagner en force et en tonus, améliorer votre posture, avec ou sans matériel.</p></div></li>
 <li class="spec rv"><figure><img src="img/remise-en-forme.webp" alt="Femme en étirement sur un tapis pendant une séance de remise en forme" loading="lazy"></figure><div><h4>Remise en forme</h4><p>Reprendre en douceur après une pause, une blessure ou une période plus sédentaire, à votre allure.</p></div></li>
 <li class="spec rv"><figure><img src="img/pilates-matwork.webp" alt="Femme en posture de pilates au sol (matwork)" loading="lazy"></figure><div><h4>Pilates</h4><p>Du pilates au sol (matwork) pour renforcer les muscles profonds, améliorer votre posture et gagner en souplesse.</p></div></li>
-<li class="spec rv"><figure><img src="img/initiation-trail.webp" alt="Coureur en pleine foulée sur un sentier, initiation au trail" loading="lazy"></figure><div><h4>Initiation au trail</h4><p>Découvrir la course en nature, progresser sans vous blesser et profiter des beaux sentiers autour d’Ottrott.</p></div></li>
+<li class="spec rv"><figure><img src="img/initiation-trail.webp" alt="Coureur en pleine foulée sur un sentier, initiation au trail" loading="lazy"></figure><div><h4>Trail / Running</h4><p>Découvrir la course en nature, progresser sans vous blesser et profiter des beaux sentiers autour d’Ottrott.</p></div></li>
 </ul>
 
 <div class="rv">
@@ -384,22 +425,6 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="duo">
 <div class="how"><img src="img/coaching-a-domicile.webp" alt="Échange entre un coach sportif et son client lors d’un coaching à domicile" loading="lazy"><div><h4>Coaching à domicile</h4><p>Je viens chez vous, à Ottrott et dans les communes alentour, avec tout le matériel nécessaire. En séance individuelle ou en petit groupe.</p></div></div>
 <div class="how"><img src="img/programme-a-distance.webp" alt="Coach corrigeant la posture d’un sportif" loading="lazy"><div><h4>Programmes à distance</h4><p>Un programme personnalisé, un suivi régulier et des échanges par message ou visio, où que vous soyez.</p></div></div>
-</div>
-</div>
-
-<div>
-<h3 class="rv">Comment ça se passe</h3>
-<p class="intro rv" style="margin-bottom:1.6rem">Tout commence par un simple message. Ensuite, pour le coaching sportif, tout se retrouve sur l’appli Ekklo&nbsp;: vos séances, vos progrès et nos échanges, sur votre téléphone comme sur votre ordinateur.</p>
-<ol class="steps rv" id="suivi-steps">
-<li><span class="k" aria-hidden="true">1</span><div><h4>Vous me contactez</h4><p>Nous parlons de votre objectif, que ce soit pour la natation ou le coaching sportif.</p></div></li>
-<li><span class="k" aria-hidden="true">2</span><div><h4>Un premier échange offert</h4><p>Pour le coaching sportif, nous prenons 30&nbsp;minutes au téléphone ou en visio, gratuitement, au moment qui vous arrange.</p></div></li>
-<li><span class="k" aria-hidden="true">3</span><div><h4>Votre compte Ekklo</h4><p>Je vous envoie le lien pour créer votre compte, sur l’appli ou sur ordinateur. Vos séances, vos habitudes, votre évolution physique et nos messages y sont réunis.</p></div></li>
-<li><span class="k" aria-hidden="true">4</span><div><h4>Vous avancez à votre rythme</h4><p>Vous validez vos séances, me faites vos retours et suivez vos progrès.</p></div></li>
-<li><span class="k" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><h4>On reste en contact</h4><p>Une question, un doute&nbsp;? Nous restons en lien grâce à la messagerie de l’appli.</p></div></li>
-</ol>
-<div class="demo rv">
-<figure><video controls playsinline preload="none" src="video/suivi-ekklo-athlea-coaching.mp4" poster="video/suivi-ekklo-athlea-coaching.webp" title="Réserver et suivre son coaching sur l’appli Ekklo" width="1280" height="720" aria-describedby="suivi-steps">Votre navigateur ne peut pas lire cette vidéo.</video><figcaption>Démonstration du suivi sur l’appli Ekklo (28 secondes). Les étapes sont décrites ci-dessus.</figcaption></figure>
-<div class="cta-card"><strong>Tout commence par un simple message.</strong><a class="btn" href="#contact">Me contacter</a><p>Un empêchement&nbsp;? Vous pouvez annuler ou décaler jusqu’à 12 heures avant.</p></div>
 </div>
 </div>
 
@@ -419,31 +444,62 @@ footer .links a{display:block;margin-bottom:.35rem}
 </tbody></table>
 <p class="small">Le prix des formules sur devis dépend du nombre de participants et du lieu&nbsp;: écrivez-moi, je vous réponds sous 48 heures. Déplacement, paiement et annulation&nbsp;: tout est dans les <a href="#infos">infos pratiques</a>.</p>
 </div>
+<div>
+<h3 class="rv">Comment ça se passe</h3>
+<p class="intro rv" style="margin-bottom:1.6rem">Tout commence par un simple message. Ensuite, pour le coaching sportif, tout se trouve sur l’appli Ekklo&nbsp;: vos séances, vos progrès et nos échanges, sur votre téléphone comme sur votre ordinateur.</p>
+<ol class="steps rv" id="suivi-steps">
+<li><span class="k" aria-hidden="true">1</span><div><h4>Vous me contactez</h4><p>Nous parlons de votre objectif, que ce soit pour la natation ou le coaching sportif.</p></div></li>
+<li><span class="k" aria-hidden="true">2</span><div><h4>Un premier échange offert</h4><p>Pour le coaching sportif, nous prenons 30&nbsp;minutes au téléphone ou en visio, gratuitement.</p></div></li>
+<li><span class="k" aria-hidden="true">3</span><div><h4>Votre compte Ekklo</h4><p>Je vous envoie le lien pour créer votre compte, sur l’appli ou sur ordinateur. Vos séances, vos habitudes, votre évolution physique et nos messages y sont réunis.</p></div></li>
+<li><span class="k" aria-hidden="true">4</span><div><h4>Vous avancez à votre rythme</h4><p>Vous validez vos séances, me faites vos retours et suivez vos progrès.</p></div></li>
+<li><span class="k" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><h4>On reste en contact</h4><p>Une question, un doute&nbsp;? Nous restons en lien grâce à la messagerie de l’appli.</p></div></li>
+</ol>
+<div class="demo rv">
+<figure><video controls playsinline preload="none" src="video/suivi-ekklo-athlea-coaching.mp4" poster="video/suivi-ekklo-athlea-coaching.webp" title="Réserver et suivre son coaching sur l’appli Ekklo" width="1280" height="720" aria-describedby="suivi-steps">Votre navigateur ne peut pas lire cette vidéo.</video><figcaption>Démonstration du suivi sur l’appli Ekklo (28 secondes). Les étapes sont décrites ci-dessus.</figcaption></figure>
+<div class="cta-card"><strong>Tout commence par un simple message.</strong><a class="btn" href="#contact">Me contacter</a><p>Un empêchement&nbsp;? Vous pouvez annuler ou décaler jusqu’à 12 heures avant.</p></div>
+</div>
+</div>
+
 </div>
 </div>
 </section>
 
 <!-- NATATION -->
-<section class="sec alt" id="natation" style="--sc:#1d8fb3">
+<section class="sec alt" id="natation" style="--sc:var(--c2)">
 <div class="wrap sgrid">
-<div class="side"><span class="num" aria-hidden="true">02</span><h2>Natation&nbsp;: apprendre, progresser, se sentir à l’aise</h2><p>De la toute première immersion au perfectionnement de la technique, chacun avance à son rythme.</p><a class="btn" href="#contact">Me contacter</a></div>
+<div class="side"><span class="num" aria-hidden="true">02</span><h2>Natation&nbsp;: apprendre, progresser, se sentir à l’aise</h2><p>De la toute première immersion au perfectionnement de la technique, chacun avance à son rythme.</p></div>
 <div class="body">
 <div class="swim-head">
 <div class="pubs">
 <p class="intro rv">Les cours ont lieu à L’O – Espace Aquatique d’Obernai ou chez vous.</p>
-<div class="pub rv" style="--pc:#16748f"><h4>Adultes</h4><p>En cours particulier, rien que vous et moi&nbsp;: apprendre à nager à tout âge, dépasser l’appréhension de l’eau, corriger votre technique ou préparer un objectif (triathlon, traversée, forme).</p></div>
+<div class="pub rv" style="--pc:#16748f"><h4>Adultes</h4><p>En cours particulier, rien que vous et moi&nbsp;: apprendre à nager à tout âge, dépasser l’appréhension de l’eau, améliorer votre technique ou préparer un objectif (triathlon, traversée, forme).</p></div>
 <div class="pub rv" style="--pc:#1d8fb3"><h4>Adolescents</h4><p>Perfectionner ses nages, gagner en endurance et en confiance, préparer un test ou une épreuve sportive.</p></div>
 <div class="pub rv" style="--pc:#6cc8e6"><h4>Enfants</h4><p>Apprivoiser l’eau, même quand elle fait peur, apprendre les nages et gagner en aisance, dans une ambiance rassurante et ludique. Seul ou avec un frère ou une sœur.</p></div>
 </div>
 <figure class="rv"><img src="img/cours-de-natation-obernai.webp" alt="Nageuse ajustant ses lunettes au bord du bassin avant un cours de natation" loading="lazy"></figure>
 </div>
 
+<div>
+<h3 class="rv">Tarifs de la natation</h3>
+<div class="prices">
+<div class="price rv"><h4>Cours de 30 minutes</h4><p>1 personne, enfant ou adulte</p><div class="two"><div><span>À L’O</span><b>25&nbsp;€</b></div><div><span>À domicile</span><b>30&nbsp;€</b></div></div><p class="foot">+ entrée piscine à L’O</p></div>
+<div class="price hl rv"><h4>Cours d’une heure</h4><p>1 personne, adolescent ou adulte</p><div class="two"><div><span>À L’O</span><b>50&nbsp;€</b></div><div><span>À domicile</span><b>60&nbsp;€</b></div></div><p class="foot">+ entrée piscine à L’O</p></div>
+<div class="price rv"><h4>Cours de 30 minutes à deux</h4><p>2 enfants de la même famille</p><div class="two"><div><span>À L’O</span><b>50&nbsp;€</b></div><div><span>À domicile</span><b><small>Sur devis</small></b></div></div><p class="foot">+ 2 entrées piscine à L’O</p></div>
+</div>
+<table class="tbl stack rv">
+<caption>Autres formules de natation</caption>
+<thead><tr><th scope="col">Formule</th><th scope="col" class="r">Prix</th></tr></thead>
+<tbody>
+<tr><th scope="row">Cours collectifs à domicile<span>Aquagym, renforcement aquatique…, 45 minutes</span></th><td class="r" data-l="Prix">Sur devis</td></tr>
+</tbody></table>
+<p class="small">À L’O, l’entrée de la piscine s’ajoute au prix du cours. Chez vous, un forfait de déplacement s’ajoute au-delà de 15&nbsp;km (voir les <a href="#infos">infos pratiques</a>).</p>
+</div>
 <div id="reserver">
 <h3 class="rv">Réserver un cours de natation</h3>
 <p class="intro rv" style="margin-bottom:1.6rem">Tout commence par un petit échange, pour que chaque cours soit pensé pour la personne qui nage. Ensuite, la réservation se fait en quelques clics, depuis votre téléphone ou votre ordinateur.</p>
 <ol class="steps rv" id="res-steps">
 <li><span class="k" aria-hidden="true">1</span><div><h4>Vous me contactez</h4><p>Nous parlons de la personne qui va nager, votre enfant, petit-enfant ou vous-même&nbsp;: son âge, son niveau, ses éventuelles craintes.</p></div></li>
-<li><span class="k" aria-hidden="true">2</span><div><h4>Je vous envoie mon agenda</h4><p>Vous recevez le lien vers mon calendrier en ligne, sur Calendly.</p></div></li>
+<li><span class="k" aria-hidden="true">2</span><div><h4>Je vous envoie mon agenda</h4><p>Vous recevez le lien vers mon calendrier en ligne, Calendly.</p></div></li>
 <li><span class="k" aria-hidden="true">3</span><div><h4>Vous choisissez vos créneaux</h4><p>Un ou plusieurs, selon ce qui vous convient. Un imprévu&nbsp;? Vous pouvez annuler ou reporter la séance.</p></div></li>
 <li><span class="k" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17 19 7"/></svg></span><div><h4>Le jour J</h4><p>Présentez-vous à l’accueil de la piscine et donnez mon nom&nbsp;: je vous attends au bord du bassin.</p></div></li>
 </ol>
@@ -453,52 +509,42 @@ footer .links a{display:block;margin-bottom:.35rem}
 </div>
 </div>
 
-<div>
-<h3 class="rv">Tarifs de la natation</h3>
-<table class="tbl stack rv">
-<caption class="sr">Tarifs des cours de natation selon le lieu</caption>
-<thead><tr><th scope="col">Cours</th><th scope="col" class="r">À L’O (Obernai)</th><th scope="col" class="r">À domicile</th></tr></thead>
-<tbody>
-<tr><th scope="row">30 minutes<span>1 personne, enfant ou adulte</span></th><td class="r" data-l="À L’O"><span><b>25&nbsp;€</b><small>+ entrée piscine</small></span></td><td class="r" data-l="À domicile"><b>30&nbsp;€</b></td></tr>
-<tr><th scope="row">1 heure<span>1 personne, enfant ou adulte</span></th><td class="r" data-l="À L’O"><span><b>50&nbsp;€</b><small>+ entrée piscine</small></span></td><td class="r" data-l="À domicile"><b>60&nbsp;€</b></td></tr>
-<tr><th scope="row">30 minutes<span>2 enfants de la même famille</span></th><td class="r" data-l="À L’O"><span><b>50&nbsp;€</b><small>+ entrées piscine</small></span></td><td class="r" data-l="À domicile"><span>Sur devis<small>2 personnes et plus</small></span></td></tr>
-<tr><th scope="row">Cours collectifs<span>Aquagym, renforcement aquatique…, 45 minutes</span></th><td class="r" data-l="À L’O">–</td><td class="r" data-l="À domicile">Sur devis</td></tr>
-</tbody></table>
-<p class="small">À L’O, l’entrée de la piscine s’ajoute au prix du cours. Chez vous, un petit forfait de déplacement s’ajoute au-delà de 15&nbsp;km (voir les <a href="#infos">infos pratiques</a>).</p>
-</div>
 </div>
 </div>
 </section>
 
 <!-- ENTREPRISE -->
-<section class="sec" id="entreprise" style="--sc:#c98a1e">
+<section class="sec" id="entreprise" style="--sc:var(--c3)">
 <div class="wrap sgrid">
-<div class="side"><span class="num" aria-hidden="true">03</span><h2>Sport en entreprise</h2><p>Entreprises, associations, collectivités.</p><a class="btn" href="#contact">Demander un devis</a></div>
+<div class="side"><span class="num" aria-hidden="true">03</span><h2>Sport en entreprise</h2><p>Entreprises, associations, collectivités.</p></div>
 <div class="body">
+<div class="pro-head">
 <div class="rv">
-<p class="intro">Je propose des activités qui prennent soin de la santé de vos équipes et renforcent leur cohésion, dans vos locaux, en plein air ou en visio. Chaque prestation est préparée sur devis.</p>
-<p class="intro" style="margin-top:1rem">Par exemple&nbsp;: une séance collective de renforcement ou de pilates dans vos locaux, ou des pauses actives au bureau. Dites-moi combien vous êtes et où, je vous envoie un devis sous 48&nbsp;heures.</p>
+<p class="intro">Des salariés en forme sont des salariés plus sereins. Je propose des activités qui prennent soin de la santé de vos équipes, réduisent les douleurs liées au travail assis et renforcent la cohésion.</p>
+<p class="intro">Séance collective, pilates, pause active au bureau ou sortie en plein air&nbsp;: tout se fait dans vos locaux, dehors ou en visio, selon vos horaires.</p>
 </div>
-<figure class="pro-photo rv"><img src="img/sport-en-entreprise-posture.webp" alt="Salarié assis sur un ballon de gym à son bureau, atelier posture en entreprise" loading="lazy"></figure>
+<figure class="pro-photo rv"><img src="img/sport-en-entreprise-posture.webp" alt="Salarié assis sur un ballon de gym à son bureau, atelier de posture en entreprise" loading="lazy"></figure>
+</div>
 <ul class="offers">
 <li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 19c.6-3.2 3-5 6-5s5.4 1.8 6 5M15 14.3c2.6-.4 5 1 5.6 4.2"/></svg></span><h4>Coaching en entreprise</h4><p>Séances collectives de renforcement, mobilité ou pilates, sur site ou en visio.</p></li>
-<li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><h4>Ateliers posture et pauses actives</h4><p>Prévenir les douleurs liées au travail assis, grâce à des exercices simples à faire au bureau.</p></li>
+<li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><h4>Ateliers de posture et pauses actives</h4><p>Prévenir les douleurs liées au travail assis, grâce à des exercices simples à faire au bureau.</p></li>
 <li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 6-11 4 6 3-4 5 9z"/><circle cx="17" cy="5" r="2"/></svg></span><h4>Sorties plein air</h4><p>Marche ou course en groupe autour d’Ottrott, tous niveaux, pour se retrouver autrement.</p></li>
 <li class="offer rv"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></span><h4>Événements sur mesure</h4><p>Journées bien-être, challenges d’équipe, découverte de la natation&nbsp;: parlez-moi de votre idée.</p></li>
 </ul>
+<div class="pro-cta rv"><p><b>Chaque prestation est préparée sur devis.</b> Dites-moi combien vous êtes et où, je vous l’envoie sous 48&nbsp;heures.</p><a class="btn" href="#contact">Demander un devis</a></div>
 </div>
 </div>
 </section>
 
 <!-- INFOS -->
-<section class="sec alt" id="infos" style="--sc:#c4613f">
+<section class="sec alt" id="infos" style="--sc:var(--c4)">
 <div class="wrap sgrid">
 <div class="side"><span class="num" aria-hidden="true">04</span><h2>Infos pratiques</h2><p>Déplacements, réservation, paiement, annulation&nbsp;: l’essentiel à savoir, pour le coaching comme pour la natation.</p></div>
 <div class="body">
 <div class="travel">
 <div class="rv">
 <h3>Frais de déplacement</h3>
-<p>Pour les séances chez vous, un petit forfait s’ajoute selon la distance depuis Ottrott. Je me déplace jusqu’à 30&nbsp;km.</p>
+<p>Pour les séances chez vous, un forfait s’ajoute selon la distance depuis Ottrott. Je me déplace jusqu’à 30&nbsp;km.</p>
 <table class="tbl">
 <caption class="sr">Frais de déplacement selon la distance depuis Ottrott</caption>
 <thead><tr><th scope="col">Distance depuis Ottrott</th><th scope="col" class="r">Par séance</th></tr></thead>
@@ -516,7 +562,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="good">
 <div class="rv"><h4>Réservation</h4><p>Coaching sportif&nbsp;: sur l’appli Ekklo, après notre premier échange. Natation&nbsp;: par le lien Calendly que je vous envoie.</p></div>
 <div class="rv"><h4>Paiement</h4><p>Juste après la séance, par virement, par paiement sans contact ou par lien de paiement. Le carnet de 10 séances se règle en une fois.</p></div>
-<div class="rv"><h4>Annulation</h4><p>Vous pouvez annuler ou décaler une séance jusqu’à 12 heures avant. Passé ce délai, on en parle ensemble.</p></div>
+<div class="rv"><h4>Annulation</h4><p>Vous pouvez annuler ou décaler une séance jusqu’à 12 heures avant.</p></div>
 </div>
 <p class="small rv">Prix en euros, TVA non applicable, article 293 B du CGI. Réservation, annulation et droit de rétractation&nbsp;: voir les <a href="index.html#cgv">conditions générales de vente</a>.</p>
 </div>
@@ -525,50 +571,29 @@ footer .links a{display:block;margin-bottom:.35rem}
 </section>
 
 <!-- À PROPOS -->
-<section class="sec" id="apropos" style="--sc:#5462b8">
+<section class="sec" id="apropos" style="--sc:var(--c5)">
 <div class="wrap sgrid">
 <div class="side"><span class="num" aria-hidden="true">05</span><h2>À propos</h2><p>Benjamin Olivier, coach sportif et maître-nageur diplômé.</p></div>
 <div class="body">
-<div class="about">
-<div class="rv">
-<p class="intro">Je m’appelle Benjamin. Sportif depuis l’enfance, j’ai joué au football pendant 10 ans et participé à des compétitions UNSS en athlétisme, volley, badminton, futsal et bien d’autres sports.</p>
-<p>Aujourd’hui maître-nageur sauveteur et coach sportif diplômé, j’aide adultes, ados et enfants à bouger plus souvent, en toute sécurité et avec plaisir, à Ottrott et dans les communes alentour.</p>
-<h3 style="margin:1.6rem 0 0">Ma façon de travailler</h3>
-<ul class="ways"><li>Des objectifs qui vous ressemblent</li><li>Des progrès mesurables</li><li>Un suivi humain</li></ul>
+<div class="about rv">
+<div>
+<p class="intro">Je m’appelle Benjamin, je suis maître-nageur sauveteur (BPJEPS AAN) et coach sportif (BPJEPS AF option AB) diplômé.</p>
+<p>Sportif depuis l’enfance, j’ai pratiqué en loisir ou en compétition le foot, l’athlétisme, le volley ou encore le badminton. La natation a été le fil rouge de ma pratique&nbsp;: c’est pour cela que j’ai choisi de me former dans ce domaine.</p>
+<p>Pour proposer d’autres activités à mes clients, j’ai ensuite approfondi le fitness et les cours collectifs (gym douce, stretching, circuit training…). Récemment, je me suis formé au pilates (Matwork niveau&nbsp;1).</p>
 </div>
-<figure class="rv"><img src="img/benjamin-olivier-coach-sportif.webp" alt="Benjamin Olivier, coach sportif et maître-nageur, en balade matinale à Chamonix face au Mont-Blanc" loading="lazy"><figcaption>Balade matinale à Chamonix, face au Mont-Blanc</figcaption></figure>
+<figure><img src="img/benjamin-olivier-coach-sportif.webp" alt="Benjamin Olivier, coach sportif et maître-nageur, en balade matinale à Chamonix face au Mont-Blanc" loading="lazy"><figcaption>Face au Mont-Blanc, à Chamonix</figcaption></figure>
 </div>
-<div class="rv">
-<h3>Diplômes et formations</h3>
-<table class="tbl stack">
-<caption class="sr">Diplômes et formations de Benjamin Olivier</caption>
-<thead><tr><th scope="col">Diplôme ou formation</th><th scope="col" class="r">Intitulé</th></tr></thead>
-<tbody>
-<tr><th scope="row">Maître-nageur sauveteur<span>Activités aquatiques et de la natation&nbsp;: enseignement et surveillance.</span></th><td class="r" data-l="Intitulé"><b>BPJEPS AAN</b></td></tr>
-<tr><th scope="row">Coach sportif<span>Activités de la forme, mention musculation et haltérophilie, option cours collectifs.</span></th><td class="r" data-l="Intitulé"><b>BPJEPS AF</b></td></tr>
-<tr><th scope="row">Matwork niveau 1<span>Pilates au sol&nbsp;: gainage profond, posture et souplesse.</span></th><td class="r" data-l="Intitulé"><b>Pilates</b></td></tr>
-<tr><th scope="row">Saunameister<span>Formation à l’animation des séances de sauna.</span></th><td class="r" data-l="Intitulé"><b>Sauna</b></td></tr>
-</tbody></table>
-</div>
-<div class="rv">
-<h3>Ma pratique aujourd’hui</h3>
-<p>Je ne fais pas que coacher&nbsp;: je m’entraîne aussi. Aujourd’hui, je cours surtout en trail, sur des distances moyennes pour l’instant, et je joue au tennis et au padel. Quelques courses récentes&nbsp;:</p>
-<table class="tbl stack">
-<caption class="sr">Courses récentes de Benjamin Olivier</caption>
-<thead><tr><th scope="col">Course</th><th scope="col" class="r">Temps</th></tr></thead>
-<tbody>
-<tr><th scope="row">Trail des Celtes 2026<span>Trail Alsace by UTMB, 47 km, 1&nbsp;650 m D+</span></th><td class="r" data-l="Temps"><b>5 h 58</b></td></tr>
-<tr><th scope="row">Trail du Haut-Koenigsbourg<span>26 km, 900 m D+</span></th><td class="r" data-l="Temps"><b>2 h 57</b></td></tr>
-<tr><th scope="row">Course des Châteaux d’Ottrott<span>10 km, 250 m D+</span></th><td class="r" data-l="Temps"><b>47 min</b></td></tr>
-</tbody></table>
-<div class="goal"><span class="k">Prochain défi</span><p><b>Le Marathon du Grand Ballon</b><span>80&nbsp;km et 3&nbsp;900&nbsp;m de dénivelé positif.</span></p></div>
+<div class="facts">
+<div class="fact rv"><h3>Diplômes et formations</h3><ul><li>Maître-nageur sauveteur<b>BPJEPS AAN</b></li><li>Coach sportif<b>BPJEPS AF</b></li><li>Pilates au sol<b>Matwork 1</b></li><li>Animation sauna<b>Saunameister</b></li></ul></div>
+<div class="fact rv"><h3>Mes dernières courses</h3><ul><li>Trail des Celtes, 47&nbsp;km<b>5 h 58</b></li><li>Trail du Haut-Koenigsbourg, 26&nbsp;km<b>2 h 57</b></li><li>Course des Châteaux d’Ottrott, 10&nbsp;km<b>47 min</b></li></ul></div>
+<div class="fact goal rv"><h3>Prochain défi</h3><b>Le Marathon du Grand Ballon</b><p>80&nbsp;km et 3&nbsp;900&nbsp;m de dénivelé positif. À côté, je joue aussi au tennis et au padel.</p></div>
 </div>
 </div>
 </div>
 </section>
 
 <!-- AVIS + FAQ -->
-<section class="sec alt" id="faq" style="--sc:#237a7a">
+<section class="sec alt" id="faq" style="--sc:var(--c6)">
 <div class="wrap sgrid">
 <div class="side"><span class="num" aria-hidden="true">06</span><h2>Avis et questions fréquentes</h2><p>Les réponses aux questions qu’on me pose le plus souvent. Une autre question&nbsp;? <a href="#contact">Écrivez-moi</a>.</p></div>
 <div class="body">
@@ -577,23 +602,23 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="acts"><a class="btn" href="https://g.page/r/CeAjLiGyOuoLECE/review" target="_blank" rel="noopener">Laisser un avis sur Google</a><a class="btn ghost" href="https://www.google.com/maps?cid=858563215702762464" target="_blank" rel="noopener">Voir les avis</a></div>
 </div>
 <div class="faqs">
-<div class="rv"><h3>Pour commencer</h3>
+<div class="fcard rv" style="--c:var(--c1)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></span>Pour commencer</h3>
 <details><summary>Comment se passe le premier échange&nbsp;?</summary><p>Pour le coaching sportif, c’est un échange offert de 30 minutes, au téléphone ou en visio. Nous faisons le point ensemble sur votre niveau, vos contraintes et vos objectifs, puis nous choisissons la formule qui vous convient.</p></details>
 <details><summary>Faut-il déjà avoir un bon niveau&nbsp;?</summary><p>Pas du tout. Chaque programme part de votre niveau, que nous définissons lors de notre premier échange, et avance à votre rythme. Les cours de natation accueillent aussi bien les débutants que les nageurs qui veulent progresser.</p></details>
 <details><summary>Dois-je avoir du matériel&nbsp;?</summary><p>Pour le coaching à domicile, j’apporte tout le matériel nécessaire. Le renforcement peut aussi se faire sans matériel.</p></details>
 </div>
-<div class="rv"><h3>Lieux et déplacement</h3>
+<div class="fcard rv" style="--c:var(--c2)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>Lieux et déplacement</h3>
 <details><summary>Où ont lieu les séances&nbsp;?</summary><p>Chez vous, à Ottrott et jusqu’à 30 km autour&nbsp;; à L’O – Espace Aquatique d’Obernai pour la natation&nbsp;; ou à distance, avec un programme suivi par message ou en visio.</p></details>
 <details><summary>Combien coûte le déplacement&nbsp;?</summary><p>Il est inclus jusqu’à 15 km autour d’Ottrott. Au-delà, comptez 5&nbsp;€ de 15 à 20 km, 10&nbsp;€ de 20 à 25 km et 15&nbsp;€ de 25 à 30 km par séance. Je ne me déplace pas au-delà de 30 km.</p></details>
 </div>
-<div class="rv"><h3>Réserver et payer</h3>
+<div class="fcard rv" style="--c:var(--c3)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>Réserver et payer</h3>
 <details><summary>Comment réserver une séance&nbsp;?</summary><p>Pour le coaching sportif, tout commence par un premier échange offert&nbsp;: je vous invite ensuite sur l’appli Ekklo, où vous réservez vos séances et suivez votre programme. Pour la natation, je vous envoie le lien de mon agenda Calendly&nbsp;: vous choisissez votre cours, un jour et une heure, puis vous recevez une confirmation et un rappel par e-mail.</p></details>
 <details><summary>Comment payer&nbsp;?</summary><p>Juste après la séance, par virement, par paiement sans contact ou par lien de paiement. Le carnet de 10 séances se règle en une fois.</p></details>
-<details><summary>Puis-je annuler ou décaler une séance&nbsp;?</summary><p>Oui, jusqu’à 12 heures avant la séance. Passé ce délai, on en parle ensemble.</p></details>
+<details><summary>Puis-je annuler ou décaler une séance&nbsp;?</summary><p>Oui, jusqu’à 12 heures avant la séance.</p></details>
 </div>
-<div class="rv"><h3>Enfants et entreprises</h3>
+<div class="fcard rv" style="--c:var(--c6)"><h3><span class="fico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.2A4.5 4.5 0 0 1 21 18.5"/></svg></span>Enfants et entreprises</h3>
 <details><summary>Les enfants peuvent-ils prendre des cours de natation&nbsp;?</summary><p>Bien sûr&nbsp;: apprivoiser l’eau, apprendre les nages et gagner en aisance, dans une ambiance rassurante. Un cours de 30 minutes peut aussi réunir deux enfants de la même famille.</p></details>
-<details><summary>Travaillez-vous avec les entreprises&nbsp;?</summary><p>Oui&nbsp;: coaching collectif, ateliers posture, sorties en plein air et événements sur mesure, dans vos locaux, dehors ou en visio. Chaque prestation fait l’objet d’un devis.</p></details>
+<details><summary>Travaillez-vous avec les entreprises&nbsp;?</summary><p>Oui&nbsp;: coaching collectif, pilates, ateliers de posture, sorties en plein air et événements sur mesure, dans vos locaux, dehors ou en visio. Chaque prestation fait l’objet d’un devis.</p></details>
 </div>
 </div>
 </div>
@@ -623,7 +648,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <button class="btn" type="submit">Envoyer ma demande</button>
 <p class="fine">Tous les champs sont obligatoires. Votre messagerie s’ouvre avec la demande pré-remplie, il ne reste qu’à l’envoyer. Rien n’est enregistré sur ce site.</p>
 </form>
-<div class="ok" id="fok" role="status" tabindex="-1"><p style="font-size:2rem">✓</p><h3>Votre demande est prête</h3><p>Elle s’est ouverte dans votre messagerie&nbsp;: vérifiez-la puis appuyez sur «&nbsp;Envoyer&nbsp;». Je vous réponds sous 48 heures.</p><p class="fine">La messagerie ne s’est pas ouverte&nbsp;? Écrivez directement à <b>athlea_coaching@icloud.com</b>.</p></div>
+<div class="ok" id="fok" role="status" tabindex="-1"><p style="font-size:2rem">✓</p><h3>Votre demande est prête</h3><p>Elle s’est ouverte dans votre messagerie&nbsp;: vérifiez-la puis appuyez sur «&nbsp;Envoyer&nbsp;». Je vous réponds sous 48 heures.</p><p class="fine">La messagerie ne s’est pas ouverte&nbsp;? Envoyez la même demande depuis votre boîte en ligne, ou copiez-la et écrivez à <b>athlea_coaching@icloud.com</b>.</p><div class="webmail"><a class="btn ghost" id="wm-gmail" href="#" target="_blank" rel="noopener">Gmail</a><a class="btn ghost" id="wm-outlook" href="#" target="_blank" rel="noopener">Outlook</a><button class="btn ghost" id="wm-copy" type="button">Copier le message</button></div></div>
 </div>
 </div>
 </section>
@@ -650,10 +675,30 @@ var top=$(".top"),mb=$("#menubtn");function menu(o){top.classList.toggle("open",
 mb.addEventListener("click",function(){menu(!top.classList.contains("open"))});
 d.querySelectorAll(".nav a").forEach(function(a){a.addEventListener("click",function(){menu(false)})});
 d.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false)});
-// progression + rubrique active
-var bar=$(".progress"),links=[].slice.call(d.querySelectorAll(".nav a")),secs=links.map(function(a){return d.querySelector(a.getAttribute("href"))});
-var raf=0;function upd(){raf=0;var m=h.scrollHeight-innerHeight;bar.style.transform="scaleX("+(m>0?scrollY/m:0)+")";var y=scrollY+innerHeight*.35,k=-1;secs.forEach(function(s,i){if(s&&s.offsetTop<=y)k=i});links.forEach(function(a,i){a.classList.toggle("on",i===k)})}
-addEventListener("scroll",function(){if(!raf)raf=requestAnimationFrame(upd)},{passive:true});upd();
+// rubrique active + vague du menu (reprise de la V35) : le segment glisse d'un lien au suivant au fil de la lecture
+var nv=$("#menu"),nw=$(".nwave"),nwi=nw.firstChild,links=[].slice.call(d.querySelectorAll(".nav a")),secs=links.map(function(a){return d.querySelector(a.getAttribute("href"))}),hov=false,ht,raf=0;
+function geo(a){return[a.offsetLeft,nv.clientWidth-a.offsetLeft-a.offsetWidth]}
+function setw(x,r,o,cl,cr){nwi.style.setProperty("--x",x+"px");nwi.style.setProperty("--rr",r+"px");nwi.style.setProperty("--o",o);if(cl){nwi.style.setProperty("--cl",cl);nwi.style.setProperty("--cr",cr||cl)}}
+var probe=d.createElement("i"),cc={};probe.hidden=true;nw.appendChild(probe);
+function col(el){var c=el?getComputedStyle(el).getPropertyValue("--sc").trim():"";if(!(c in cc)){probe.style.color=c;cc[c]=(getComputedStyle(probe).color.match(/[\d.]+/g)||[47,138,78]).slice(0,3).map(Number)}return cc[c]}
+function mix(a,b,t){return"rgb("+a.map(function(v,i){return Math.round(v+(b[i]-v)*t)}).join(",")+")"}
+function sm(t){t=t<0?0:t>1?1:t;return t*t*(3-2*t)}
+function tp(el){return el.getBoundingClientRect().top+scrollY}
+function track(){raf=0;var ref=scrollY+innerHeight*.4,k=-1,i;for(i=0;i<secs.length;i++)if(secs[i]&&tp(secs[i])<=ref)k=i;
+links.forEach(function(a,j){a.classList.toggle("on",j===k)});
+if(hov||!nv.offsetWidth||!nw.offsetWidth)return;
+if(k<0){var g0=geo(links[0]),c0=mix(col(secs[0]),col(secs[0]),0);setw(g0[0],g0[1],0,c0,c0);return}
+var A=geo(links[k]),CA=col(secs[k]);if(k===links.length-1||!secs[k+1]){setw(A[0],A[1],1,mix(CA,CA,0));return}
+var B=geo(links[k+1]),t0=tp(secs[k]),t=(ref-t0)/(tp(secs[k+1])-t0),tr=sm((t-.1)/.7),tl=sm((t-.3)/.7),CB=col(secs[k+1]);
+setw(A[0]+(B[0]-A[0])*tl,A[1]+(B[1]-A[1])*tr,1,mix(CA,CB,tl),mix(CA,CB,tr))}
+function req(){if(!raf)raf=requestAnimationFrame(track)}
+addEventListener("scroll",req,{passive:true});addEventListener("resize",req);if(d.fonts)d.fonts.ready.then(req);req();
+function go(a){hov=true;clearTimeout(ht);nw.classList.add("anim");var g=geo(a),c=col(secs[links.indexOf(a)]);c=mix(c,c,0);setw(g[0],g[1],1,c,c)}
+function back(){hov=false;nw.classList.add("anim");track();clearTimeout(ht);ht=setTimeout(function(){if(!hov)nw.classList.remove("anim")},600)}
+links.forEach(function(a){a.addEventListener("mouseenter",function(){go(a)});a.addEventListener("focus",function(){go(a)});a.addEventListener("blur",back)});
+nv.addEventListener("mouseleave",back);
+// le thème change les couleurs : on les relit
+$("#themebtn").addEventListener("click",function(){cc={};setTimeout(req,30)});
 // apparition
 if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});d.querySelectorAll(".rv").forEach(function(el){io.observe(el)})}else d.querySelectorAll(".rv").forEach(function(el){el.classList.add("in")});
 // copier
@@ -661,7 +706,12 @@ d.querySelectorAll("[data-copy]").forEach(function(bt){bt.addEventListener("clic
 // formulaire : ouvre la messagerie avec la demande pré-remplie
 var f=$("#cform");f.addEventListener("submit",function(e){e.preventDefault();if(f.elements["botcheck"].checked)return;if(!f.checkValidity()){f.reportValidity();return}
 var body="Nom : "+f.elements["name"].value+"\nE-mail : "+f.elements["email"].value+"\nDemande : "+f.elements["topic"].value+"\n\n"+f.elements["message"].value;
-location.href="mailto:athlea_coaching@icloud.com?subject="+encodeURIComponent(f.elements["topic"].value+" – "+f.elements["name"].value)+"&body="+encodeURIComponent(body);
+var to="athlea_coaching@icloud.com",su=f.elements["topic"].value+" – "+f.elements["name"].value,es=encodeURIComponent;
+// sans logiciel de messagerie configuré (souvent Chrome, Edge ou Firefox sur Windows), mailto ne fait rien : on propose aussi Gmail, Outlook et la copie
+$("#wm-gmail").href="https://mail.google.com/mail/?view=cm&fs=1&to="+es(to)+"&su="+es(su)+"&body="+es(body);
+$("#wm-outlook").href="https://outlook.live.com/mail/0/deeplink/compose?to="+es(to)+"&subject="+es(su)+"&body="+es(body);
+$("#wm-copy").onclick=function(){var t="À : "+to+"\nObjet : "+su+"\n\n"+body,bt=this;function okc(){bt.textContent="Message copié"}if(navigator.clipboard&&isSecureContext)navigator.clipboard.writeText(t).then(okc);else{var a=d.createElement("textarea");a.value=t;d.body.appendChild(a);a.select();try{d.execCommand("copy");okc()}catch(e){}a.remove()}};
+location.href="mailto:"+to+"?subject="+es(su)+"&body="+es(body);
 f.hidden=true;var ok=$("#fok");ok.classList.add("show");ok.focus()});
 })();
 </script>
