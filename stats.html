@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Test A/B | Athlea Coaching</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--bg:#f6f5f0;--card:#fff;--ink:#0f1f19;--mute:#5d6a64;--line:rgba(15,31,25,.13);--a:#0b7fa6;--b:#c4613f}
+@media (prefers-color-scheme:dark){:root{--bg:#151c18;--card:#202b25;--ink:#f5ecd7;--mute:#b3ad9b;--line:rgba(245,236,215,.12);--a:#1f9fcc;--b:#d6714c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:2rem 16px}
+h1{font-size:1.6rem;margin:0 0 .3rem}
+.mute{color:var(--mute);font-size:.92rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin:1.5rem 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem}
+.tile h2{font-size:1rem;margin:0 0 .6rem;display:flex;align-items:center;gap:.5rem}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.big{font-size:2rem;font-weight:700;line-height:1.1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.2rem}
+.legend{display:flex;gap:1.2rem;flex-wrap:wrap;font-size:.9rem;margin-bottom:1rem}
+.legend span{display:flex;align-items:center;gap:.4rem}
+.row{display:grid;grid-template-columns:7.5rem 1fr;gap:.8rem;align-items:center;padding:.45rem 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.lab{font-size:.88rem;color:var(--mute)}
+.bars{display:grid;gap:2px}
+.bar{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--mute)}
+.bar i{display:block;height:12px;border-radius:0 4px 4px 0;min-width:2px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:1rem}
+th,td{padding:.35rem .5rem;border-bottom:1px solid var(--line);text-align:right}
+th:first-child,td:first-child{text-align:left}
+details{margin-top:1rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Test A/B du site</h1>
+<p class="mute">Chaque visiteur arrivant sur athleacoaching.fr tombe une fois sur deux sur la V35 ou sur la nouvelle version. Seuls ceux qui acceptent la mesure sont comptés. <span id="maj"></span></p>
+<div class="tiles" id="tiles"></div>
+<div class="card">
+<h2 style="margin:0 0 .4rem;font-size:1.1rem">Temps passé sur la page</h2>
+<p class="mute" style="margin:0 0 .8rem">Part des visites mesurées dans chaque tranche de durée.</p>
+<div class="legend"><span><i class="sw" style="background:var(--a)"></i>V35 (index.html)</span><span><i class="sw" style="background:var(--b)"></i>Nouvelle version (V-test-2)</span></div>
+<div id="chart">Chargement…</div>
+<details><summary>Voir les chiffres</summary><table id="tbl"></table></details>
+</div>
+</main>
+<script>
+(function(){
+var API="https://abacus.jasoncameron.dev/get/ac-ab-7q2k9x/",
+    T=["Moins de 10 s","10 à 30 s","30 s à 1 min","1 à 2 min","2 à 5 min","5 à 10 min","Plus de 10 min"],
+    MID=[5,20,45,90,210,450,900], // shortcut: moyenne estimée au milieu de chaque tranche (900 s pour « plus de 10 min »)
+    V={a:"V35 (index.html)",b:"Nouvelle version (V-test-2)"};
+function get(k){return fetch(API+k).then(function(r){return r.ok?r.json():{value:0}}).then(function(j){return j.value||0}).catch(function(){return 0})}
+var keys=[];["a","b"].forEach(function(v){keys.push(v+"_vues");T.forEach(function(_,i){keys.push(v+"_t"+i)})});
+Promise.all(keys.map(get)).then(function(vals){
+  var D={};keys.forEach(function(k,i){D[k]=vals[i]});
+  var S={};["a","b"].forEach(function(v){
+    var c=T.map(function(_,i){return D[v+"_t"+i]}),n=c.reduce(function(x,y){return x+y},0);
+    S[v]={vues:D[v+"_vues"],c:c,n:n,moy:n?c.reduce(function(x,y,i){return x+y*MID[i]},0)/n:0,plus1:n?(c[3]+c[4]+c[5]+c[6])/n:0};
+  });
+  function dur(s){return s<60?Math.round(s)+" s":Math.floor(s/60)+" min "+String(Math.round(s%60)).padStart(2,"0")}
+  function pc(x){return Math.round(x*100)+" %"}
+  document.getElementById("tiles").innerHTML=["a","b"].map(function(v){var s=S[v];
+    return '<div class="tile"><h2><i class="sw" style="background:var(--'+v+')"></i>'+V[v]+'</h2><div class="big">'+(s.n?dur(s.moy):"—")+'</div><div class="mute">durée moyenne estimée</div><p style="margin:.6rem 0 0">'+s.vues+' visites acceptées · '+s.n+' durées mesurées<br>'+(s.n?pc(s.plus1)+" restent plus d’une minute":"pas encore de données")+'</p></div>'}).join("");
+  var max=Math.max.apply(null,["a","b"].map(function(v){return Math.max.apply(null,S[v].c.map(function(x){return S[v].n?x/S[v].n:0}))}))||1;
+  document.getElementById("chart").innerHTML=T.map(function(t,i){
+    return '<div class="row"><div class="lab">'+t+'</div><div class="bars">'+["a","b"].map(function(v){var s=S[v],p=s.n?s.c[i]/s.n:0;
+      return '<div class="bar" title="'+V[v]+' : '+s.c[i]+' visites ('+pc(p)+')"><i style="width:'+(p/max*85)+'%;background:var(--'+v+')"></i>'+pc(p)+'</div>'}).join("")+'</div></div>'}).join("");
+  document.getElementById("tbl").innerHTML='<tr><th>Tranche</th><th>V35</th><th>Nouvelle version</th></tr>'+T.map(function(t,i){return '<tr><td>'+t+'</td><td>'+S.a.c[i]+'</td><td>'+S.b.c[i]+'</td></tr>'}).join("")+'<tr><td>Visites acceptées</td><td>'+S.a.vues+'</td><td>'+S.b.vues+'</td></tr>';
+  document.getElementById("maj").textContent="Chiffres du "+new Date().toLocaleString("fr-FR")+".";
+});
+})();
+</script>
+</body>
+</html>

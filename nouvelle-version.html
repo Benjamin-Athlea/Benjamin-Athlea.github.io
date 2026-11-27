@@ -55,7 +55,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .logo svg{width:32px;height:30px}
 .logo b{font-weight:800}
 .nav{position:relative;display:flex;gap:.2rem}
-.nav a{padding:.5rem .7rem .75rem;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--text);transition:color .2s}
+.nav a{padding:.5rem .7rem .75rem;white-space:nowrap;text-decoration:none;font-weight:600;font-size:.95rem;color:var(--text);transition:color .2s}
 .nav a:hover,.nav a.on{color:var(--ink)}
 /* vague sous le menu (reprise de la V35) : le segment coloré suit la lecture */
 :root{--navwave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='10'%3E%3Cpath d='M0 5c4.566-1.537 8.934-3 14-3s9.434 1.463 14 3s8.934 3 14 3s9.434-1.463 14-3' fill='none' stroke='%23000' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E");--navwave2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='10'%3E%3Cpath d='M0 5c4.566-1.537 8.934-3 14-3s9.434 1.463 14 3s8.934 3 14 3s9.434-1.463 14-3' fill='none' stroke='%23000' stroke-width='3.6' stroke-linecap='round'/%3E%3C/svg%3E")}
@@ -361,6 +361,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 .no-js .rv{opacity:1;transform:none}
 @media print{.top,.progress,.contact .form,video,.demo{display:none}.rv{opacity:1;transform:none}}
 </style>
+<script src="js/ab.js" defer></script>
 </head>
 <body class="no-js">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="7.83 21.44 248.37 221.97"><path fill="currentColor" d="M252.2 132C252.93 153.68 243.95 175.11 230.42 191.13C216.89 207.16 199.75 218.31 182.38 226.19C165.01 234.06 146.75 238.97 128 239.4C109.25 239.84 90.2 235.16 74.02 225.5C57.84 215.84 44.78 201.74 34.78 185.82C24.78 169.9 17.18 151.96 13.63 132C10.09 112.04 11.39 89.59 20.93 70.18C30.47 50.77 48.44 35.6 68.71 29.3C88.97 23 110.19 25.25 128 29.97C145.81 34.68 160.97 40.65 177.07 47.01C193.17 53.38 210.95 61.33 225.87 75.49C240.8 89.65 251.46 110.32 252.2 132ZM212.88 82.99C199.27 71.1 183.4 65.06 169.57 60C155.73 54.95 143.19 49.68 128 44.97C112.81 40.25 94.2 37.3 76.21 42.29C58.21 47.28 42.15 60.54 33.92 77.68C25.69 94.82 25.09 114.66 28.63 132C32.18 149.34 39.08 164.67 47.77 178.32C56.46 191.98 67.6 204.16 81.52 212.51C95.43 220.86 111.87 224.84 128 224.4C144.13 223.97 159.77 219.76 174.88 213.2C189.98 206.63 205.21 197.39 217.43 183.63C229.65 169.88 237.93 151.06 237.2 132C236.46 112.94 226.5 94.89 212.88 82.99ZM218.02 126C218.38 140.84 212.84 155.55 204.1 167.05C195.35 178.54 183.86 187.07 171.7 193.03C159.54 198.99 146.39 202.52 133 202.73C119.61 202.94 106.07 199.53 94.5 192.69C82.93 185.85 73.45 175.87 66.45 164.42C59.44 152.98 54.58 139.99 52.83 126C51.08 112.01 52.83 96.79 59.61 83.63C66.39 70.46 78.29 59.95 91.87 54.77C105.46 49.59 120.07 49.59 133 51.92C145.93 54.25 157.54 58.3 169.08 63.51C180.61 68.73 192.41 75.68 201.85 86.25C211.29 96.82 217.66 111.16 218.02 126ZM188.86 93.75C180.73 85.44 170.84 80.41 161.58 76.5C152.31 72.6 143.31 69.25 133 66.92C122.69 64.59 110.69 63.89 99.37 67.76C88.05 71.63 78.07 80.23 72.6 91.13C67.13 102.03 66.08 114.63 67.83 126C69.58 137.37 73.74 147.75 79.44 156.92C85.13 166.1 92.69 174.17 102 179.7C111.3 185.23 122.23 187.94 133 187.73C143.77 187.52 154.31 184.69 164.2 180.04C174.09 175.39 183.67 168.77 191.11 159.55C198.54 150.32 203.38 138.22 203.02 126C202.66 113.78 196.99 102.06 188.86 93.75ZM186 120C186.12 128.38 183.36 136.71 178.73 143.51C174.1 150.32 167.76 155.67 160.73 159.38C153.71 163.08 145.9 165.17 138 165.24C130.1 165.32 122.16 163.26 115.33 159.26C108.5 155.27 102.83 149.43 98.78 142.64C94.73 135.85 92.19 128.1 91.61 120C91.03 111.9 92.53 103.4 96.51 96.04C100.48 88.68 106.96 82.67 114.46 79.23C121.96 75.78 130.26 74.86 138 75.64C145.74 76.41 153.04 78.68 159.86 82.14C166.68 85.59 173.12 90.42 177.98 96.92C182.84 103.41 185.88 111.62 186 120ZM164.99 104.42C161.44 100.19 156.91 97.27 152.36 95.13C147.81 92.98 143.12 91.41 138 90.64C132.88 89.86 127.19 90.08 121.96 92.22C116.73 94.35 112.16 98.45 109.5 103.54C106.83 108.64 106.03 114.52 106.61 120C107.19 125.48 109.03 130.62 111.77 135.14C114.52 139.66 118.27 143.59 122.83 146.27C127.39 148.96 132.72 150.32 138 150.24C143.28 150.17 148.48 148.78 153.23 146.39C157.99 143.99 162.42 140.55 165.74 136.01C169.06 131.48 171.12 125.76 171 120C170.88 114.24 168.54 108.65 164.99 104.42Z"/><circle style="fill:var(--markdot,#e8d5b0)" cx="143.0" cy="114.0" r="11.0"/></symbol></svg>
@@ -369,7 +370,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <header class="top" id="top">
 <div class="wrap">
 <a class="logo" href="#accueil" aria-label="Athlea Coaching, retour en haut de page"><svg aria-hidden="true"><use href="#mark"/></svg><span><b>athlea</b> coaching</span></a>
-<nav class="nav" id="menu" aria-label="Navigation principale"><a href="#coaching">Coaching</a><a href="#natation">Natation</a><a href="#entreprise">Entreprise</a><a href="#infos">Infos pratiques</a><a href="#apropos">À propos</a><a href="#faq">FAQ</a><span class="nwave" aria-hidden="true"><i></i></span></nav>
+<nav class="nav" id="menu" aria-label="Navigation principale"><a href="#coaching">Coaching</a><a href="#natation">Natation</a><a href="#entreprise">Entreprise</a><a href="#infos">Comment ça se passe</a><a href="#apropos">Qui suis-je</a><a href="#faq">FAQ</a><span class="nwave" aria-hidden="true"><i></i></span></nav>
 <button class="ibtn" id="themebtn" type="button" aria-label="Changer de thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 <a class="btn" href="#contact">Écrivez-moi</a>
 <button class="ibtn" id="menubtn" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -400,11 +401,11 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="wrap">
 <span class="kicker">Chaque petit pas compte</span>
 <h2 id="lanes-t">Par où commencer&nbsp;?</h2>
-<a class="lane rv" href="#coaching" style="--lc:var(--c1)"><span class="n">01</span><div><h3>Je veux me remettre en forme ou préparer des objectifs</h3><p>Perdre du poids, vous renforcer, retrouver la forme ou pratiquer le pilates, seul ou entre amis, chez vous ou à distance, même si vous débutez.</p></div><div class="px"><b>70&nbsp;€ la séance d’une heure</b><span>le premier échange est offert</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#coaching" style="--lc:var(--c1)"><span class="n">01</span><div><h3>Je veux me remettre en forme ou préparer des objectifs</h3><p>Perdre du poids, vous renforcer, retrouver la forme ou pratiquer le pilates, seul ou entre amis, chez vous, à distance et bientôt à L’O, même si vous débutez.</p></div><div class="px"><b>70&nbsp;€ la séance d’une heure</b><span>le premier échange est offert</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
 <a class="lane rv" href="#natation" style="--lc:var(--c2)"><span class="n">02</span><div><h3>Je veux apprendre ou progresser en natation</h3><p>Enfants, ados et adultes, même si l’eau vous fait peur&nbsp;: de la première immersion au test d’aisance aquatique, jusqu’aux nages codifiées ou à un objectif de triathlon.</p></div><div class="px"><b>À partir de 25&nbsp;€ la demi-heure</b><span>à L’O ou chez vous</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
 <a class="lane rv" href="#entreprise" style="--lc:var(--c3)"><span class="n">03</span><div><h3>Je cherche à développer le bien-être de mes employés</h3><p>Coaching collectif, pilates, ateliers de posture, sorties en plein air et événements sur mesure.</p></div><div class="px"><b>Sur devis</b><span>sur site, dehors ou en visio</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
 <a class="lane rv" href="#infos" style="--lc:var(--c4)"><span class="n">04</span><div><h3>Je veux savoir comment ça se passe</h3><p>Déplacements, réservation, paiement et annulation&nbsp;: l’essentiel avant de commencer.</p></div><div class="px"><b>Déplacement inclus</b><span>jusqu’à 15&nbsp;km d’Ottrott</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
-<a class="lane rv" href="#apropos" style="--lc:var(--c5)"><span class="n">05</span><div><h3>Je veux connaître mon coach</h3><p>Benjamin, maître-nageur sauveteur et coach sportif diplômé, formé au pilates.</p></div><div class="px"><b>Diplômé d’État</b><span>BPJEPS AAN et AF</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
+<a class="lane rv" href="#apropos" style="--lc:var(--c5)"><span class="n">05</span><div><h3>Je veux connaître mon coach</h3><p>Benjamin, maître-nageur sauveteur et coach sportif diplômé, formé au pilates.</p></div><div class="px"><b>Diplômé</b><span>BPJEPS AF et BPJEPS AAN</span><span class="arr" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span></div></a>
 </div>
 </section>
 
@@ -428,6 +429,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="how"><img src="img/coaching-a-domicile.webp" alt="Échange entre un coach sportif et son client lors d’un coaching à domicile" loading="lazy"><div><h4>Coaching à domicile</h4><p>Je viens chez vous, à Ottrott et dans les communes alentour, avec tout le matériel nécessaire. En séance individuelle ou en petit groupe.</p></div></div>
 <div class="how"><img src="img/programme-a-distance.webp" alt="Coach corrigeant la posture d’un sportif" loading="lazy"><div><h4>Programmes à distance</h4><p>Un programme personnalisé, un suivi régulier et des échanges par message ou visio, où que vous soyez.</p></div></div>
 </div>
+<p class="small">Nouveau à partir de février&nbsp;: le coaching pourra aussi se faire à L’O – Espace Aquatique d’Obernai. Les tarifs sont en cours de définition.</p>
 </div>
 
 <div>
@@ -442,12 +444,13 @@ footer .links a{display:block;margin-bottom:.35rem}
 <thead><tr><th scope="col">Formule</th><th scope="col" class="r">Prix</th></tr></thead>
 <tbody>
 <tr><th scope="row">Programme personnalisé en autonomie<span>Avec suivi adapté</span></th><td class="r" data-l="Prix">Sur devis</td></tr>
+<tr><th scope="row">Coaching à L’O, Obernai<span>À partir de février</span></th><td class="r" data-l="Prix">Tarif à venir</td></tr>
 <tr><th scope="row">Cours collectifs à domicile<span>De 3 à 8 personnes (pilates, stretching…), 45 minutes</span></th><td class="r" data-l="Prix">Sur devis</td></tr>
 </tbody></table>
-<p class="small">Le prix des formules sur devis dépend du nombre de participants et du lieu&nbsp;: écrivez-moi, je vous réponds sous 48 heures. Déplacement, paiement et annulation&nbsp;: tout est dans les <a href="#infos">infos pratiques</a>.</p>
+<p class="small">Le prix des formules sur devis dépend du nombre de participants et du lieu&nbsp;: écrivez-moi, je vous réponds sous 48 heures. Déplacement, paiement et annulation&nbsp;: tout est expliqué dans <a href="#infos">Comment ça se passe&nbsp;?</a>.</p>
 </div>
 <div>
-<h3 class="rv">Comment ça se passe</h3>
+<h3 class="rv">Votre suivi, étape par étape</h3>
 <p class="intro rv" style="margin-bottom:1.6rem">Tout commence par un simple message. Ensuite, pour le coaching sportif, tout se trouve sur l’appli Ekklo&nbsp;: vos séances, vos progrès et nos échanges, sur votre téléphone comme sur votre ordinateur.</p>
 <ol class="steps rv" id="suivi-steps">
 <li><span class="k" aria-hidden="true">1</span><div><h4>Vous me contactez</h4><p>Nous parlons de votre objectif, que ce soit pour la natation ou le coaching sportif.</p></div></li>
@@ -494,7 +497,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <tbody>
 <tr><th scope="row">Cours collectifs à domicile<span>Aquagym, renforcement aquatique…, 45 minutes</span></th><td class="r" data-l="Prix">Sur devis</td></tr>
 </tbody></table>
-<p class="small">À L’O, l’entrée de la piscine s’ajoute au prix du cours. Chez vous, un forfait de déplacement s’ajoute au-delà de 15&nbsp;km (voir les <a href="#infos">infos pratiques</a>).</p>
+<p class="small">À L’O, l’entrée de la piscine s’ajoute au prix du cours. Chez vous, un forfait de déplacement s’ajoute au-delà de 15&nbsp;km (voir <a href="#infos">Comment ça se passe&nbsp;?</a>).</p>
 </div>
 <div id="reserver">
 <h3 class="rv">Réserver un cours de natation</h3>
@@ -541,7 +544,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <!-- INFOS -->
 <section class="sec alt" id="infos" style="--sc:var(--c4)">
 <div class="wrap sgrid">
-<div class="side"><span class="num" aria-hidden="true">04</span><h2>Infos pratiques</h2><p>Déplacements, réservation, paiement, annulation&nbsp;: l’essentiel à savoir, pour le coaching comme pour la natation.</p></div>
+<div class="side"><span class="num" aria-hidden="true">04</span><h2>Comment ça se passe&nbsp;?</h2><p>Déplacements, réservation, paiement, annulation&nbsp;: l’essentiel à savoir, pour le coaching comme pour la natation.</p></div>
 <div class="body">
 <div class="travel">
 <div class="rv">
@@ -575,12 +578,12 @@ footer .links a{display:block;margin-bottom:.35rem}
 <!-- À PROPOS -->
 <section class="sec" id="apropos" style="--sc:var(--c5)">
 <div class="wrap sgrid">
-<div class="side"><span class="num" aria-hidden="true">05</span><h2>À propos</h2><p>Benjamin Olivier, coach sportif et maître-nageur diplômé.</p></div>
+<div class="side"><span class="num" aria-hidden="true">05</span><h2>Qui suis-je&nbsp;?</h2><p>Benjamin Olivier, coach sportif et maître-nageur diplômé.</p></div>
 <div class="body">
 <div class="about rv">
 <div>
 <p class="intro">Je m’appelle Benjamin, je suis maître-nageur sauveteur (BPJEPS AAN) et coach sportif (BPJEPS AF option AB) diplômé.</p>
-<p>Sportif depuis l’enfance, j’ai pratiqué en loisir ou en compétition le foot, l’athlétisme, le volley ou encore le badminton. La natation a été le fil rouge de ma pratique&nbsp;: c’est pour cela que j’ai choisi de me former dans ce domaine.</p>
+<p>Sportif depuis l’enfance, j’ai pratiqué en loisir ou en compétition le foot, l’athlétisme, le volley ou encore le badminton, et aujourd’hui je joue aussi au tennis et au padel. La natation a été le fil rouge de ma pratique&nbsp;: c’est pour cela que j’ai choisi de me former dans ce domaine.</p>
 <p>Pour proposer d’autres activités à mes clients, j’ai ensuite approfondi le fitness et les cours collectifs (gym douce, stretching, circuit training…). Récemment, je me suis formé au pilates (Matwork niveau&nbsp;1).</p>
 </div>
 <figure><img src="img/benjamin-olivier-coach-sportif.webp" alt="Benjamin Olivier, coach sportif et maître-nageur, en balade matinale à Chamonix face au Mont-Blanc" loading="lazy"><figcaption>Face au Mont-Blanc, à Chamonix</figcaption></figure>
@@ -588,7 +591,7 @@ footer .links a{display:block;margin-bottom:.35rem}
 <div class="facts">
 <div class="fact rv"><h3>Diplômes et formations</h3><ul><li>Maître-nageur sauveteur<b>BPJEPS AAN</b></li><li>Coach sportif<b>BPJEPS AF</b></li><li>Pilates au sol<b>Matwork 1</b></li><li>Animation sauna<b>Saunameister</b></li></ul></div>
 <div class="fact rv"><h3>Mes dernières courses</h3><ul><li>Trail des Celtes, 47&nbsp;km<b>5 h 58</b></li><li>Trail du Haut-Koenigsbourg, 26&nbsp;km<b>2 h 57</b></li><li>Course des Châteaux d’Ottrott, 10&nbsp;km<b>47 min</b></li></ul></div>
-<div class="fact goal rv"><h3>Prochain défi</h3><b>Le Marathon du Grand Ballon</b><p>80&nbsp;km et 3&nbsp;900&nbsp;m de dénivelé positif. À côté, je joue aussi au tennis et au padel.</p></div>
+<div class="fact goal rv"><h3>Prochain défi</h3><b>Le Marathon du Grand Ballon</b><p>80&nbsp;km et 3&nbsp;900&nbsp;m de dénivelé positif.</p></div>
 </div>
 </div>
 </div>
