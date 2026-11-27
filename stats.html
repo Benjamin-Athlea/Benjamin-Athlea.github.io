@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; connect-src https://abacus.jasoncameron.dev; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
 <title>Test A/B | Athlea Coaching</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
@@ -32,10 +34,12 @@ table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:1rem}
 th,td{padding:.35rem .5rem;border-bottom:1px solid var(--line);text-align:right}
 th:first-child,td:first-child{text-align:left}
 details{margin-top:1rem}
+#gate{max-width:22rem;margin:3rem auto}#gate input{width:100%;min-height:44px;padding:.5rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit;margin:.4rem 0 .8rem}#gate button{min-height:44px;padding:.5rem 1.4rem;border:0;border-radius:99px;background:var(--ink);color:var(--bg);font:inherit;font-weight:600;cursor:pointer}#err{color:#b3261e;min-height:1.5em}
 </style>
 </head>
 <body>
-<main>
+<form id="gate"><h1>Test A/B du site</h1><input type="text" name="username" value="stats" autocomplete="username" hidden><label for="pw">Mot de passe</label><input id="pw" type="password" autocomplete="current-password" required autofocus><p id="err" role="alert"></p><button type="submit">Ouvrir</button></form>
+<main hidden>
 <h1>Test A/B du site</h1>
 <p class="mute">Chaque visiteur arrivant sur athleacoaching.fr tombe une fois sur deux sur la V35 ou sur la nouvelle version. Seuls ceux qui acceptent la mesure sont comptés. <span id="maj"></span></p>
 <div class="tiles" id="tiles"></div>
@@ -53,7 +57,8 @@ var API="https://abacus.jasoncameron.dev/get/ac-ab-7q2k9x/",
     T=["Moins de 10 s","10 à 30 s","30 s à 1 min","1 à 2 min","2 à 5 min","5 à 10 min","Plus de 10 min"],
     MID=[5,20,45,90,210,450,900], // shortcut: moyenne estimée au milieu de chaque tranche (900 s pour « plus de 10 min »)
     V={a:"V35 (index.html)",b:"Nouvelle version (V-test-2)"};
-function get(k){return fetch(API+k).then(function(r){return r.ok?r.json():{value:0}}).then(function(j){return j.value||0}).catch(function(){return 0})}
+function get(k){return fetch(API+k).then(function(r){return r.ok?r.json():{value:0}}).then(function(j){var n=Number(j.value);return n>0&&isFinite(n)?Math.floor(n):0}).catch(function(){return 0})}
+function load(){
 var keys=[];["a","b"].forEach(function(v){keys.push(v+"_vues");T.forEach(function(_,i){keys.push(v+"_t"+i)})});
 Promise.all(keys.map(get)).then(function(vals){
   var D={};keys.forEach(function(k,i){D[k]=vals[i]});
@@ -71,6 +76,17 @@ Promise.all(keys.map(get)).then(function(vals){
       return '<div class="bar" title="'+V[v]+' : '+s.c[i]+' visites ('+pc(p)+')"><i style="width:'+(p/max*85)+'%;background:var(--'+v+')"></i>'+pc(p)+'</div>'}).join("")+'</div></div>'}).join("");
   document.getElementById("tbl").innerHTML='<tr><th>Tranche</th><th>V35</th><th>Nouvelle version</th></tr>'+T.map(function(t,i){return '<tr><td>'+t+'</td><td>'+S.a.c[i]+'</td><td>'+S.b.c[i]+'</td></tr>'}).join("")+'<tr><td>Visites acceptées</td><td>'+S.a.vues+'</td><td>'+S.b.vues+'</td></tr>';
   document.getElementById("maj").textContent="Chiffres du "+new Date().toLocaleString("fr-FR")+".";
+});
+}
+// shortcut: verrou côté navigateur seulement (site statique) ; les compteurs Abacus restent lisibles par qui connaît leur adresse
+var SALT="16c01bb688cb9ce98f971aa2d88de3c6",HASH="c335024e21b786ab1a009482ea7a8c97eae32430c42c406b92c2f55c653a89ea",g=document.getElementById("gate");
+function hex(b){return Array.from(new Uint8Array(b),function(x){return x.toString(16).padStart(2,"0")}).join("")}
+g.addEventListener("submit",function(e){e.preventDefault();var err=document.getElementById("err");err.textContent="Vérification…";
+  var s=new Uint8Array(SALT.match(/../g).map(function(x){return parseInt(x,16)}));
+  crypto.subtle.importKey("raw",new TextEncoder().encode(document.getElementById("pw").value),"PBKDF2",false,["deriveBits"]).then(function(k){
+    return crypto.subtle.deriveBits({name:"PBKDF2",salt:s,iterations:310000,hash:"SHA-256"},k,256)}).then(function(b){
+    if(hex(b)!==HASH){err.textContent="Mot de passe incorrect.";return}
+    g.remove();document.querySelector("main").hidden=false;load()});
 });
 })();
 </script>
